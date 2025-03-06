@@ -1,0 +1,9 @@
+# Node.js 관련
+node_modules/
+dist/
+*.log
+.env
+
+# Vite & TypeScript 관련
+.vite/
+*.tsbuildinfo

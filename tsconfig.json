@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "isolatedModules": true,
+      "jsx": "react-jsx", //React JSX지원
+      "strict": true,
+      "allowSyntheticDefaultImports": true,
+      "declaration": true, //.d.ts 타입 선언 파일 생성
+      "declarationMap": true,
+      "sourceMap": true,
+      "outDir": "dist", //빌드된 파일을 dist/ 에생성
+      "skipLibCheck": true,      
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }
