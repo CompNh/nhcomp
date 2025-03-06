@@ -54,3 +54,9 @@ globalStyle(".nh-button", {
 globalStyle(".nh-button:hover", {
   backgroundColor: themeVars.colorSecondHover,
 });
+
+import "./gridHeader.css";
+import "./gridBody.css";
+import "./gridCommon.css";
+import "./contextMenu.css";
+import "./paginationContainer.css";

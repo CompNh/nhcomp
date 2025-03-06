@@ -8,8 +8,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true, // 타입 선언 파일 자동 생성
+      rollupTypes : true,
     }),
-    vanillaExtractPlugin(), // ✅ Vanilla Extract 스타일 적용
+    vanillaExtractPlugin(), // ✅ Vanilla Extract 스타일 적용    
   ],
   build: {
     lib: {
