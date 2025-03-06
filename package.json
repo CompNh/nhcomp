@@ -2,12 +2,14 @@
   "name": "nhcomp",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",         
-  "module": "dist/index.es.js",    
-  "types": "dist/index.d.ts",      
-  "umd:main": "dist/index.umd.js", 
-  "scripts": {    
-    "build": "vite build"
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "umd:main": "dist/index.umd.js",
+  "scripts": {
+    "build": "vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "files": [
     "dist"
@@ -15,21 +17,33 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {  
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.5.0"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.5",
+    "@storybook/addon-essentials": "^8.6.4",
+    "@storybook/addon-onboarding": "^8.6.4",
+    "@storybook/blocks": "^8.6.4",
+    "@storybook/experimental-addon-test": "^8.6.4",
+    "@storybook/react": "^8.6.4",
+    "@storybook/react-vite": "^8.6.4",
+    "@storybook/test": "^8.6.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vanilla-extract/css": "^1.17.1",
     "@vanilla-extract/vite-plugin": "^5.0.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/browser": "^3.0.7",
+    "@vitest/coverage-v8": "^3.0.7",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.50.1",
     "postcss": "^8.5.3",
+    "storybook": "^8.6.4",
     "typescript": "^5.8.2",
     "vite": "^6.2.0",
-    "vite-plugin-dts": "^4.5.3"
+    "vite-plugin-dts": "^4.5.3",
+    "vitest": "^3.0.7"
   }
 }
