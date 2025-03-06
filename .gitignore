@@ -7,3 +7,4 @@ dist/
 # Vite & TypeScript 관련
 .vite/
 *.tsbuildinfo
+*storybook.log

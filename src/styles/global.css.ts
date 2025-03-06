@@ -1,38 +1,7 @@
-import { createGlobalTheme, globalStyle } from "@vanilla-extract/css";
+import { globalStyle } from "@vanilla-extract/css";
+import { themeVars } from "./theme.css"; // ✅ 테마 변수 가져오기
 
-// ✅ CSS 변수 정의 (다크모드 포함)
-export const themeVars = createGlobalTheme(":root", {
-  colorBackground: "#F9FAFB",
-  colorFont: "#111827",
-  colorFontEdited: "#FF4500",
-  colorPrime: "#F9FAFB",
-  colorPrimeHover: "#D6D6DA",
-  colorSecond: "#e3e4e6",
-  colorSecondHover: "#D6D6DA",
-  colorThird: "#EF4444",
-  colorThirdHover: "#DC2626",
-  colorFourth: "#3B82F6",
-  colorFourthHover: "#2563EB",
-  colorActive: "#9fd0f1",
-});
-
-// ✅ 다크 모드 설정
-createGlobalTheme(".dark", {
-  colorBackground: "#1E1E1E",
-  colorFont: "#D4D4D4",
-  colorFontEdited: "#bba529",
-  colorPrime: "#2C2C2C",
-  colorPrimeHover: "#4A4A4A",
-  colorSecond: "#313131",
-  colorSecondHover: "#464545",
-  colorThird: "#F87171",
-  colorThirdHover: "#DC2626",
-  colorFourth: "#3B82F6",
-  colorFourthHover: "#2563EB",
-  colorActive: "#0883d4",
-});
-
-// ✅ 기본 스타일 적용
+// ✅ 기본 스타일 (body, html)
 globalStyle("body, html", {
   height: "100%",
   backgroundColor: themeVars.colorBackground,
@@ -45,12 +14,12 @@ globalStyle("body, html", {
   textAlign: "left",
 });
 
-// ✅ 테이블 스타일 적용
+// ✅ 테이블 스타일
 globalStyle(".table-th", {
   padding: "0.5rem",
   borderRight: `1px solid ${themeVars.colorPrimeHover}`,
   textAlign: "center",
-  width: "3rem",
+  width: "2rem",
   backgroundColor: themeVars.colorSecond,
   fontWeight: "bold",
 });

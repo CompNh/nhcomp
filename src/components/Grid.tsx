@@ -4,6 +4,7 @@ import { useGridReducer } from "./Reducer/useGridReducer";
 import GridPagination from "./Parts/GridPagination";
 import { GridProps } from "./GridTypes";
 import { setRowKeysForOrginData } from "./Utility/GridUtility";
+import { gridContainer, gridTable } from "../styles/grid.css";
 
 const Grid = <T,>({
   columns,
@@ -14,30 +15,29 @@ const Grid = <T,>({
   pagingable = false,
   pagination,
   isCellEditable = false,
-
-}: GridProps<T>) => {  
+}: GridProps<T>) => {
   const reducer = useGridReducer<T>(setRowKeysForOrginData(data), pagingable, pagination?.pageSize);
 
   const { pagenate } = reducer.state;
-  const totalRows = data.length; // ✅ 전체 데이터 개수
-  const totalPages = Math.ceil(totalRows / pagenate.pageSize); // ✅ 총 페이지 계산  
+  const totalRows = data.length;
+  const totalPages = Math.ceil(totalRows / pagenate.pageSize);
   console.log("Grid.tsx - editedRows:", reducer.state.editedRows);
 
   return (
-    <div className="nh-grid-container">        
-        <table className="nh-grid-table">          
+    <div className={gridContainer}>        
+        <table className={gridTable}>          
             <GridHeader
                 columns={columns}                                
                 showRowNumCol={showRowNumCol}
                 showRowCheckboxCol={showRowCheckboxCol}  
                 options={options}       
                 reducer={reducer}   
-                editedRows = {reducer.state.editedRows}    
+                editedRows={reducer.state.editedRows}    
             />
             <GridBody
                 reducer={reducer}                
                 columns={columns}
-                isCellEditable = {isCellEditable}
+                isCellEditable={isCellEditable}
                 showRowNumCol={showRowNumCol}
                 showRowCheckboxCol={showRowCheckboxCol}
                 selectedRows={reducer.state.selectedRows}
@@ -45,15 +45,14 @@ const Grid = <T,>({
                 onToggleGroupExpand={reducer.expandGroup}
             />          
         </table>
-        {/* ✅ 페이지네이션 추가 */}
         {pagingable && (
             <GridPagination
-                  currentPage={pagenate.currentPage}
-                  totalPages={totalPages}
-                  onPageChange={reducer.setPage} 
-                  totalDataCount={data.length} 
-                  pageSize={reducer.state.pagenate.pageSize} 
-                  onPageSizeChange={reducer.setPageSize}  
+                currentPage={pagenate.currentPage}
+                totalPages={totalPages}
+                onPageChange={reducer.setPage} 
+                totalDataCount={data.length} 
+                pageSize={reducer.state.pagenate.pageSize} 
+                onPageSizeChange={reducer.setPageSize}  
             />
         )}          
     </div>
@@ -61,4 +60,3 @@ const Grid = <T,>({
 };
 
 export default Grid;
-

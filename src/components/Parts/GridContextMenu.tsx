@@ -2,8 +2,16 @@ import { useEffect, useRef } from "react";
 import { ContextMenuItem, GridColumn, GridOptions } from "../GridTypes";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import { FaFilter, FaLayerGroup, FaSortAmountDown, FaSortAmountUp, FaTimes } from "react-icons/fa";
+import {
+    contextMenu,
+    contextMenuList,
+    contextItem,
+    contextDisabled,
+    contextDivider,
+    contextIcon,
+} from "../../styles/contextMenu.css";
 
-const GridContextMenu = <T,>({    
+const GridContextMenu = <T,>({
     menuPosition,
     options,
     onClose,
@@ -57,9 +65,9 @@ const GridContextMenu = <T,>({
             icon: <FaTimes style={{ color: "#DC2626", fontSize: "14px" }} />, // ✅ text-red-600
             onClick: () => reducer?.removeGroup(menuPosition.column.key),
         },
-        (options.grouping || options.sortable) && options.filterable && menuPosition.column.filterable &&  { divider: true },
+        (options.grouping || options.sortable) && options.filterable && menuPosition.column.filterable && { divider: true },
 
-        options.filterable && menuPosition.column.filterable &&{
+        options.filterable && menuPosition.column.filterable && {
             label: options.contextMenuLabels?.filter || "필터",
             icon: <FaFilter style={{ color: "#D97706", fontSize: "14px" }} />, // ✅ text-amber-500
             onClick: () => reducer?.setFilter({ [menuPosition.column.key]: "" }),
@@ -70,31 +78,30 @@ const GridContextMenu = <T,>({
             onClick: () => reducer?.clearFilter(menuPosition.column.key),
         },
     ].filter(Boolean) as ContextMenuItem[];
-    
 
     return (
         <div
             ref={menuRef}
-            className="nh-context-menu"
+            className={contextMenu}
             style={{
                 top: `${menuPosition.y}px`,
                 left: `${menuPosition.x}px`,
             }}
         >
-            <ul className="nh-context-menu-list">
+            <ul className={contextMenuList}>
                 {menuItems.map((item, index) =>
                     item.divider ? (
-                        <hr key={`divider-${index}`} className="nh-context-divider" />
+                        <hr key={`divider-${index}`} className={contextDivider} />
                     ) : (
                         <li
                             key={index}
-                            className={`nh-context-item ${item.disabled ? "nh-context-disabled" : ""}`}
+                            className={`${contextItem} ${item.disabled ? contextDisabled : ""}`}
                             onClick={() => {
                                 if (!item.disabled && item.onClick) item.onClick();
                                 onClose();
                             }}
                         >
-                            {item.icon && <span className="nh-context-icon">{item.icon}</span>}
+                            {item.icon && <span className={contextIcon}>{item.icon}</span>}
                             <span>{item.label}</span>
                         </li>
                     )
