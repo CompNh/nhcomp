@@ -93,6 +93,13 @@ interface GridProps<T> {
     showRowCheckboxCol?: boolean;
     /** Cell Edit Mode 활성화 (기본값: false) */
     isCellEditable?: boolean;
+    /** 사용자 스타일 커스텀 (Grid 내부 컴포넌트용) */
+    customStyles?: {
+        header?: React.CSSProperties;
+        body?: React.CSSProperties;
+        pagination?: React.CSSProperties;
+        contextMenu?: React.CSSProperties;
+    };
 }
 interface GridGroupState {
     column: string[];

@@ -6,6 +6,7 @@ interface PaginationProps {
     pageSize: number;
     onPageChange: (page: number) => void;
     onPageSizeChange: (size: number) => void;
+    style?: React.CSSProperties;
 }
 declare const GridPagination: React.FC<PaginationProps>;
 export default GridPagination;

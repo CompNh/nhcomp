@@ -1,16 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      insertTypesEntry: true, // 타입 선언 파일 자동 생성
-      rollupTypes : true,
+      insertTypesEntry: true, // 타입 선언 파일 자동 생성      
     }),
-    vanillaExtractPlugin(), // ✅ Vanilla Extract 스타일 적용    
+    
   ],
   build: {
     lib: {

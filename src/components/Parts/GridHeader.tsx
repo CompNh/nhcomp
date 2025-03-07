@@ -1,18 +1,9 @@
+import styled from "styled-components";
 import { FaLayerGroup, FaFilter, FaSortAmountUp, FaSortAmountDown, FaCheck, FaUndo } from "react-icons/fa";
 import { GridColumn, GridOptions } from "../GridTypes";
 import { useState } from "react";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import GridContextMenu from "./GridContextMenu";
-import {
-  gridHeader,
-  gridHeaderRow,  
-  stickyLeft,
-  stickyRight,
-  gridFilterRow,
-  gridFilterInput,
-  gridHeaderContent,
-} from "../../styles/gridHeader.css"; // ✅ Vanilla Extract 스타일 import
-import { btn, btnApply, btnReset, tableCell } from "../../styles/gridCommon.css";
 
 interface GridHeaderProps<T> {
   columns: GridColumn<T>[];
@@ -21,7 +12,73 @@ interface GridHeaderProps<T> {
   options?: GridOptions;
   reducer: GridReducerReturn<T>;
   editedRows: Record<string, Partial<T>>;
+  style?: React.CSSProperties;
 }
+
+// ✅ styled-components 적용
+const HeaderWrapper = styled.thead`
+  background-color: ${(props) => props.theme.colors.prime};
+  color: ${(props) => props.theme.colors.font};
+`;
+
+const HeaderRow = styled.tr`
+  background-color: ${(props) => props.theme.colors.second};
+  color: ${(props) => props.theme.colors.font};
+  border-bottom: 2px solid ${(props) => props.theme.colors.font};
+`;
+
+const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
+  position: ${(props) => (props.sticky ? "sticky" : "relative")};
+  ${(props) => props.sticky === "left" && `left: 0; background-color: ${props.theme.colors.prime};`}
+  ${(props) => props.sticky === "right" && `right: 0; background-color: ${props.theme.colors.prime};`}
+  text-align: left;
+  padding: 5px;
+  width: ${(props) => (props.width ? `${props.width}px` : "auto")};
+  min-width: ${(props) => (props.width ? `${props.width}px` : "50px")};
+  border-right: 1px solid ${(props) => props.theme.colors.primeHover};
+  background-color: ${(props) => props.theme.colors.second};
+  font-weight: bold;
+`;
+
+const FilterRow = styled.tr`
+  background-color: ${(props) => props.theme.colors.primeHover};
+  border-bottom: 1px solid ${(props) => props.theme.colors.font};
+`;
+
+const FilterInput = styled.input`
+  width: 100%;
+  padding: 4px 8px;
+  border: 1px solid ${(props) => props.theme.colors.second};
+  background-color: white;
+  color: black;
+  outline: none;
+  border-radius: 4px;
+`;
+
+const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+`;
+
+const Button = styled.button<{ apply?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  background-color: ${(props) => (props.apply ? props.theme.colors.fourth : props.theme.colors.third)};
+  color: white;
+
+  &:hover {
+    background-color: ${(props) => (props.apply ? props.theme.colors.fourthHover : props.theme.colors.thirdHover)};
+  }
+`;
 
 const GridHeader = <T,>({
   columns,
@@ -30,11 +87,12 @@ const GridHeader = <T,>({
   options,
   reducer,
   editedRows,
+  style,
 }: GridHeaderProps<T>) => {
   const [menuPosition, setMenuPosition] = useState<{ x: number; y: number; column: GridColumn<T> } | null>(null);
   const { filters, sortedColumn, sortDirection, group } = reducer.state;
 
-  // ✅ 우클릭 이벤트 핸들러
+  // ✅ 컨텍스트 메뉴 핸들러 추가
   const handleContextMenu = (event: React.MouseEvent, column: GridColumn<T>) => {
     event.preventDefault();
     if (options) {
@@ -42,77 +100,60 @@ const GridHeader = <T,>({
     }
   };
 
-  // ✅ 메뉴 닫기 함수
   const closeContextMenu = () => setMenuPosition(null);
-  console.log(editedRows);
 
   return (
-    <thead className={gridHeader}>
-      <tr className={gridHeaderRow}>
-        {/* ✅ "전체 적용(✔) / 되돌리기(↩)" 버튼 */}
+    <HeaderWrapper style={style}>
+      <HeaderRow>
         {editedRows && Object.keys(editedRows).length > 0 && (
-          <th className={`${tableCell}`} style={{width : "60px"}}>
-            <div style={{ display: "flex", gap: "1px", justifyContent: "center" }}>
-              <button className={`${btn} ${btnApply}`} onClick={reducer.applyAllChanges}>
+          <HeaderCell width={40}>
+            <div style={{ display: "flex", gap: "1px", justifyContent: "center", alignItems: "center" }}>
+              <Button apply onClick={reducer.applyAllChanges}>
                 <FaCheck />
-              </button>
-              <button className={`${btn} ${btnReset}`} onClick={reducer.resetAllChanges}>
+              </Button>
+              <Button onClick={reducer.resetAllChanges}>
                 <FaUndo />
-              </button>
+              </Button>
             </div>
-          </th>
+          </HeaderCell>
         )}
-        {showRowNumCol && <th className={tableCell} style={{width : "30px"}}>No.</th>}
-        {showRowCheckboxCol && <th className={tableCell} style={{width : "30px"}}>✔</th>}
-
+        {showRowNumCol && <HeaderCell width={40}>No.</HeaderCell>}
+        {showRowCheckboxCol && <HeaderCell width={40}>✔</HeaderCell>}
         {columns.map((col) => (
-          <th
-            key={col.key}
-            className={`${tableCell} ${col.sticky === "left" ? stickyLeft : ""} ${
-              col.sticky === "right" ? stickyRight : ""
-            }`}
-            style={{ width: col.width ? `${col.width}px` : "auto", textAlign: col.align || "left" }}
-            title={col.tooltip}
-            onContextMenu={(event) => handleContextMenu(event, col)}
-          >
-            <div className={gridHeaderContent}>
+          <HeaderCell key={col.key} width={col.width} sticky={col.sticky} onContextMenu={(event) => handleContextMenu(event, col)}>
+            <HeaderContent>
               <span>{col.label}</span>
               {col.sortable && sortedColumn === col.key && sortDirection !== null && (
-                sortDirection === "asc" ? 
-                  <FaSortAmountUp style={{ color: "#2563EB", fontSize: "14px" }} />
-                  : <FaSortAmountDown style={{ color: "#2563EB", fontSize: "14px" }} />
+                sortDirection === "asc" ? <FaSortAmountUp /> : <FaSortAmountDown />
               )}
-              {group.column?.includes(col.key) && <FaLayerGroup style={{ color: "#16A34A", fontSize: "14px" }} />}
-              {options?.filterable && filters[col.key] !== undefined && <FaFilter style={{ color: "#D97706", fontSize: "14px" }} />}
-            </div>
-          </th>
+              {group.column?.includes(col.key) && <FaLayerGroup />}
+              {options?.filterable && filters[col.key] !== undefined && <FaFilter />}
+            </HeaderContent>
+          </HeaderCell>
         ))}
-      </tr>
+      </HeaderRow>
 
-      {/* ✅ 필터 입력 행 */}
-      {columns.some((col) => options?.filterable && filters[col.key] !== undefined) ? (
-        <tr className={gridFilterRow}>
-          {showRowNumCol ? <td style={{ padding: "8px" }}>&nbsp;</td> : null}
-          {showRowCheckboxCol ? <td style={{ padding: "8px" }}>&nbsp;</td> : null}
+      {columns.some((col) => options?.filterable && filters[col.key] !== undefined) && (
+        <FilterRow>
+          {showRowNumCol && <td style={{ padding: "8px" }}>&nbsp;</td>}
+          {showRowCheckboxCol && <td style={{ padding: "8px" }}>&nbsp;</td>}
           {columns.map((col) => (
             <td key={col.key} style={{ padding: "8px" }}>
               {col.filterable && filters[col.key] !== undefined && (
-                <input
+                <FilterInput
                   type="text"
                   value={filters[col.key] || ""}
                   onChange={(e) => reducer.setFilter({ ...filters, [col.key]: e.target.value })}
-                  className={gridFilterInput}
                   placeholder="필터 입력..."
                 />
               )}
             </td>
           ))}
-        </tr>
-      ) : null}
+        </FilterRow>
+      )}
 
-      {/* ✅ 컨텍스트 메뉴 추가 */}
       {options && <GridContextMenu menuPosition={menuPosition} options={options} onClose={closeContextMenu} reducer={reducer} />}
-    </thead>
+    </HeaderWrapper>
   );
 };
 
