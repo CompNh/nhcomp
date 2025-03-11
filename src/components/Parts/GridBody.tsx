@@ -81,6 +81,23 @@ const Button = styled.button<{ apply?: boolean }>`
     background-color: ${(props) => (props.apply ? props.theme.colors.fourthHover : props.theme.colors.thirdHover)};
   }
 `;
+const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  appearance: auto;
+  display: inline-block;
+  visibility: visible;
+  opacity: 1;
+  background-color: white;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+
+  &:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+`;
 
 const GridBody = <T,>({
   columns,
@@ -181,7 +198,10 @@ const GridBody = <T,>({
         {showRowNumCol && <TableCell>{rowNum}</TableCell>}
         {showRowCheckboxCol && (
           <TableCell>
-            <input type="checkbox" checked={selectedRows.has(row)} onChange={() => onToggleRow(row)} />
+            <StyledCheckbox 
+              type="checkbox" 
+              checked={selectedRows.has(row)} 
+              onChange={() => onToggleRow(row)} />
           </TableCell>
         )}
 

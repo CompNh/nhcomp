@@ -134,7 +134,7 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
         }
         
         case "TOGGLE_ROW" : {
-            const newSelectedRows = new Set(state.selectedRows);
+            const newSelectedRows = new Set(state.selectedRows);            
     
             if (newSelectedRows.has(action.row)) {
                 newSelectedRows.delete(action.row); // ✅ 이미 선택된 경우 해제
