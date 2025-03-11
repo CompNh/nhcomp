@@ -58,8 +58,9 @@ export const Default: Story = {
     isCellEditable : true,
     pagingable: true,
     pagination: {
-      pageSize: 5,
+      pageSize: 10,
       currentPage: 1,
     },
+    showRowCheckboxCol: true,
   },
 };

@@ -45,6 +45,7 @@ const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number): 
             expanded: new Set<string>, // ✅ 초기 확장 상태 저장
         },
         selectedRows: new Set<T>(),
+        pagingable : pagingable,
         pagenate: {
             pageSize: pageSize,
             currentPage: 1,
@@ -131,10 +132,20 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                     : [...state.originalData], // ✅ 모든 그룹이 해제되면 원본 데이터 복원
             };
         }
-
         
         case "TOGGLE_ROW" : {
-            return {...state}
+            const newSelectedRows = new Set(state.selectedRows);
+    
+            if (newSelectedRows.has(action.row)) {
+                newSelectedRows.delete(action.row); // ✅ 이미 선택된 경우 해제
+            } else {
+                newSelectedRows.add(action.row); // ✅ 선택되지 않은 경우 추가
+            }
+        
+            return { 
+                ...state, 
+                selectedRows: newSelectedRows // ✅ 변경된 상태 적용
+            };
         }
 
         /** 🔹 특정 Row 선택/해제 */
@@ -297,10 +308,11 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                     ? { ...row, ...state.editedRows[(row as T & {rowKey : string}).rowKey] }
                     : row
             )
+            const resultData = state.pagingable ? paginateData(newData, state.pagenate.currentPage, state.pagenate.pageSize, state) : newData;
             return {
                 ...state,
                 originalData : newData,  
-                data : paginateData(newData, state.pagenate.currentPage, state.pagenate.pageSize, state) as GridData<T>[],                              
+                data : resultData as GridData<T>[],                              
                 editedRows: {}, // ✅ 적용 후 초기화
                 editingCell : null
             };

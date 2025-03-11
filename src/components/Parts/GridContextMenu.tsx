@@ -95,7 +95,7 @@ const GridContextMenu = <T,>({
       icon: <FaTimes style={{ color: "#DC2626", fontSize: "14px" }} />,
       onClick: () => reducer?.setSort(menuPosition.column.key, null),
     },
-    options.sortable && menuPosition.column.sortable && (options.grouping || options.filterable) && { divider: true },
+    options.sortable && menuPosition.column.sortable && options.grouping && { divider: true },
 
     options.grouping && {
       label: options.contextMenuLabels?.group || "그룹화",

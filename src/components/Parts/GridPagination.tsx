@@ -83,7 +83,7 @@ const DropdownItem = styled.div`
   }
 `;
 
-const Button = styled.button<{ active?: boolean }>`
+const Button = styled.button<{ $active?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@ const Button = styled.button<{ active?: boolean }>`
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
-  background-color: ${(props) => (props.active ? props.theme.colors.active : props.theme.colors.second)};
+  background-color: ${(props) => (props.$active ? props.theme.colors.active : props.theme.colors.second)};
   color: ${(props) => props.theme.colors.font};
   cursor: pointer;
   border: none;
@@ -178,7 +178,7 @@ const GridPagination: React.FC<PaginationProps> = ({
         </Button>
 
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <Button key={page} active={page === currentPage} onClick={() => onPageChange(page)}>
+          <Button key={page} $active={page === currentPage} onClick={() => onPageChange(page)}>
             {page}
           </Button>
         ))}

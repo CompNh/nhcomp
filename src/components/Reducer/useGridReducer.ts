@@ -101,6 +101,7 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
     const toggleRow = (row: T) => {
         dispatch({ type: "TOGGLE_ROW", row });
     };
+
     /** 🔹 Group Expend */
     const expandGroup = (column : string) => {
         const newExpanded = new Set(state.group.expanded);
@@ -135,6 +136,7 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
             }) 
         });
     };
+    
     /** 🔹 페이지 크기 변경 */
     const setPageSize = (pageSize: number) => {
         dispatch({ 

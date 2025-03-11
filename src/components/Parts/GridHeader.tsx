@@ -124,10 +124,10 @@ const GridHeader = <T,>({
             <HeaderContent>
               <span>{col.label}</span>
               {col.sortable && sortedColumn === col.key && sortDirection !== null && (
-                sortDirection === "asc" ? <FaSortAmountUp /> : <FaSortAmountDown />
+                sortDirection === "asc" ? <FaSortAmountUp style={{ color: "#2563EB", fontSize: "10px" }}/> : <FaSortAmountDown style={{ color: "#2563EB", fontSize: "10px" }}/>
               )}
-              {group.column?.includes(col.key) && <FaLayerGroup />}
-              {options?.filterable && filters[col.key] !== undefined && <FaFilter />}
+              {group.column?.includes(col.key) && <FaLayerGroup style={{ color: "#16A34A", fontSize: "10px" }}/>}
+              {options?.filterable && filters[col.key] !== undefined && <FaFilter style={{ color: "#D97706", fontSize: "10px" }}/>}
             </HeaderContent>
           </HeaderCell>
         ))}

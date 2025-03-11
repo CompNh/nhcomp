@@ -25,11 +25,11 @@ const TableRow = styled.tr`
   border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};
 `;
 
-const TableCell = styled.td<{ isEdited?: boolean }>`
+const TableCell = styled.td<{ $isEdited?: boolean }>`
   padding: 5px;
   border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};
-  font-weight: ${(props) => (props.isEdited ? "bold" : "normal")};
-  color: ${(props) => (props.isEdited ? props.theme.colors.third : "inherit")};
+  font-weight: ${(props) => (props.$isEdited ? "bold" : "normal")};
+  color: ${(props) => (props.$isEdited ? props.theme.colors.third : "inherit")};
 `;
 
 const EditInput = styled.input`
@@ -193,9 +193,18 @@ const GridBody = <T,>({
             : reducer.state.editedRows[row.rowKey]?.[col.key as keyof T] ?? row[col.key as keyof T];
 
           return (
-            <TableCell key={col.key} isEdited={isEdited} onDoubleClick={() => isCellEditable && handleCellDoubleClick(row.rowKey, col.key, cellValue as T[keyof T])}>
+            <TableCell 
+              key={col.key} 
+              $isEdited={isEdited} 
+              onDoubleClick={() => isCellEditable && handleCellDoubleClick(row.rowKey, col.key, cellValue as T[keyof T])}
+            >
               {isEditing ? (
-                <EditInput type="text" value={(reducer.state.editingCell?.value as string) ?? ""} onChange={(e) => handleCellChange(e.target.value)} onKeyDown={(e) => handleKeyDown(e, row)} />
+                <EditInput 
+                  type="text" 
+                  value={(reducer.state.editingCell?.value as string) ?? ""} 
+                  onChange={(e) => handleCellChange(e.target.value)} 
+                  onKeyDown={(e) => handleKeyDown(e, row)} 
+                />
               ) : (
                 cellValue as string
               )}

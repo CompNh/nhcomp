@@ -175,12 +175,14 @@ const gridStateChanges = <T>(state: GridState<T>): GridState<T> => {
         processedData = sortData(processedData as GridData<T>[], state.sortedColumn as keyof T, state.sortDirection);
     }
 
-    processedData = paginateData(
-        processedData, 
-        state.pagenate.currentPage, 
-        state.pagenate.pageSize,
-        state     
-    );
+    if (state.pagingable) {
+        processedData = paginateData(
+            processedData, 
+            state.pagenate.currentPage, 
+            state.pagenate.pageSize,
+            state     
+        );
+    }
 
     if (state.group.column.length > 0) {
         processedData = groupData(processedData as GridData<T>[], state.group.column, state.group.expanded);
@@ -203,12 +205,6 @@ export const setRowKeysForOrginData = <T>(data: Array<T>): Array<T & { rowKey: s
         rowKey: (row as GridData<T>).rowKey ?? `row-${Date.now()}-${Math.random()}-${index}`, 
     }));
 };
-
-
-
-
-
-
 
 
 export {isGroupRowHelper, sortData, groupData, filterData, gridStateChanges, paginateData}
