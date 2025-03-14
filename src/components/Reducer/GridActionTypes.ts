@@ -113,11 +113,7 @@ interface SetGridStateAction<T>{
 interface AddRowAction<T>{
     type: "ADD_ROW";    
 }
-/**🔹Delete Row */
-interface DeleteRowAction{
-    type: "DELETE_ROW";
-    rowKey: string;
-}
+
 /** 🔹 Grid 액션 타입 정의 */
 type GridAction<T> =
     | SetGridStateAction<T>
@@ -139,7 +135,6 @@ type GridAction<T> =
     | ApplyRowChangesAction
     | ResetRowChangesAction
     | AddRowAction<T>
-    | DeleteRowAction
 
 export type { 
     GridAction,
@@ -161,6 +156,5 @@ export type {
     ResetAllChangesAction,
     ApplyRowChangesAction,
     ResetRowChangesAction,
-    AddRowAction,
-    DeleteRowAction
+    AddRowAction
 };

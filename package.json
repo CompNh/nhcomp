@@ -14,14 +14,6 @@
   "files": [
     "dist"
   ],
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-transform-runtime"
-    ]
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

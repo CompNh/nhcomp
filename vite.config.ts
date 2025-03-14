@@ -22,11 +22,20 @@ export default defineConfig({
       
     },
     rollupOptions: {
-      external: ["react", "react-dom"], // React는 번들에서 제외하여 가벼운 패키지 유지
+      external: [
+        "react", 
+        "react-dom", 
+        "xlsx", 
+        "jspdf", 
+        "jspdf-autotable" // ✅ Excel, PDF 관련 라이브러리 번들 제외
+      ],
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          xlsx: "XLSX",
+          jspdf: "jsPDF",
+          "jspdf-autotable": "jspdfAutoTable",
         },
       },
     },

@@ -105,12 +105,7 @@ interface SetGridStateAction<T> {
 interface AddRowAction<T> {
     type: "ADD_ROW";
 }
-/**🔹Delete Row */
-interface DeleteRowAction {
-    type: "DELETE_ROW";
-    rowKey: string;
-}
 /** 🔹 Grid 액션 타입 정의 */
-type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction | AddRowAction<T> | DeleteRowAction;
-export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, AddRowAction, DeleteRowAction };
+type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction | AddRowAction<T>;
+export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, AddRowAction };
 //# sourceMappingURL=GridActionTypes.d.ts.map
