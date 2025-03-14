@@ -112,7 +112,7 @@ interface GridOptions {
 
 /** 🔹 Grid 컴포넌트 Props 인터페이스 */
 interface GridProps<T> {
-    /** 컬럼 목록 */
+    /** 컬럼 목록 */    
     columns: GridColumn<T>[];
 
     /** 표시할 데이터 (기존 `rows` → `data`) */
@@ -141,8 +141,13 @@ interface GridProps<T> {
         body?: React.CSSProperties;
         pagination?: React.CSSProperties;
         contextMenu?: React.CSSProperties;
-    };    
-    }
+    };
+    /** Excel,PDF... Export Active In Contextmenu */
+    activeExportSurport? : boolean;    
+    
+    /** Grid Body에 Context Menu For Row Add&Del Active */
+    activeAddRowAble? : boolean;
+}
 
 interface GridGroupState {
     column : string [];

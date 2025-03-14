@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCheck, FaChevronDown, FaChevronRight, FaUndo } from "react-icons/fa";
 import { GridColumn, GridData, GroupRow } from "../GridTypes";
 import { isGroupRowHelper } from "../Utility/GridUtility";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
+import GridBodyContextMenu from "./GridBodyContextMenu";
 
 interface GridBodyProps<T> {
   columns: GridColumn<T>[];
   isCellEditable?: boolean;
   showRowNumCol?: boolean;
-  showRowCheckboxCol?: boolean;
+  showRowCheckboxCol?: boolean;  
   selectedRows: Set<T>;
   onToggleRow: (row: T) => void;
   onToggleGroupExpand: (groupKey: string) => void;
@@ -102,7 +103,7 @@ const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
 const GridBody = <T,>({
   columns,
   showRowNumCol,
-  showRowCheckboxCol,
+  showRowCheckboxCol,  
   selectedRows,
   isCellEditable,
   onToggleRow,
@@ -110,9 +111,19 @@ const GridBody = <T,>({
   reducer,
   style,
 }: GridBodyProps<T>) => {
+  const [menuPosition, setMenuPosition] = useState<{ x: number; y: number; row: T & {rowKey: string}} | null>(null);
+
   const handleCellDoubleClick = (rowKey: string, colKey: string, value: T[keyof T]) => {
     reducer.setEditingCell(rowKey, colKey, value);
   };
+
+  // ✅ 컨텍스트 메뉴 핸들러 추가
+  const handleContextMenu = (event: React.MouseEvent, row: T & {rowKey: string}) => {
+    event.preventDefault();    
+      setMenuPosition({ x: event.clientX, y: event.clientY, row });    
+  };
+
+  const closeContextMenu = () => setMenuPosition(null);
 
   const handleCellChange = (newValue: string) => {
     if (!reducer.state.editingCell) return;
@@ -179,7 +190,7 @@ const GridBody = <T,>({
     const showActionColumn = isCellEditable && Object.keys(reducer.state.editedRows).length > 0;
 
     return (
-      <TableRow key={row.rowKey}>
+      <TableRow key={row.rowKey} onContextMenu={(event) => handleContextMenu(event, row)}>
         {showActionColumn && (
           <ActionCell>
             {reducer.state.editedRows[row.rowKey] && (
@@ -235,7 +246,20 @@ const GridBody = <T,>({
     );
   };
 
-  return <TableBody>{reducer.state.data.map((row, index) => (isGroupRowHelper(row) ? renderGroupRow(row as GroupRow<T>, 0) : renderDataRow(row as GridData<T>, 0, index + 1)))}</TableBody>;
+  return (
+    <>
+      <TableBody>
+        {reducer.state.data.map((row, index) => 
+          (isGroupRowHelper(row) ? renderGroupRow(row as GroupRow<T>, 0) : renderDataRow(row as GridData<T>, 0, index + 1)))
+        }
+      </TableBody>
+
+      {reducer.state.activeAddRowAble && <GridBodyContextMenu 
+        menuPosition={menuPosition}         
+        onClose={closeContextMenu} 
+        reducer={reducer} />}      
+    </>
+  );
 };
 
 export default GridBody;

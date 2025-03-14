@@ -62,6 +62,7 @@ interface SetEditCellAction<T> {
         newValue: T[keyof T];
     };
 }
+/** 🔹Cell 값 변경 */
 interface SetEditingCellAction<T> {
     type: "SET_EDITING_CELL";
     payload: {
@@ -70,11 +71,11 @@ interface SetEditingCellAction<T> {
         value: T[keyof T];
     };
 }
-
+/** 🔹Cell 변경 종료 */
 interface ClearEditingCellAction {
     type: "CLEAR_EDITING_CELL";
 }
-
+/** 🔹Cell 변경 삭제 */
 interface RemoveEditedCellAction {
     type: "REMOVE_EDITED_CELL";
     payload: {
@@ -89,7 +90,6 @@ interface ApplyRowChangesAction {
         rowKey: string;
     };
 }
-
 /** 🔹 특정 행의 변경 사항 되돌리기 */
 interface ResetRowChangesAction {
     type: "RESET_ROW_CHANGES";
@@ -97,7 +97,6 @@ interface ResetRowChangesAction {
         rowKey: string;
     };
 }
-
 /** 🔹모든 수정 값 변경 */
 interface ApplyAllChangesAction {
     type: "APPLY_ALL_CHANGES";
@@ -106,10 +105,18 @@ interface ApplyAllChangesAction {
 interface ResetAllChangesAction {
     type: "RESET_ALL_CHANGES";
 }
-
 interface SetGridStateAction<T>{
     type: "SET_GRID_STATE";
     state: GridState<T>;
+}
+/**🔹Add Row */
+interface AddRowAction<T>{
+    type: "ADD_ROW";    
+}
+/**🔹Delete Row */
+interface DeleteRowAction{
+    type: "DELETE_ROW";
+    rowKey: string;
 }
 /** 🔹 Grid 액션 타입 정의 */
 type GridAction<T> =
@@ -131,6 +138,8 @@ type GridAction<T> =
     | ResetAllChangesAction
     | ApplyRowChangesAction
     | ResetRowChangesAction
+    | AddRowAction<T>
+    | DeleteRowAction
 
 export type { 
     GridAction,
@@ -152,4 +161,6 @@ export type {
     ResetAllChangesAction,
     ApplyRowChangesAction,
     ResetRowChangesAction,
+    AddRowAction,
+    DeleteRowAction
 };

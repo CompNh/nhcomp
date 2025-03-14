@@ -1,6 +1,10 @@
 
+import * as XLSX from "xlsx";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import { GridData, GroupRow, SortDirection } from "../GridTypes";
 import { GridState } from "../Reducer/GridReducer";
+
 /**
  * 그룹 행인지 확인하는 헬퍼 함수
  * @param row 데이터 행 또는 그룹 행
@@ -9,6 +13,22 @@ import { GridState } from "../Reducer/GridReducer";
 const isGroupRowHelper = <T,>(row: T | GroupRow<T>): row is GroupRow<T> => {
     return (row as GroupRow<T>).__group === true;
 };
+
+/**
+ * 원본 데이터에 rowKey를 추가하는 함수
+ * @param data 원본 데이터 배열
+ * @returns rowKey가 추가된 새로운 데이터 배열
+ */
+export const setRowKeysForOrginData = <T>(data: Array<T>): Array<T & { rowKey: string }> => {
+    return data.map((row, index) => ({
+        ...row,
+        rowKey: (row as GridData<T>).rowKey ?? setNewRowKey(index), 
+    }));
+};
+
+export const setNewRowKey = (index : number) : string =>{
+    return `row-${Date.now()}-${Math.random()}-${index}`
+}
 
 /**
  * 단일 컬럼 기준 정렬 함수
@@ -194,18 +214,67 @@ const gridStateChanges = <T>(state: GridState<T>): GridState<T> => {
     };
 };
 
+const addRow = <T>(data : Array<T>)=>{
+    const newRow: T = {
+        ...(Object.keys(data[0] as keyof T).reduce((acc, key) => {
+            acc[key as keyof T] = "" as any; // 기본값 설정
+            return acc;
+        }, {} as T)),
+        rowKey: Date.now() // 고유한 rowKey 추가
+    };
+
+    // Reducer에 액션 전달
+    return { type: "ADD_ROW", row: newRow };    
+}
+
+
 /**
- * 원본 데이터에 rowKey를 추가하는 함수
- * @param data 원본 데이터 배열
- * @returns rowKey가 추가된 새로운 데이터 배열
+ * 엑셀로 내보내기
+ * @param data Grid 데이터 (배열 형태) 
  */
-export const setRowKeysForOrginData = <T>(data: Array<T>): Array<T & { rowKey: string }> => {
-    return data.map((row, index) => ({
-        ...row,
-        rowKey: (row as GridData<T>).rowKey ?? `row-${Date.now()}-${Math.random()}-${index}`, 
-    }));
-};
+export const exportToExcel = <T>(data : Array<T>) =>{
+    if (data.length === 0) {
+        console.warn("데이터가 없습니다.");
+        return;
+      }
+
+      const excludedKeys = ["rowKey"]; // ❌ 제외할 컬럼들
+    
+      // 특정 키 제외한 데이터 변환
+      const filteredData = data.map((row) => {
+        const newRow = { ...row };
+        excludedKeys.forEach((key) => delete newRow[key as keyof T]); // ❌ 제외할 키 삭제
+        return newRow;
+      });
+    
+      const worksheet = XLSX.utils.json_to_sheet(filteredData);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      XLSX.writeFile(workbook, "export.xlsx");
+}
+
+export const exportToPDF = <T>(data : Array<T>)=>{
+    if (data.length === 0) {
+        console.warn("데이터가 없습니다.");
+        return;
+      }
+
+      const excludedKeys = ["rowKey"]; // ❌ 제외할 컬럼들
+    
+      const doc = new jsPDF();
+      const headers = (Object.keys(data[0] as object) as (keyof T)[]).filter((key)=>!excludedKeys.includes(key as string)) as (keyof T)[]; // 필터 적용); // 컬럼명 가져오기
+      const rows = data.map((row) => headers.map((field) => row[field] as string | number)); // 데이터 변환
+    
+      autoTable(doc, {
+        head: [headers.map(String)], // 컬럼명
+        body: rows, // 데이터
+      });
+    
+      doc.save("export.pdf");     
+}
 
 
-export {isGroupRowHelper, sortData, groupData, filterData, gridStateChanges, paginateData}
+
+
+export {isGroupRowHelper, sortData, groupData, filterData, gridStateChanges, paginateData, addRow}
   

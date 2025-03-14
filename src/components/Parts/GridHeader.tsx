@@ -152,7 +152,11 @@ const GridHeader = <T,>({
         </FilterRow>
       )}
 
-      {options && <GridContextMenu menuPosition={menuPosition} options={options} onClose={closeContextMenu} reducer={reducer} />}
+      {options && <GridContextMenu 
+        menuPosition={menuPosition} 
+        options={options} 
+        onClose={closeContextMenu} 
+        reducer={reducer} />}
     </HeaderWrapper>
   );
 };

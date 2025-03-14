@@ -51,8 +51,10 @@ const Grid = <T,>({
   pagination,
   isCellEditable = false,
   customStyles = {},
+  activeExportSurport,
+  activeAddRowAble,
 }: GridProps<T>) => {
-  const reducer = useGridReducer<T>(setRowKeysForOrginData(data), pagingable, pagination?.pageSize);
+  const reducer = useGridReducer<T>(setRowKeysForOrginData(data), pagingable, pagination?.pageSize, activeExportSurport, activeAddRowAble);
   const { pagenate } = reducer.state;
   const totalRows = data.length;
   const totalPages = Math.ceil(totalRows / pagenate.pageSize);
@@ -91,7 +93,7 @@ const Grid = <T,>({
                 totalDataCount={data.length}
                 pageSize={reducer.state.pagenate.pageSize}
                 onPageSizeChange={reducer.setPageSize}
-                style={customStyles.pagination}
+                style={customStyles.pagination}                
               />
             )}
           </GridContainer>        

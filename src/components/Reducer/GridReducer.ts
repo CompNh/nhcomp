@@ -1,5 +1,5 @@
 import { GridData, GridGroupState, GridPaginationProps, SortDirection} from "../GridTypes";
-import { groupData, paginateData, setRowKeysForOrginData, sortData } from "../Utility/GridUtility";
+import { groupData, paginateData, setNewRowKey, setRowKeysForOrginData, sortData } from "../Utility/GridUtility";
 import { GridAction } from "./GridActionTypes";
 
 
@@ -16,7 +16,7 @@ interface GridState<T> {
     /** 컬럼별 필터 상태 */
     filters: Record<string, string>; 
     /** 그룹핑된 컬럼 목록 */
-    group: GridGroupState;
+    group: GridGroupState;    
     /** 선택된 Row 목록 */
     selectedRows: Set<T>;
     /** 페이지 활성화 */    
@@ -26,12 +26,17 @@ interface GridState<T> {
     /** 수정된 Data 관리 */
     editedRows : Record<string, Partial<T>>;
     /** 현재 편집 중인 셀 */
-    editingCell: { rowKey: string; colKey: string; value: T[keyof T] } | null;
+    editingCell: { rowKey: string; colKey: string; value: T[keyof T] } | null;    
+    /** Excel,PDF... Export Active */
+    activeExportSurport? : boolean;
+    /** Grid Body에 Context Menu For Row Add&Del Active */
+    activeAddRowAble? : boolean;
+    
     
 }
 
 /** 🔹 초기 상태 값 */
-const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number): GridState<T> => {
+const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport : boolean, activeAddRowAble : boolean): GridState<T> => {
     const newData : GridData<T>[] = setRowKeysForOrginData(data);
 
     return {
@@ -51,7 +56,9 @@ const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number): 
             currentPage: 1,
         },
         editedRows : {},
-        editingCell : null
+        editingCell : null,     
+        activeExportSurport : activeExportSurport,  
+        activeAddRowAble : activeAddRowAble 
     };
 };
 
@@ -95,8 +102,7 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                     Object.entries(state.filters).filter(([key]) => key !== action.column)
                 ),
             };
-        }
-        
+        }        
 
         /** 🔹 컬럼을 그룹핑 */
         case "SET_GROUP": {
@@ -166,6 +172,7 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 }
             };
         }
+
         /** 🔹 페이지 변경 */
         case "SET_PAGE": {
             return {
@@ -176,6 +183,7 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 },
             };
         }
+
         /** 🔹 페이지 변경 */
         case "SET_PAGE_SIZE": {
             return {
@@ -185,7 +193,9 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                     pageSize: action.pageSize, // ✅ pagenate 내부 currentPage 수정
                 },
             };
-        }        
+        }
+
+        /** 🔹 페이지 변경 중 */
         case "SET_EDITING_CELL": {
             return {
                 ...state,
@@ -196,12 +206,16 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 }
             };
         }
+
+        /** 🔹 페이지 변경 종료*/
         case "CLEAR_EDITING_CELL": {
             return {
                 ...state,
                 editingCell: null
             };
         }
+
+        /** 🔹 페이지 변경*/
         case "EDIT_CELL": {
             const { rowKey, colKey, newValue } = action.payload;
             return {
@@ -215,6 +229,8 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 }
             };
         }
+
+        /** 🔹 페이지 변경 제거*/
         case "REMOVE_EDITED_CELL": {
             const { rowKey, colKey } = action.payload;
             const updatedRow = { ...state.editedRows[rowKey] };
@@ -237,6 +253,8 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 }
             };
         }
+
+        /** 🔹 로우 변경 적용*/
         case "APPLY_ROW_CHANGES": {
             const { rowKey } = action.payload;
             
@@ -269,10 +287,9 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 editedRows: newEditedRows, // ✅ 해당 Row만 제거
                 editingCell: null, // ✅ 편집 상태 초기화
             };
-        }
+        }  
         
-        
-        
+        /** 🔹 로우 변경 되돌리기*/
         case "RESET_ROW_CHANGES": {
             const { rowKey } = action.payload;
         
@@ -280,19 +297,26 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
             const originalRow = state.originalData.find(
                 (row) => (row as T & { rowKey: string }).rowKey === rowKey
             );
+
+            // ✅ editedRows에서 해당 rowKey 제거
+            const newEditedRows = { ...state.editedRows };
+            delete newEditedRows[rowKey];
         
-            // ✅ 원본 데이터가 없으면 변경하지 않음
-            if (!originalRow) return state;
+            // ✅ 원본 데이터가 없으면, 새로 추가된 행이므로 data에서 삭제
+            if (!originalRow) {
+                return {
+                    ...state,
+                    data: state.data.filter((row) => (row as T & { rowKey: string }).rowKey !== rowKey),
+                    editedRows: newEditedRows, // ✅ 해당 Row의 변경 사항 삭제
+                    
+                };
+            }
         
             const newData = state.data.map((row) =>
                 (row as T & { rowKey: string }).rowKey === rowKey
                     ? originalRow // ✅ 원본 데이터로 복원
                     : row
-            );
-        
-            // ✅ editedRows에서 해당 rowKey 제거
-            const newEditedRows = { ...state.editedRows };
-            delete newEditedRows[rowKey];
+            ); 
         
             return {
                 ...state,                
@@ -300,8 +324,9 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 editedRows: newEditedRows, // ✅ 해당 Row의 변경 사항 삭제
                 editingCell: null, // ✅ 편집 상태 초기화
             };
-        }  
-  
+        }
+
+        /** 🔹전체 로우 변경 적용*/
         case "APPLY_ALL_CHANGES": {
             const newData = state.originalData.map((row) =>
                 state.editedRows[(row as T & {rowKey : string}).rowKey]
@@ -317,14 +342,37 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
                 editingCell : null
             };
         }
-        
+
+        /** 🔹전체 로우 변경 되돌리기*/
         case "RESET_ALL_CHANGES": {
             return {
                 ...state,
                 editedRows: {}, // ✅ 모든 변경 사항 초기화
                 editingCell : null,
             };
-        }         
+        }     
+
+        /** 🔹Add Row*/
+        case "ADD_ROW": {
+            const newRow : T & { rowKey : string } = {
+                ...(Object.keys(state.originalData[0]).reduce((acc, key) => {
+                    acc[key as keyof T] = "" as any; // 기본값 설정
+                    return acc;
+                }, {} as T)),
+                rowKey: setNewRowKey(state.originalData.length)
+            }            
+            const newData = [newRow, ...state.data ];            
+            return {
+                ...state,
+                data: newData,                
+                editedRows: {
+                    ...state.editedRows,
+                    [newRow.rowKey]: {
+                        ...state.editedRows[newRow.rowKey],                        
+                    }
+                }
+            };
+        }
         /** 🔹 Grid 상태 변경 */
         case "SET_GRID_STATE":
             return { ...state, ...action.state }; // ✅ 새로운 상태 적용

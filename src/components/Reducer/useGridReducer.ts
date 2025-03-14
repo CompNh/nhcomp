@@ -1,3 +1,4 @@
+import { addRow } from './../Utility/GridUtility';
 import { useReducer } from "react";
 import { gridReducer, GridState, initialGridState } from "./GridReducer";
 import { SortDirection } from "../GridTypes";
@@ -23,12 +24,13 @@ export interface GridReducerReturn<T> {
     removeEditedCell : (rowKey: string, colKey: string) => void;
     applyRowChanges : (rowKey: string) => void;
     resetRowChanges : (rowKey: string) => void;
+    addRow : () => void;
     
 }
 
 /** 🔹 useGridReducer 훅 */
-function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : number = 10) : GridReducerReturn<T>  {
-    const [state, dispatch] = useReducer(gridReducer<T>, initialGridState<T>(data, pagingable, pageSize));
+function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : number = 10, activeExportSurport = true, activeAddRowAble = true) : GridReducerReturn<T>  {
+    const [state, dispatch] = useReducer(gridReducer<T>, initialGridState<T>(data, pagingable, pageSize, activeExportSurport, activeAddRowAble));
     
     /** 🔹 컬럼 정렬 변경 */
     const setSort = (column: string, direction: SortDirection) => {        
@@ -183,6 +185,10 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
         dispatch({ type: "RESET_ALL_CHANGES" });
     };   
 
+    const addRow = () => {
+        dispatch({ type: "ADD_ROW" });        
+    }
+
 
     /** 🔹 Grid 상태 전체 업데이트 */
     const updateGridState = () => {
@@ -213,6 +219,7 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
         removeEditedCell,
         applyRowChanges,
         resetRowChanges,
+        addRow
     };
 }
 
