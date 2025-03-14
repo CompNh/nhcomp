@@ -11,11 +11,15 @@ export default defineConfig({
     
   ],
   build: {
+    commonjsOptions: {
+      transformMixedEsModules: true
+    },    
     lib: {
       entry: "src/index.ts", // ✅ 엔트리 파일 (컴포넌트 라이브러리 시작점)
       name: "NHComp",
       formats: ["es", "cjs", "umd"], // ✅ CommonJS(cjs), ESM(es), UMD 번들 추가
       fileName: (format) => format === "cjs" ? "index.js" : `index.${format}.js`
+      
     },
     rollupOptions: {
       external: ["react", "react-dom"], // React는 번들에서 제외하여 가벼운 패키지 유지
