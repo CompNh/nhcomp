@@ -7,6 +7,15 @@ import { GridState } from '../Reducer/GridReducer';
  */
 declare const isGroupRowHelper: <T>(row: T | GroupRow<T>) => row is GroupRow<T>;
 /**
+ * 원본 데이터에 rowKey를 추가하는 함수
+ * @param data 원본 데이터 배열
+ * @returns rowKey가 추가된 새로운 데이터 배열
+ */
+export declare const setRowKeysForOrginData: <T>(data: Array<T>) => Array<T & {
+    rowKey: string;
+}>;
+export declare const setNewRowKey: (index: number) => string;
+/**
  * 단일 컬럼 기준 정렬 함수
  * @param data 원본 데이터 배열
  * @param key 정렬할 컬럼 키
@@ -45,13 +54,15 @@ declare const paginateData: <T>(data: (GridData<T> | GroupRow<T>)[], currentPage
  * @returns 새로운 GridState 객체
  */
 declare const gridStateChanges: <T>(state: GridState<T>) => GridState<T>;
+declare const addRow: <T>(data: Array<T>) => {
+    type: string;
+    row: T;
+};
 /**
- * 원본 데이터에 rowKey를 추가하는 함수
- * @param data 원본 데이터 배열
- * @returns rowKey가 추가된 새로운 데이터 배열
+ * 엑셀로 내보내기
+ * @param data Grid 데이터 (배열 형태)
  */
-export declare const setRowKeysForOrginData: <T>(data: Array<T>) => Array<T & {
-    rowKey: string;
-}>;
-export { isGroupRowHelper, sortData, groupData, filterData, gridStateChanges, paginateData };
+export declare const exportToExcel: <T>(data: Array<T>) => void;
+export declare const exportToPDF: <T>(data: Array<T>) => void;
+export { isGroupRowHelper, sortData, groupData, filterData, gridStateChanges, paginateData, addRow };
 //# sourceMappingURL=GridUtility.d.ts.map

@@ -28,9 +28,13 @@ interface GridState<T> {
         colKey: string;
         value: T[keyof T];
     } | null;
+    /** Excel,PDF... Export Active */
+    activeExportSurport?: boolean;
+    /** Grid Body에 Context Menu For Row Add&Del Active */
+    activeAddRowAble?: boolean;
 }
 /** 🔹 초기 상태 값 */
-declare const initialGridState: <T>(data: T[], pagingable: boolean, pageSize: number) => GridState<T>;
+declare const initialGridState: <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport: boolean, activeAddRowAble: boolean) => GridState<T>;
 /** 🔹 Grid 리듀서 함수 */
 declare function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T>;
 export { gridReducer, initialGridState };

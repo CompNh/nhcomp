@@ -54,6 +54,7 @@ interface SetEditCellAction<T> {
         newValue: T[keyof T];
     };
 }
+/** 🔹Cell 값 변경 */
 interface SetEditingCellAction<T> {
     type: "SET_EDITING_CELL";
     payload: {
@@ -62,9 +63,11 @@ interface SetEditingCellAction<T> {
         value: T[keyof T];
     };
 }
+/** 🔹Cell 변경 종료 */
 interface ClearEditingCellAction {
     type: "CLEAR_EDITING_CELL";
 }
+/** 🔹Cell 변경 삭제 */
 interface RemoveEditedCellAction {
     type: "REMOVE_EDITED_CELL";
     payload: {
@@ -98,7 +101,16 @@ interface SetGridStateAction<T> {
     type: "SET_GRID_STATE";
     state: GridState<T>;
 }
+/**🔹Add Row */
+interface AddRowAction<T> {
+    type: "ADD_ROW";
+}
+/**🔹Delete Row */
+interface DeleteRowAction {
+    type: "DELETE_ROW";
+    rowKey: string;
+}
 /** 🔹 Grid 액션 타입 정의 */
-type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction;
-export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, };
+type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction | AddRowAction<T> | DeleteRowAction;
+export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, AddRowAction, DeleteRowAction };
 //# sourceMappingURL=GridActionTypes.d.ts.map

@@ -20,8 +20,9 @@ export interface GridReducerReturn<T> {
     removeEditedCell: (rowKey: string, colKey: string) => void;
     applyRowChanges: (rowKey: string) => void;
     resetRowChanges: (rowKey: string) => void;
+    addRow: () => void;
 }
 /** 🔹 useGridReducer 훅 */
-declare function useGridReducer<T>(data: T[], pagingable?: boolean, pageSize?: number): GridReducerReturn<T>;
+declare function useGridReducer<T>(data: T[], pagingable?: boolean, pageSize?: number, activeExportSurport?: boolean, activeAddRowAble?: boolean): GridReducerReturn<T>;
 export { useGridReducer };
 //# sourceMappingURL=useGridReducer.d.ts.map

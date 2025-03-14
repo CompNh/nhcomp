@@ -9,7 +9,7 @@ interface GridContextMenuProps<T> {
     } | null;
     options?: GridOptions;
     onClose: () => void;
-    reducer?: GridReducerReturn<T>;
+    reducer: GridReducerReturn<T>;
     style?: React.CSSProperties;
 }
 declare const GridContextMenu: <T>({ menuPosition, options, onClose, reducer, style, }: GridContextMenuProps<T>) => import("react/jsx-runtime").JSX.Element | null;
