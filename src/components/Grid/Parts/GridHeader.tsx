@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { FaLayerGroup, FaFilter, FaSortAmountUp, FaSortAmountDown, FaCheck, FaUndo } from "react-icons/fa";
 import { GridColumn, GridOptions } from "../GridTypes";
 import { useState } from "react";
-import { GridReducerReturn } from "../Reducer/useGridReducer";
 import GridContextMenu from "./GridContextMenu";
 import { Button } from "./ContextComp";
+import { GridReducerReturn } from "../Reducer/useGridReducer";
 
 interface GridHeaderProps<T> {
   columns: GridColumn<T>[];

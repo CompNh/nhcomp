@@ -1,11 +1,11 @@
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import GridHeader from "./Parts/GridHeader";
 import GridBody from "./Parts/GridBody";
-import { useGridReducer } from "./Reducer/useGridReducer";
+import useGridReducer from "./Reducer/useGridReducer";
 import GridPagination from "./Parts/GridPagination";
-import { GridProps } from "./GridTypes";
 import { setRowKeysForOrginData } from "./Utility/GridUtility";
-import { theme } from "../styles/theme"; // ✅ 테마 가져오기
+import { theme } from "../../styles/theme"; // ✅ 테마 가져오기
+import { GridProps } from "./GridTypes";
 
 const GlobalStyle = createGlobalStyle`
   body, html {

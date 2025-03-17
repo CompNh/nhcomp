@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCheck, FaChevronDown, FaChevronRight, FaUndo } from "react-icons/fa";
 import { GridColumn, GridData, GroupRow } from "../GridTypes";
-import { isGroupRowHelper } from "../Utility/GridUtility";
-import { GridReducerReturn } from "../Reducer/useGridReducer";
 import GridBodyContextMenu from "./GridBodyContextMenu";
 import { Button } from "./ContextComp";
+import { GridReducerReturn } from "../Reducer/useGridReducer";
+import { isGroupRowHelper } from "../Utility/GridUtility";
 
 interface GridBodyProps<T> {
   columns: GridColumn<T>[];

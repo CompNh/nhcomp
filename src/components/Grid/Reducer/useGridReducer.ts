@@ -1,4 +1,4 @@
-import { addRow } from './../Utility/GridUtility';
+
 import { useReducer } from "react";
 import { gridReducer, GridState, initialGridState } from "./GridReducer";
 import { SortDirection } from "../GridTypes";
@@ -223,4 +223,4 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
     };
 }
 
-export { useGridReducer };
+export default useGridReducer ;

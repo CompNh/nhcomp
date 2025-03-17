@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { ContextMenuItem, GridColumn, GridOptions } from "../GridTypes";
-import { GridReducerReturn } from "../Reducer/useGridReducer";
+import { ContextMenuItem} from "../GridTypes";
 import { MdAddBox } from "react-icons/md"; // Material Icons
 import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "./ContextComp";
 import { createPortal } from "react-dom";
+import { GridReducerReturn } from "../Reducer/useGridReducer";
 
 interface GridBodyContextMenuProps<T> {  
   menuPosition: { x: number; y: number; row: T & { rowKey : string} } | null;  
