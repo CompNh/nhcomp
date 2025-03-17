@@ -5,6 +5,7 @@ import { GridColumn, GridData, GroupRow } from "../GridTypes";
 import { isGroupRowHelper } from "../Utility/GridUtility";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import GridBodyContextMenu from "./GridBodyContextMenu";
+import { Button } from "./ContextComp";
 
 interface GridBodyProps<T> {
   columns: GridColumn<T>[];
@@ -65,23 +66,6 @@ const ActionCell = styled.td`
   gap: 4px;
 `;
 
-const Button = styled.button<{ apply?: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease-in-out;
-  background-color: ${(props) => (props.apply ? props.theme.colors.fourth : props.theme.colors.third)};
-  color: white;
-
-  &:hover {
-    background-color: ${(props) => (props.apply ? props.theme.colors.fourthHover : props.theme.colors.thirdHover)};
-  }
-`;
 const StyledCheckbox = styled.input.attrs({ type: "checkbox" })`
   width: 18px;
   height: 18px;
@@ -187,26 +171,29 @@ const GridBody = <T,>({
   };
 
   const renderDataRow = (row: GridData<T>, level: number, rowNum: number) => {
-    const showActionColumn = isCellEditable && Object.keys(reducer.state.editedRows).length > 0;
+    const showActionColumn = Object.keys(reducer.state.editedRows).length > 0;
 
     return (
       <TableRow key={row.rowKey} onContextMenu={(event) => handleContextMenu(event, row)}>
+        {/** Row Edit Col */}
         {showActionColumn && (
           <ActionCell>
             {reducer.state.editedRows[row.rowKey] && (
-              <>
-                <Button apply onClick={() => reducer.applyRowChanges(row.rowKey)}>
+              <div style={{ display: "flex", gap: "1px", justifyContent: "center", alignItems: "center" }}>
+                <Button $apply onClick={() => reducer.applyRowChanges(row.rowKey)}>
                   <FaCheck />
                 </Button>
                 <Button onClick={() => reducer.resetRowChanges(row.rowKey)}>
                   <FaUndo />
                 </Button>
-              </>
+              </div>
             )}
           </ActionCell>
         )}
-
+        {/** Row Num Col */}
         {showRowNumCol && <TableCell>{rowNum}</TableCell>}
+
+        {/** Check Box Col*/}
         {showRowCheckboxCol && (
           <TableCell>
             <StyledCheckbox 
@@ -254,7 +241,7 @@ const GridBody = <T,>({
         }
       </TableBody>
 
-      {reducer.state.activeAddRowAble && <GridBodyContextMenu 
+      {reducer.state.isCellEditable && <GridBodyContextMenu 
         menuPosition={menuPosition}         
         onClose={closeContextMenu} 
         reducer={reducer} />}      

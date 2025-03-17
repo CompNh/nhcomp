@@ -3,6 +3,7 @@ import { ContextMenuItem, GridColumn, GridOptions } from "../GridTypes";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import { MdAddBox } from "react-icons/md"; // Material Icons
 import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "./ContextComp";
+import { createPortal } from "react-dom";
 
 interface GridBodyContextMenuProps<T> {  
   menuPosition: { x: number; y: number; row: T & { rowKey : string} } | null;  
@@ -43,8 +44,17 @@ const GridBodyContextMenu = <T,>({
     
   ].filter(Boolean) as ContextMenuItem[];
 
-  return (
-    <ContextMenuContainer ref={menuRef} style={{ ...style, top: `${menuPosition.y}px`, left: `${menuPosition.x}px` }}>
+  return createPortal(
+    <ContextMenuContainer 
+      ref={menuRef} 
+      style={{ 
+        ...style, 
+        position: "absolute", 
+        top: `${menuPosition.y}px`, 
+        left: `${menuPosition.x}px`, 
+        zIndex: 1000 
+      }}
+    >
       <ContextMenuHeader>{""}</ContextMenuHeader>
       <ContextMenuList>           
         {menuItems.map((item, index) =>
@@ -65,7 +75,8 @@ const GridBodyContextMenu = <T,>({
           )
         )}
       </ContextMenuList>
-    </ContextMenuContainer>
+    </ContextMenuContainer>,
+    document.body // ✅ <body>에 추가하여 <table> 내부에서 벗어남!
   );
 };
 

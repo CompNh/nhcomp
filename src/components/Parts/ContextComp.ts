@@ -56,4 +56,22 @@ const ContextIcon = styled.span`
   height: 20px;
 `;
 
-export { ContextMenuContainer, ContextMenuHeader, ContextMenuList, ContextItem, ContextDivider, ContextIcon };
+const Button = styled.button<{ $apply?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  background-color: ${(props) => (props.$apply ? props.theme.colors.fourth : props.theme.colors.third)};
+  color: white;
+
+  &:hover {
+    background-color: ${(props) => (props.$apply ? props.theme.colors.fourthHover : props.theme.colors.thirdHover)};
+  }
+`;
+
+export { ContextMenuContainer, ContextMenuHeader, ContextMenuList, ContextItem, ContextDivider, ContextIcon, Button };

@@ -29,14 +29,12 @@ interface GridState<T> {
     editingCell: { rowKey: string; colKey: string; value: T[keyof T] } | null;    
     /** Excel,PDF... Export Active */
     activeExportSurport? : boolean;
-    /** Grid Body에 Context Menu For Row Add&Del Active */
-    activeAddRowAble? : boolean;
-    
-    
+    /** Cell Edit Mode 활성화 (기본값: false) */
+    isCellEditable?: boolean;
 }
 
 /** 🔹 초기 상태 값 */
-const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport : boolean, activeAddRowAble : boolean): GridState<T> => {
+const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport : boolean, isCellEditable : boolean): GridState<T> => {
     const newData : GridData<T>[] = setRowKeysForOrginData(data);
 
     return {
@@ -58,7 +56,7 @@ const initialGridState = <T>(data: T[], pagingable: boolean, pageSize: number, a
         editedRows : {},
         editingCell : null,     
         activeExportSurport : activeExportSurport,  
-        activeAddRowAble : activeAddRowAble 
+        isCellEditable : isCellEditable,
     };
 };
 

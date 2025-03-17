@@ -4,6 +4,7 @@ import { GridColumn, GridOptions } from "../GridTypes";
 import { useState } from "react";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import GridContextMenu from "./GridContextMenu";
+import { Button } from "./ContextComp";
 
 interface GridHeaderProps<T> {
   columns: GridColumn<T>[];
@@ -62,24 +63,6 @@ const HeaderContent = styled.div`
   cursor: pointer;
 `;
 
-const Button = styled.button<{ apply?: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.2s ease-in-out;
-  background-color: ${(props) => (props.apply ? props.theme.colors.fourth : props.theme.colors.third)};
-  color: white;
-
-  &:hover {
-    background-color: ${(props) => (props.apply ? props.theme.colors.fourthHover : props.theme.colors.thirdHover)};
-  }
-`;
-
 const GridHeader = <T,>({
   columns,
   showRowNumCol,
@@ -105,10 +88,11 @@ const GridHeader = <T,>({
   return (
     <HeaderWrapper style={style}>
       <HeaderRow>
-        {editedRows && Object.keys(editedRows).length > 0 && (
-          <HeaderCell width={40}>
+        {/** Row Edit Col */}
+        {editedRows && Object.keys(editedRows).length > 0 && (          
+          <HeaderCell width={40}>            
             <div style={{ display: "flex", gap: "1px", justifyContent: "center", alignItems: "center" }}>
-              <Button apply onClick={reducer.applyAllChanges}>
+              <Button $apply onClick={reducer.applyAllChanges}>
                 <FaCheck />
               </Button>
               <Button onClick={reducer.resetAllChanges}>

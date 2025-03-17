@@ -61,6 +61,6 @@ export const Default: Story = {
       pageSize: 10,
       currentPage: 1,
     },
-    showRowCheckboxCol: true,        
+    showRowCheckboxCol: true,            
   },
 };

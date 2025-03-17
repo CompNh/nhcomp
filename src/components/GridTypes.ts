@@ -135,6 +135,7 @@ interface GridProps<T> {
 
     /** Cell Edit Mode 활성화 (기본값: false) */
     isCellEditable?: boolean;
+    
     /** 사용자 스타일 커스텀 (Grid 내부 컴포넌트용) */
     customStyles?: {
         header?: React.CSSProperties;
@@ -144,9 +145,6 @@ interface GridProps<T> {
     };
     /** Excel,PDF... Export Active In Contextmenu */
     activeExportSurport? : boolean;    
-    
-    /** Grid Body에 Context Menu For Row Add&Del Active */
-    activeAddRowAble? : boolean;
 }
 
 interface GridGroupState {
