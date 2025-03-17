@@ -40,9 +40,14 @@ git commit -m "$SourceCommitMessage"
 
 Write-Output "🚀 Running build..."
 npm run build
+$buildResult = npm run build
+if ($LASTEXITCODE -ne 0) {
+    Write-Output "❌ Build failed! Exiting..."
+    exit 1
+}
 
 Write-Output "🔹 Committing build files..."
-git add .
+git add -f dist
 git commit -m "$BuildCommitMessage"
 
 Write-Output "🔹 Selected version update type: $NpmVersionType"
