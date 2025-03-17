@@ -102,8 +102,6 @@ interface GridProps<T> {
     };
     /** Excel,PDF... Export Active In Contextmenu */
     activeExportSurport?: boolean;
-    /** Grid Body에 Context Menu For Row Add&Del Active */
-    activeAddRowAble?: boolean;
 }
 interface GridGroupState {
     column: string[];

@@ -30,11 +30,11 @@ interface GridState<T> {
     } | null;
     /** Excel,PDF... Export Active */
     activeExportSurport?: boolean;
-    /** Grid Body에 Context Menu For Row Add&Del Active */
-    activeAddRowAble?: boolean;
+    /** Cell Edit Mode 활성화 (기본값: false) */
+    isCellEditable?: boolean;
 }
 /** 🔹 초기 상태 값 */
-declare const initialGridState: <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport: boolean, activeAddRowAble: boolean) => GridState<T>;
+declare const initialGridState: <T>(data: T[], pagingable: boolean, pageSize: number, activeExportSurport: boolean, isCellEditable: boolean) => GridState<T>;
 /** 🔹 Grid 리듀서 함수 */
 declare function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T>;
 export { gridReducer, initialGridState };
