@@ -1,11 +1,11 @@
 interface DropDownBoxProps {
     id?: string;
     options: Array<DropDownBoxOption>;
-    isActiveAll: boolean;
-    defualtKey: string;
+    isActiveAll?: boolean;
+    defualtKey?: string;
     onChange?: (item: DropDownBoxOption) => void;
     onTranslate?: (item: string) => string;
-    displayText: "text" | "value";
+    displayText?: "text" | "value";
     style?: React.CSSProperties;
 }
 interface DropDownBoxOption {
