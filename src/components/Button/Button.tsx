@@ -7,7 +7,11 @@ export interface ButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonEleme
     apply? : boolean;  
 }
 
-const Button: React.FC<ButtonProps> = ({ apply, children, ...props }) => {    
+const Button = ({ 
+    apply, 
+    children, 
+    ...props 
+}: ButtonProps) => {    
 
   return (
     <ThemeProvider theme={theme}>
