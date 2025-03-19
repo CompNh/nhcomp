@@ -1,13 +1,13 @@
-import { ComboOption } from "../ComboBoxTypes";
+import { DropDownBoxOption } from "../DropDownBoxTypes";
 
 interface SetOptions {
     type : "SET_OPTIONS";
-    options : Array<ComboOption>
+    options : Array<DropDownBoxOption>
 }
 
 interface SelectItem {
     type : "SELECT_ITEM";
-    item : ComboOption;
+    item : DropDownBoxOption;
     isOpen : boolean
 }
 interface SetIsOpen {
@@ -16,13 +16,13 @@ interface SetIsOpen {
 }
 
 
-type ComboBoxAction =
+type DropDownBoxAction =
     |SetOptions
     |SelectItem
     |SetIsOpen    
 
 export type {
-    ComboBoxAction,
+    DropDownBoxAction,
     SetOptions,
     SelectItem,
     SetIsOpen,    

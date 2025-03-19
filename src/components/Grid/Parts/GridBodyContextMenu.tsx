@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ContextMenuItem} from "../GridTypes";
 import { MdAddBox } from "react-icons/md"; // Material Icons
-import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "./ContextComp";
+import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "../GridStyle";
 import { createPortal } from "react-dom";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 

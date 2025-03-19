@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { ContextMenuItem, GridColumn, GridOptions } from "../GridTypes";
 import { FaFileExcel, FaFilePdf, FaFilter, FaLayerGroup, FaSortAmountDown, FaSortAmountUp, FaTimes } from "react-icons/fa";
-import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "./ContextComp";
+import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "../GridStyle";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import { exportToExcel, exportToPDF } from "../Utility/GridUtility";
 

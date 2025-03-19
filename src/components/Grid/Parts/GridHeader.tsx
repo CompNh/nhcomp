@@ -1,10 +1,9 @@
-import styled from "styled-components";
 import { FaLayerGroup, FaFilter, FaSortAmountUp, FaSortAmountDown, FaCheck, FaUndo } from "react-icons/fa";
 import { GridColumn, GridOptions } from "../GridTypes";
 import { useState } from "react";
 import GridContextMenu from "./GridContextMenu";
-import { Button } from "./ContextComp";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
+import { CancelButton, ConfirmButton, FilterInput, FilterRow, HeaderCell, HeaderContent, HeaderRow, HeaderWrapper } from "../GridStyle";
 
 interface GridHeaderProps<T> {
   columns: GridColumn<T>[];
@@ -15,53 +14,6 @@ interface GridHeaderProps<T> {
   editedRows: Record<string, Partial<T>>;
   style?: React.CSSProperties;
 }
-
-// ✅ styled-components 적용
-const HeaderWrapper = styled.thead`
-  background-color: ${(props) => props.theme.colors.prime};
-  color: ${(props) => props.theme.colors.font};
-`;
-
-const HeaderRow = styled.tr`
-  background-color: ${(props) => props.theme.colors.second};
-  color: ${(props) => props.theme.colors.font};
-  border-bottom: 2px solid ${(props) => props.theme.colors.font};
-`;
-
-const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
-  position: ${(props) => (props.sticky ? "sticky" : "relative")};
-  ${(props) => props.sticky === "left" && `left: 0; background-color: ${props.theme.colors.prime};`}
-  ${(props) => props.sticky === "right" && `right: 0; background-color: ${props.theme.colors.prime};`}
-  text-align: left;
-  padding: 5px;
-  width: ${(props) => (props.width ? `${props.width}px` : "auto")};
-  min-width: ${(props) => (props.width ? `${props.width}px` : "50px")};
-  border-right: 1px solid ${(props) => props.theme.colors.primeHover};
-  background-color: ${(props) => props.theme.colors.second};
-  font-weight: bold;
-`;
-
-const FilterRow = styled.tr`
-  background-color: ${(props) => props.theme.colors.primeHover};
-  border-bottom: 1px solid ${(props) => props.theme.colors.font};
-`;
-
-const FilterInput = styled.input`
-  width: 100%;
-  padding: 4px 8px;
-  border: 1px solid ${(props) => props.theme.colors.second};
-  background-color: white;
-  color: black;
-  outline: none;
-  border-radius: 4px;
-`;
-
-const HeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-`;
 
 const GridHeader = <T,>({
   columns,
@@ -92,12 +44,12 @@ const GridHeader = <T,>({
         {editedRows && Object.keys(editedRows).length > 0 && (          
           <HeaderCell width={40}>            
             <div style={{ display: "flex", gap: "1px", justifyContent: "center", alignItems: "center" }}>
-              <Button $apply onClick={reducer.applyAllChanges}>
+              <ConfirmButton onClick={reducer.applyAllChanges}>
                 <FaCheck />
-              </Button>
-              <Button onClick={reducer.resetAllChanges}>
+              </ConfirmButton>
+              <CancelButton onClick={reducer.resetAllChanges}>
                 <FaUndo />
-              </Button>
+              </CancelButton>
             </div>
           </HeaderCell>
         )}

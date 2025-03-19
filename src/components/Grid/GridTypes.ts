@@ -26,6 +26,14 @@ interface GridColumn<T> {
   
     /** 컬럼 크기 조절 가능 여부 (true이면 사용자가 크기 조정 가능) */
     resizable?: boolean;
+
+    /** 지정된 Cell Type */
+    cellType? : {
+         type : "Button" | "Check" |"DropDownBox" | "DatePicker"
+         key? : string
+         content?: React.ReactNode;         
+         cellProps? : object
+    }
   
     /** 커스텀 셀 렌더링 함수 */
     renderCell?: (rowData: T) => React.ReactNode;

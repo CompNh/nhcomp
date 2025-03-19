@@ -1,21 +1,21 @@
-import { ComboOption } from "../ComboBoxTypes"
-import { ComboBoxAction } from "./ComboBoxActionTypes"
+import { DropDownBoxOption } from "../DropDownBoxTypes"
+import { DropDownBoxAction } from "./DropDownBoxActionTypes"
 
-interface ComboBoxState {
+interface DropDownBoxState {
     isOpen : boolean
-    options : Array<ComboOption>
-    selectedItem? : ComboOption
+    options : Array<DropDownBoxOption>
+    selectedItem? : DropDownBoxOption
 }
 
-const initialComboBoxState = (options: Array<ComboOption>, selectedItem? : ComboOption) : ComboBoxState =>{
+const initialDropDownBoxState = (options: Array<DropDownBoxOption>, defaultKey? : string) : DropDownBoxState =>{
     return {
         isOpen : false,
         options: options,
-        selectedItem : selectedItem
+        selectedItem : options.find((t)=>t.key ===defaultKey)
     }
 }
 
-function reducerComboBox(state : ComboBoxState, action : ComboBoxAction) : ComboBoxState{
+function reducerDropDownBox(state : DropDownBoxState, action : DropDownBoxAction) : DropDownBoxState{
     switch (action.type) {
         case "SET_OPTIONS":            
             {
@@ -44,5 +44,5 @@ function reducerComboBox(state : ComboBoxState, action : ComboBoxAction) : Combo
     }
 }
 
-export {reducerComboBox, initialComboBoxState}
-export type {ComboBoxState}
+export {reducerDropDownBox, initialDropDownBoxState}
+export type {DropDownBoxState}

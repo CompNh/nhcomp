@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { theme } from "../../styles/theme"; 
 
 // ✅ Styled Components 정의
-const ComboBoxContainer = styled.div`
+const DropDownBoxContainer = styled.div`
   position: relative;
 `;
 
@@ -11,16 +10,21 @@ const StyledButton = styled.button`
   align-items: center;
   gap: 8px;
   padding: 4px;
-  height: 27px;
+  height: 35px;
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.second};
   border-radius: 6px;
   background: ${({ theme }) => theme.colors.prime};
   color: ${({ theme }) => theme.colors.font};
   width: 144px;
+      &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.fourth};
+    box-shadow: 0 0 4px ${({ theme }) => theme.colors.fourth};
+  }
 `;
 
-const ComboBoxList = styled.div`
+const DropDownBoxList = styled.div`
   position: absolute;
   left: 0;
   margin-top: 4px;
@@ -32,7 +36,7 @@ const ComboBoxList = styled.div`
   color: ${({ theme }) => theme.colors.font};
 `;
 
-const ComboBoxItem = styled.div`
+const DropDownBoxItem = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -52,4 +56,4 @@ const Circle = styled.div<{ color?: string }>`
   background: ${({ color, theme }) => color || theme.colors.background};
 `;
 
-export { ComboBoxContainer, StyledButton, ComboBoxList, ComboBoxItem, Circle };
+export { DropDownBoxContainer, StyledButton, DropDownBoxList, DropDownBoxItem, Circle };

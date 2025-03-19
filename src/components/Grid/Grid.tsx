@@ -4,26 +4,8 @@ import GridBody from "./Parts/GridBody";
 import useGridReducer from "./Reducer/useGridReducer";
 import GridPagination from "./Parts/GridPagination";
 import { setRowKeysForOrginData } from "./Utility/GridUtility";
-import { theme } from "../../styles/theme"; // ✅ 테마 가져오기
+import { GlobalStyle, theme } from "../../styles/theme"; // ✅ 테마 가져오기
 import { GridProps } from "./GridTypes";
-
-const GlobalStyle = createGlobalStyle`
-  body, html {
-    height: 100%;
-  }
-
-  body {
-    background-color: ${(props) => props.theme.colors.background};
-    color: ${(props) => props.theme.colors.font};
-    font-family: 'Arial', sans-serif;
-    font-size: 12px;
-    line-height: 1.5;
-    letter-spacing: 0.5px;
-    word-spacing: 2px;
-    text-align: left;
-    visibility: visible;
-  }
-`;
 
 const GridContainer = styled.div`
   position: relative;

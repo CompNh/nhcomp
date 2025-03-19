@@ -1,18 +1,18 @@
 import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { ComboBox, ComboOption } from "../components";
+import { DropDownBox, DropDownBoxOption } from "../components";
 
-const meta: Meta<typeof ComboBox> = {
-  title: "Components/ComboBox",
-  component: ComboBox,
+const meta: Meta<typeof DropDownBox> = {
+  title: "Components/DropDownBox",
+  component: DropDownBox,
   argTypes: {},
 };
 
 export default meta;
-type Story = StoryObj<typeof ComboBox>;
+type Story = StoryObj<typeof DropDownBox>;
 
 // ✅ 샘플 데이터
-const sampleData: ComboOption[] = [
+const sampleData: DropDownBoxOption[] = [
   { key : "1" , text : "AAAA"},
   { key : "2" , text : "BBBB"},
   { key : "3" , text : "CCCC"},
@@ -22,6 +22,8 @@ const sampleData: ComboOption[] = [
 // ✅ 기본 스토리
 export const Default: Story = {
   args: {
-    options : sampleData          
+    options : sampleData,     
+    isActiveAll : true,    
+    defualtKey : "1"
   },
 };
