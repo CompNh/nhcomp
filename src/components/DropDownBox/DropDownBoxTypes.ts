@@ -3,15 +3,15 @@ interface DropDownBoxProps {
     //Combo Option 값
     options : Array<DropDownBoxOption>;
     //기본값인 All 이 Option에 추가된다.
-    isActiveAll : boolean;
+    isActiveAll? : boolean;
     //Default Key
-    defualtKey : string;
+    defualtKey? : string;
     //OnChange Event
     onChange? : (item : DropDownBoxOption) => void;   
     //Translate Function
     onTranslate?: (item : string) => string;   
     //보여질 Text 의 값 (defualt : text)
-    displayText : "text" | "value";    
+    displayText? : "text" | "value";    
     //Custom Style 
     style?: React.CSSProperties;  
     
