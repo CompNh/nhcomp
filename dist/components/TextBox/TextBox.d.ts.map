@@ -1,0 +1,1 @@
+{"version":3,"file":"TextBox.d.ts","sourceRoot":"","sources":["../../../src/components/TextBox/TextBox.tsx"],"names":[],"mappings":"AAAA,OAAO,KAA2C,MAAM,OAAO,CAAC;AAKhE,MAAM,WAAW,YAAa,SAAQ,IAAI,CAAC,KAAK,CAAC,mBAAmB,CAAC,gBAAgB,CAAC,EAAE,MAAM,GAAG,SAAS,CAAC;IACvG,KAAK,CAAC,EAAE,OAAO,CAAC;CACnB;AAED,QAAA,MAAM,OAAO,GAAI,iDAAiD,YAAY,4CA4B7E,CAAC;AAEF,eAAe,OAAO,CAAC"}
