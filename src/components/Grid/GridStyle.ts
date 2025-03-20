@@ -56,6 +56,34 @@ const ContextIcon = styled.span`
   width: 20px;
   height: 20px;
 `;
+
+const GridContainer = styled.div`  
+  width: 100%;  
+  height: 100%; 
+  display: flex;
+  flex-direction: column;  
+  background-color: ${(props) => props.theme.colors.background}; 
+  color: ${(props) => props.theme.colors.font};
+  overflow: hidden; 
+`;
+
+const GridTableWrapper = styled.div<{ $maxHeight?: number | null }>`
+  flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
+  width: 100%;  
+  overflow-x: auto;
+  overflow-y: auto;    
+`;
+
+const GridTable = styled.table`    
+  width: 100%;
+  height: 100%;
+  table-layout: fixed; /* ✅ 테이블이 부모 크기에 맞춰짐 */
+  border-collapse: collapse;
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.font};   
+  table-layout: auto; 
+`;
+
 const ConfirmButton = styled(BaseButton)`
   width: 24px;
   height: 24px;
@@ -80,14 +108,18 @@ const CancelButton = styled(BaseButton)`
 
 // ✅ Header
 const HeaderWrapper = styled.thead`
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: ${(props) => props.theme.colors.prime};
   color: ${(props) => props.theme.colors.font};
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* ✅ 스크롤 시에도 그림자로 구분 */
+    
 `;
 
 const HeaderRow = styled.tr`
   background-color: ${(props) => props.theme.colors.second};
-  color: ${(props) => props.theme.colors.font};
-  border-bottom: 2px solid ${(props) => props.theme.colors.font};
+  color: ${(props) => props.theme.colors.font};  
 `;
 
 const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
@@ -95,7 +127,7 @@ const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
   ${(props) => props.sticky === "left" && `left: 0; background-color: ${props.theme.colors.prime};`}
   ${(props) => props.sticky === "right" && `right: 0; background-color: ${props.theme.colors.prime};`}
   text-align: left;
-  padding: 5px;
+  padding: 5px;  
   width: ${(props) => (props.width ? `${props.width}px` : "auto")};
   min-width: ${(props) => (props.width ? `${props.width}px` : "50px")};
   border-right: 1px solid ${(props) => props.theme.colors.primeHover};
@@ -104,6 +136,7 @@ const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
 `;
 
 const FilterRow = styled.tr`
+  position: "sticky";
   background-color: ${(props) => props.theme.colors.primeHover};
   border-bottom: 1px solid ${(props) => props.theme.colors.font};
 `;
@@ -126,17 +159,24 @@ const HeaderContent = styled.div`
 `;
 
 // ✅ styled-components 적용
-const TableBody = styled.tbody``;
+const TableBody = styled.tbody`
+  flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
+  overflow-y: auto;  
+`;
 
 const TableRow = styled.tr`
   height: 80%;
-  border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};
+  border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};  
 `;
 const TableCell = styled.td<{ $isEdited?: boolean }>`
-  padding: 1px;
+  padding: 5px;
   border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};
   font-weight: ${(props) => (props.$isEdited ? "bold" : "normal")};
   color: ${(props) => (props.$isEdited ? props.theme.colors.third : "inherit")};
+  
+  white-space: nowrap; /* 줄 바꿈 방지, 내용이 길면 셀 크기 증가 */
+  min-width: max-content; /* 내용에 맞게 최소 크기 조정 */
+  
 `;
 // ✅ GroupTilte 정의
 const GroupRowtr = styled.tr`
@@ -157,6 +197,10 @@ const GroupRowContent = styled.div`
   padding: 2px;
   gap: 8px;
   white-space: nowrap;
+`;
+const GridPaginationWrapper = styled.div`
+  flex-shrink: 0; /* ✅ GridPagination이 항상 하단에 고정 */
+  height: 40px; /* ✅ GridPagination 높이 설정 */    
 `;
 
 export { 
@@ -179,5 +223,9 @@ export {
   HeaderCell,
   FilterRow,
   FilterInput,
-  HeaderContent
+  HeaderContent,
+  GridContainer,
+  GridTable,
+  GridPaginationWrapper,  
+  GridTableWrapper
  };

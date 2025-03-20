@@ -29,7 +29,7 @@ interface GridColumn<T> {
 
     /** 지정된 Cell Type */
     cellType? : {
-         type : "Button" | "Check" |"DropDownBox" | "DatePicker"
+         type : "Button" | "Check" |"DropDownBox" | "SingleDatePicker" 
          key? : string
          content?: React.ReactNode;         
          cellProps? : object

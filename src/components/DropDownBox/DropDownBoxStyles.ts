@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 // ✅ Styled Components 정의
 const DropDownBoxContainer = styled.div`
-  position: relative;
+  position: relative;  
 `;
 
 const StyledButton = styled.button`
@@ -27,13 +27,13 @@ const StyledButton = styled.button`
 const DropDownBoxList = styled.div`
   position: absolute;
   left: 0;
-  margin-top: 4px;
+  margin-top: 4px;  
   width: 144px;
   border: 1px solid ${({ theme }) => theme.colors.second};
   border-radius: 6px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   background: ${({ theme }) => theme.colors.prime};
-  color: ${({ theme }) => theme.colors.font};
+  color: ${({ theme }) => theme.colors.font};  
 `;
 
 const DropDownBoxItem = styled.div`

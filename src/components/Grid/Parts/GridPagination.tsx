@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import DropDownBox from "../../DropDownBox/DropDownBox";
+import { DropDownBoxOption, DropDownBoxProps } from "../../DropDownBox/DropDownBoxTypes";
 
 interface PaginationProps {
   currentPage: number;
@@ -13,7 +15,8 @@ interface PaginationProps {
 }
 
 // ✅ styled-components 스타일 정의
-const PaginationContainer = styled.div`
+const PaginationContainer = styled.div`  
+  flex-shrink: 0; /* ✅ GridPagination이 항상 하단에 고정 */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,6 +34,7 @@ const DropdownContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  overflow: visible;
 `;
 
 const DropdownLabel = styled.span`
@@ -38,50 +42,6 @@ const DropdownLabel = styled.span`
   color: ${(props) => props.theme.colors.font};
 `;
 
-const DropdownWrapper = styled.div`
-  position: relative;
-`;
-
-const DropdownButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 4px;
-  height: 24px;
-  font-size: 14px;
-  border-radius: 6px;
-  background-color: ${(props) => props.theme.colors.prime};
-  color: ${(props) => props.theme.colors.font};
-  width: 64px;
-  cursor: pointer;
-  border: none;
-`;
-
-const DropdownMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  width: 144px;
-  border: 1px solid ${(props) => props.theme.colors.second};
-  border-radius: 6px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: ${(props) => props.theme.colors.prime};
-  color: ${(props) => props.theme.colors.font};
-  z-index: 1000;
-`;
-
-const DropdownItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primeHover};
-  }
-`;
 
 const Button = styled.button<{ $active?: boolean }>`
   display: flex;
@@ -116,26 +76,12 @@ const GridPagination: React.FC<PaginationProps> = ({
   onPageChange,
   onPageSizeChange,  
   style,
-}) => {
-  const pageSizes = [10, 20, 30, 50, 100];
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      window.addEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [isOpen]);
+}) => {  
+  const pageSizes: DropDownBoxOption[] = [
+    { key : "10" , text : "10"},
+    { key : "20" , text : "20"},
+    { key : "30" , text : "30"},
+  ];
 
   return (
     <PaginationContainer style={style}>
@@ -145,33 +91,15 @@ const GridPagination: React.FC<PaginationProps> = ({
 
       <DropdownContainer>
         <DropdownLabel>Page Size:</DropdownLabel>
-        <DropdownWrapper ref={dropdownRef}>
-          <DropdownButton
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsOpen(!isOpen);
-            }}
-          >
-            {pageSize}
-          </DropdownButton>
-          {isOpen && (
-            <DropdownMenu>
-              {pageSizes.map((size, index) => (
-                <DropdownItem
-                  key={index}
-                  onClick={() => {
-                    onPageSizeChange(size);
-                    setIsOpen(false);
-                  }}
-                >
-                  {size}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          )}
-        </DropdownWrapper>
+        <DropDownBox         
+          options={pageSizes}
+          defualtKey={String(pageSize)}  
+          style={{width : 80}}      
+          onChange={(item)=>{
+            onPageSizeChange(parseInt(item.text as string, 10));
+          }}
+        />
       </DropdownContainer>
-
       <div style={{ display: "flex", gap: "4px" }}>
         <Button onClick={() => currentPage > 1 && onPageChange(currentPage - 1)} disabled={currentPage === 1}>
           <FaChevronLeft size={14} />

@@ -4,6 +4,7 @@ import { DropDownBoxOption, DropDownBoxProps, Grid, GridColumn } from "../compon
 import Button from "../components/Button/Button";
 import { CheckBoxProps } from "../components/CheckBox/CheckBox";
 import { TextBoxProps } from "../components/TextBox/TextBox";
+import { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 
 
 interface SampleData {
@@ -57,7 +58,11 @@ const onChanged = (e : object) =>{
 const columns: GridColumn<SampleData>[] = [
   { key: "name", label: "이름", sortable: true, filterable: true, width: 100 },
   { key: "age", label: "나이", sortable: true, filterable: true, width: 100 },
-  { key: "registered", label: "가입일", sortable: true, editable : false },
+  { key: "registered", label: "가입일", sortable: true, cellType : {type : "SingleDatePicker",
+    cellProps : {       
+      onChange : onChanged     
+    } as SingleDatePickerProps
+  }},
   { key: "dropdown", label: "dropDown", cellType : {type : "DropDownBox", 
     cellProps : {
         options : sampleDropData,                

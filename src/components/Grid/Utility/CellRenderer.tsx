@@ -8,6 +8,7 @@ import DropDownBox from "../../DropDownBox/DropDownBox";
 import { DropDownBoxProps } from "../../DropDownBox/DropDownBoxTypes";
 import { useState } from "react";
 import { FaCheck } from "react-icons/fa";
+import SingleDatePicker from "../../DatePicker/SingleDatePicker";
 
 interface CellRendererProps<T> {
     col: GridColumn<T>;
@@ -17,7 +18,7 @@ interface CellRendererProps<T> {
     cellValue?: T[keyof T] | Array<T>;
     cellprops? : object;
     handleCellDoubleClick: (rowKey: string, colKey: string, value: T[keyof T]) => void;
-    handleCellChange: (value: string | boolean) => void;
+    handleCellChange: (value: string | boolean | Date | null) => void;
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, row: T) => void;
     isCellEditable?: boolean;
 }
@@ -38,9 +39,9 @@ const CellRenderer = <T,>({
     const isColEditable = col.editable ?? row[col.key as keyof T] !== undefined;    
 
     return (
-        <TableCell
-            $isEdited={isEdited}
-            onDoubleClick={() => (isCellEditable && isColEditable) && handleCellDoubleClick(row.rowKey, col.key, cellValue as T[keyof T] )}
+        <TableCell            
+            $isEdited={isEdited}  /* ✅ 수정된 셀 강조 유지 */
+            onDoubleClick={() => (isCellEditable && isColEditable) && handleCellDoubleClick(row.rowKey, col.key, cellValue as T[keyof T])}
         >
             {isEditing ? (                
                 /* ✅ cellType이 있으면 자동 UI 적용 */
@@ -90,11 +91,12 @@ const renderCellByType = <T,>(
     col: GridColumn<T>, 
     row: T & { rowKey : string}, 
     props: object, 
-    handleCellChange: (value: string | boolean) => void,
+    handleCellChange: (value: string | boolean | Date | null) => void,
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, row: T) => void,
     isEditing: boolean, // ✅ 추가: isEditing 상태에 따라 다르게 렌더링
     cellValue?: T[keyof T] | Array<T>
 ) => {
+    const fakeEvent = new KeyboardEvent("keydown", { key: "Enter" });
     switch (col.cellType?.type) {
         case "Button":
             return isEditing 
@@ -108,8 +110,7 @@ const renderCellByType = <T,>(
                         {...props as CheckBoxProps} 
                         checked={Boolean(cellValue)}                         
                         onChange={(e) => {                                                 
-                            handleCellChange(e.target.checked)
-                            const fakeEvent = new KeyboardEvent("keydown", { key: "Enter" });
+                            handleCellChange(e.target.checked)                            
                             handleKeyDown(fakeEvent as unknown as React.KeyboardEvent<HTMLInputElement>, row);                                
                         }}
                    />
@@ -127,12 +128,23 @@ const renderCellByType = <T,>(
                     defualtKey={defaultValue}
                     onChange={(e)=> {
                         handleCellChange(e.key);
-                        setDefaultValue(e.key);
-                        const fakeEvent = new KeyboardEvent("keydown", { key: "Enter" });
+                        setDefaultValue(e.key);                        
                         handleKeyDown(fakeEvent as unknown as React.KeyboardEvent<HTMLInputElement>, row);                                                                
                     }}
                     />
                 : <>{(props as DropDownBoxProps).options.find((t)=>t.key === cellValue as string)?.text}</>;
+
+        case "SingleDatePicker":
+            const [selecedDate, setSelectedDate] = useState((row as Record<string, any>)[col.key])
+            return isEditing
+                ? <SingleDatePicker 
+                    selected={selecedDate} 
+                    onChange={(date) =>{                        
+                        handleCellChange(date ? date.toLocaleDateString('sv-SE') : "")
+                        setSelectedDate(date ? date.toLocaleDateString('sv-SE') : "")                        
+                        handleKeyDown(fakeEvent as unknown as React.KeyboardEvent<HTMLInputElement>, row);  
+                    }}/> 
+                :<>{cellValue instanceof Date ? cellValue.toLocaleDateString('sv-SE') : cellValue}</>;
 
         default:
             return <>{row[col.key as keyof T] as string}</>;

@@ -1,6 +1,3 @@
-// components/Grid/Parts/GroupCell.tsx
-import React from "react";
-import styled from "styled-components";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { GridColumn, GroupRow } from "../GridTypes";
 import { GroupRowContent, GroupRowtr, GroupTableCell } from "../GridStyle";

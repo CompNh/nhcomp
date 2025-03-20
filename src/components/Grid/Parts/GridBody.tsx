@@ -45,7 +45,7 @@ const GridBody = <T,>({
 
   const closeContextMenu = () => setMenuPosition(null);
 
-  const handleCellChange = (newValue: string | boolean) => {
+  const handleCellChange = (newValue: string | boolean | Date | null) => {
     if (!reducer.state.editingCell) return;
     const { rowKey, colKey } = reducer.state.editingCell;
     reducer.setEditingCell(rowKey, colKey, newValue as T[keyof T]);
@@ -68,6 +68,7 @@ const GridBody = <T,>({
     if (e.key === "Enter") {
       reducer.clearEditingCell();
     }
+    
     if (e.key === "Tab") {
       e.preventDefault();
       for (let i = columnIndex + 1; i < columns.length; i++) {
