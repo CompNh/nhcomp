@@ -9,7 +9,7 @@ interface CellRendererProps<T> {
     cellValue?: T[keyof T] | Array<T>;
     cellprops?: object;
     handleCellDoubleClick: (rowKey: string, colKey: string, value: T[keyof T]) => void;
-    handleCellChange: (value: string | boolean) => void;
+    handleCellChange: (value: string | boolean | Date | null) => void;
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, row: T) => void;
     isCellEditable?: boolean;
 }

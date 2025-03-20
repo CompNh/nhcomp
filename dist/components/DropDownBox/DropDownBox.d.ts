@@ -1,4 +1,4 @@
 import { DropDownBoxProps } from './DropDownBoxTypes';
-declare const DropDownBox: ({ id, options, isActiveAll, onChange, onTranslate, style, displayText, defualtKey }: DropDownBoxProps) => import("react/jsx-runtime").JSX.Element;
+declare const DropDownBox: import('react').ForwardRefExoticComponent<DropDownBoxProps & import('react').RefAttributes<HTMLDivElement>>;
 export default DropDownBox;
 //# sourceMappingURL=DropDownBox.d.ts.map
