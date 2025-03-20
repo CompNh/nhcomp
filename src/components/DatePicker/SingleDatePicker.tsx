@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import { CalendarContainer, DatePickerWrapper } from "./DatePickerStyle";
 import DatePickerInput from "./Parts/DatePickerInput";
 import { createPortal } from "react-dom";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle, theme } from "../../styles/theme";
 
 export interface SingleDatePickerProps {
     selected?: Date | null;
@@ -42,36 +44,39 @@ const SingleDatePicker = ({
     }, [selectedDate]); // ? 날짜 변경 시 위치 업데이트
 
     return (    
-        <DatePickerWrapper ref={inputRef}>    
-            <DatePicker               
-                selected={selectedDate}            
-                onChange={(date) => {  
-                    setSelectedDate(date);              
-                    onChange(date);                                
-                }}            
-                dateFormat="yyyy-MM-dd"
-                placeholderText="날짜 선택"
-                minDate={minDate} 
-                maxDate={maxDate}
-                customInput={<DatePickerInput />}   
-                popperClassName="custom-datepicker"    
-                popperContainer={({ children }) =>
-                    createPortal(
-                        <CalendarContainer
-                            style={{
-                                position: "absolute",
-                                top: `${position.top}px`,
-                                left: `${position.left}px`,
-                                zIndex: 9999,
-                            }}
-                        >
-                            {children} {/* ✅ `DatePicker`의 내부 요소를 유지 */}
-                        </CalendarContainer>,
-                        document.body
-                    )
-                }        
-            />
-        </DatePickerWrapper>
+        <ThemeProvider theme={theme}>
+            <GlobalStyle/>        
+            <DatePickerWrapper ref={inputRef}>    
+                <DatePicker               
+                    selected={selectedDate}            
+                    onChange={(date) => {  
+                        setSelectedDate(date);              
+                        onChange(date);                                
+                    }}            
+                    dateFormat="yyyy-MM-dd"
+                    placeholderText="날짜 선택"
+                    minDate={minDate} 
+                    maxDate={maxDate}
+                    customInput={<DatePickerInput />}   
+                    popperClassName="custom-datepicker"    
+                    popperContainer={({ children }) =>
+                        createPortal(
+                            <CalendarContainer
+                                style={{
+                                    position: "absolute",
+                                    top: `${position.top}px`,
+                                    left: `${position.left}px`,
+                                    zIndex: 9999,
+                                }}
+                            >
+                                {children} {/* ✅ `DatePicker`의 내부 요소를 유지 */}
+                            </CalendarContainer>,
+                            document.body
+                        )
+                    }        
+                />
+            </DatePickerWrapper>
+        </ThemeProvider>
     )
 
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button, DropDownBoxOption, DropDownBoxProps, Grid, GridColumn, Layout, PageDesigner, Section} from "../components";
-import { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
+import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 import { CheckBoxProps } from "../components/CheckBox/CheckBox";
 
 export default {
@@ -97,7 +97,9 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                     />                  
                 </Section>
                 <Section startPosition={[1,2]} endPosition={[1,2]}>
-               
+                  <SingleDatePicker selected={new Date()} onChange={function (date: Date | null): void {
+            throw new Error("Function not implemented.");
+          } }/>
                 </Section> 
                 <Section startPosition={[2,1]} endPosition={[2,2]}>
                 <Grid<SampleData> 
