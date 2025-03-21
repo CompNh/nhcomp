@@ -2660,7 +2660,7 @@ z.div`
 `;
 const Lu = (r, n) => {
   let t = [];
-  return n === !0 ? t = [{ key: "all", text: "ALL", value: "ALL" }, ...r] : t = r, t;
+  return n === !0 ? t = [{ key: "all", value: "ALL" }, ...r] : t = r, t;
 }, Ao = (r, n) => n === void 0 ? r : n(r), Ya = Ca(
   ({
     id: r,
@@ -10785,9 +10785,9 @@ const vm = z.div`
   style: i
 }) => {
   const s = [
-    { key: "10", text: "10" },
-    { key: "20", text: "20" },
-    { key: "30", text: "30" }
+    { key: "10", value: "10" },
+    { key: "20", value: "20" },
+    { key: "30", value: "30" }
   ];
   return /* @__PURE__ */ v.jsxs(vm, { style: i, children: [
     /* @__PURE__ */ v.jsxs(ym, { children: [
@@ -10807,7 +10807,7 @@ const vm = z.div`
           defualtKey: String(e),
           style: { width: 80 },
           onChange: (c) => {
-            o(parseInt(c.text, 10));
+            o(parseInt(c.value, 10));
           }
         }
       )
