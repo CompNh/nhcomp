@@ -3,7 +3,7 @@ import { DropDownBoxOption } from "../DropDownBoxTypes"
 const DefualtOptionAtive = (option : Array<DropDownBoxOption>, isActiveAll? : boolean ) : Array<DropDownBoxOption> => {
     let newOptions : Array<DropDownBoxOption> = [];
     if(isActiveAll === true)
-        newOptions = [{key : 'all', text : 'ALL', value : 'ALL'}, ...option];
+        newOptions = [{key : 'all', value : 'ALL'}, ...option];
     else
         newOptions = option;
 

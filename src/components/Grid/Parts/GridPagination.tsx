@@ -78,9 +78,9 @@ const GridPagination: React.FC<PaginationProps> = ({
   style,
 }) => {  
   const pageSizes: DropDownBoxOption[] = [
-    { key : "10" , text : "10"},
-    { key : "20" , text : "20"},
-    { key : "30" , text : "30"},
+    { key : "10" , value : "10"},
+    { key : "20" , value : "20"},
+    { key : "30" , value : "30"},
   ];
 
   return (
@@ -96,7 +96,7 @@ const GridPagination: React.FC<PaginationProps> = ({
           defualtKey={String(pageSize)}  
           style={{width : 80}}      
           onChange={(item)=>{
-            onPageSizeChange(parseInt(item.text as string, 10));
+            onPageSizeChange(parseInt(item.value as string, 10));
           }}
         />
       </DropdownContainer>
