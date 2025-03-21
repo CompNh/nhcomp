@@ -7,7 +7,7 @@ const Section = ({
     endPosition, 
     children,
     level,
-    border 
+    border,     
 }: SectionProps) => {
   const [startRow, startCol] = startPosition;
   const [endRow, endCol] = endPosition;

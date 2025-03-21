@@ -39,11 +39,13 @@ const BaseCheckbox = styled.input.attrs({ type: "checkbox" })`
 `;
 
 const BaseTextBox = styled.input.attrs({ type: "text" })`
-  width: 90%;
+  display: flex;
+  align-items: center;
+  width: 85%;
   padding: 8px;
   height : 11px;
   border: 1px solid ${({ theme }) => theme.colors.second};
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 14px;
   color: ${({ theme }) => theme.colors.font};
   background-color: ${({ theme }) => theme.colors.prime};

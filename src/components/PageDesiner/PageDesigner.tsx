@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { PageDesignerProps } from "./PageDesignerTypes";
+import { PageDesignerProps, SectionProps } from "./PageDesignerTypes";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../../styles/theme";
+import React from "react";
 
 const DEFAULT_SIZE = ["1fr", "1fr"];
 
@@ -55,7 +56,11 @@ const PageDesigner = ({
           overflow: "hidden", // ✅ 내부에서 스크롤 제어
         }}
       >
-        {children}
+        {React.Children?.toArray(children).filter((child) => {
+            if (!React.isValidElement(child)) return false; // ✅ 유효한 React 요소인지 확인
+              const [row, col] = (child.props as SectionProps).startPosition; // ✅ startPosition 추출
+            return row <= dynamicRowSizes.length && col <= dynamicColSizes.length; // ✅ row, col 초과 여부 체크
+        })}
       </div>
     </ThemeProvider>    
   );

@@ -18,7 +18,7 @@ function useDropDownBoxReducer(options: Array<DropDownBoxOption>, defaultKey? : 
         })
     }
 
-    const selectItem = (item : DropDownBoxOption) =>{
+    const selectItem = (item? : DropDownBoxOption) =>{
         dispatch({
             type : "SELECT_ITEM",
             item : item,

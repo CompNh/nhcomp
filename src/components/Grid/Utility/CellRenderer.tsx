@@ -132,13 +132,13 @@ const renderCellByType = <T,>(
                         handleKeyDown(fakeEvent as unknown as React.KeyboardEvent<HTMLInputElement>, row);                                                                
                     }}
                     />
-                : <>{(props as DropDownBoxProps).options.find((t)=>t.key === cellValue as string)?.text}</>;
+                : <>{(props as DropDownBoxProps).options.find((t)=>t.key === cellValue as string)?.value}</>;
 
         case "SingleDatePicker":
             const [selecedDate, setSelectedDate] = useState((row as Record<string, any>)[col.key])
             return isEditing
                 ? <SingleDatePicker 
-                    selected={selecedDate} 
+                    value={selecedDate} 
                     onChange={(date) =>{                        
                         handleCellChange(date ? date.toLocaleDateString('sv-SE') : "")
                         setSelectedDate(date ? date.toLocaleDateString('sv-SE') : "")                        

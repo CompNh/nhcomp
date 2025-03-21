@@ -1,8 +1,10 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button, DropDownBoxOption, DropDownBoxProps, Grid, GridColumn, Layout, PageDesigner, Section} from "../components";
+import { Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, Section, TextBox} from "../components";
 import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 import { CheckBoxProps } from "../components/CheckBox/CheckBox";
+import { FormField } from "../components/Form/FormTypes";
+import { isEmail } from "../utils/Validate/ValidationRules";
 
 export default {
   title: "Components/PageDesigner",
@@ -39,9 +41,9 @@ const sampleData: SampleData[] = [
   ];
   
   const sampleDropData: DropDownBoxOption[] = [
-    { key : "1" , text : "AAAA"},
-    { key : "2" , text : "BBBB"},
-    { key : "3" , text : "CCCC"},
+    { key : "1" , value : "AAAA"},
+    { key : "2" , value : "BBBB"},
+    { key : "3" , value : "CCCC"},
   ];
   
   const onChanged = (e : object) =>{
@@ -71,7 +73,13 @@ const sampleData: SampleData[] = [
       <Button onClick={() => console.log(row)}>Click Me</Button>
     ), },
   ];
-
+  
+  const formFields: FormField[] = [
+    { label: "이름", key: "name", position : [1,1], isRequired: true, toolTip: "이름을 입력하시오", component: <TextBox/>},
+    { label: "이메일", key: "email",position : [1,2], component: <TextBox textType= "email"/>, validate : isEmail() },
+    { label: "비밀번호", key: "password",position : [2,1], component: <SingleDatePicker/> },
+    { label: "창고 선택", key: "warehouse",position : [2,2], component: <DropDownBox options={sampleDropData} /> }
+  ];
 
 const Template: StoryFn<typeof PageDesigner> = (args) => (
     <PageDesigner {...args} gap={2}>
@@ -97,9 +105,16 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                     />                  
                 </Section>
                 <Section startPosition={[1,2]} endPosition={[1,2]}>
-                  <SingleDatePicker selected={new Date()} onChange={function (date: Date | null): void {
-            throw new Error("Function not implemented.");
-          } }/>
+                  <Form       
+                      division={{
+                        row: 2,
+                        col: 2
+                      }}                             
+                      formFields={formFields}
+                      onSubmit={function (data: { [key: string]: any; }): void {
+                        throw new Error("Function not implemented.");
+                      } }                
+                  />
                 </Section> 
                 <Section startPosition={[2,1]} endPosition={[2,2]}>
                 <Grid<SampleData> 
@@ -127,6 +142,8 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
         </Section>
 
         <Section startPosition={[3, 3]} endPosition={[3, 3]}>
+        </Section>
+        <Section startPosition={[10, 1]} endPosition={[10, 3]}>
         </Section>
     </PageDesigner>
 );

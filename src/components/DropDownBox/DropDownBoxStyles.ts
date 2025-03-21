@@ -7,16 +7,15 @@ const DropDownBoxContainer = styled.div`
 
 const StyledButton = styled.button`
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: center;  
   padding: 4px;
   height: 35px;
   font-size: 14px;
   border: 1px solid ${({ theme }) => theme.colors.second};
-  border-radius: 6px;
+  border-radius: 5px;
   background: ${({ theme }) => theme.colors.prime};
   color: ${({ theme }) => theme.colors.font};
-  width: 144px;
+  width: 90%;
       &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.fourth};

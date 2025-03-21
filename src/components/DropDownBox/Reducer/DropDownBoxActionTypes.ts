@@ -7,7 +7,7 @@ interface SetOptions {
 
 interface SelectItem {
     type : "SELECT_ITEM";
-    item : DropDownBoxOption;
+    item? : DropDownBoxOption;
     isOpen : boolean
 }
 interface SetIsOpen {
