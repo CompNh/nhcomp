@@ -8,7 +8,7 @@ export interface DropDownBoxReducerReturn {
 declare function useDropDownBoxReducer(options: Array<DropDownBoxOption>, defaultKey?: string): {
     state: DropDownBoxState;
     setOptions: (options: Array<DropDownBoxOption>) => void;
-    selectItem: (item: DropDownBoxOption) => void;
+    selectItem: (item?: DropDownBoxOption) => void;
     setIsOpen: (isOpen: boolean) => void;
 };
 export default useDropDownBoxReducer;
