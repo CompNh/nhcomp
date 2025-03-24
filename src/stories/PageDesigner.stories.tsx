@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, Section, TextBox} from "../components";
+import { AvartarButton, Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, Section, TextBox} from "../components";
 import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 import { CheckBoxProps } from "../components/CheckBox/CheckBox";
 import { FormField } from "../components/Form/FormTypes";
@@ -138,7 +138,8 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
             </Layout>                        
         </Section>
 
-        <Section startPosition={[3, 1]} endPosition={[3, 2]}>
+        <Section startPosition={[3, 1]} endPosition={[3, 2]}>          
+             <AvartarButton/>
         </Section>
 
         <Section startPosition={[3, 3]} endPosition={[3, 3]}>

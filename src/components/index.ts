@@ -4,6 +4,7 @@ export { default as DropDownBox} from "./DropDownBox/DropDownBox";
 export * from  "./DropDownBox/DropDownBoxTypes";
 export { default as Label} from "./Label/Label";
 export { default as Button} from "./Button/Button";
+export { default as AvartarButton} from "./Avatar/AvatarButton";
 export { default as CheckBox} from "./CheckBox/CheckBox";
 export { default as TextBox} from "./TextBox/TextBox";
 export { default as SingleDatePicker} from "./DatePicker/SingleDatePicker";

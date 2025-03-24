@@ -18,7 +18,8 @@ const Button = ({
       <GlobalStyle />    
         <BaseButton
             {...props}
-            style={{           
+            style={{    
+   
                 ...props.style,           
             }}
         >
