@@ -1,1 +1,1 @@
-{"version":3,"file":"AvatarButton.d.ts","sourceRoot":"","sources":["../../../src/components/Avatar/AvatarButton.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,kBAAkB,CAAC;AAI/C,QAAA,MAAM,aAAa,GAAI,+BAInB,WAAW,4CAqBd,CAAA;AAED,eAAe,aAAa,CAAC"}
+{"version":3,"file":"AvatarButton.d.ts","sourceRoot":"","sources":["../../../src/components/Avatar/AvatarButton.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAqB,MAAM,OAAO,CAAC;AAE1C,OAAO,EAAE,WAAW,EAAE,MAAM,kBAAkB,CAAC;AAI/C,QAAA,MAAM,aAAa,uFAwBlB,CAAC;AAEF,eAAe,aAAa,CAAC"}
