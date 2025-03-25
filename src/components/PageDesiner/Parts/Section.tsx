@@ -33,7 +33,7 @@ const Section = ({
         
       }}
     >
-      {children || `${level}Lv [${startRow}, ${startCol}] ~ [${endRow}, ${endCol}]`}
+      {children || !transparent &&`${level}Lv [${startRow}, ${startCol}] ~ [${endRow}, ${endCol}]`}
     </div>
   );
 }

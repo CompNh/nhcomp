@@ -3,30 +3,27 @@ import { BaseButton } from "../CommonStyle";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../../styles/theme";
 
-export interface ButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-    apply? : boolean;  
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  apply?: boolean;
 }
 
-const Button = ({ 
-    apply, 
-    children, 
-    ...props 
-}: ButtonProps) => {    
-
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />    
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ apply, children, ...props }, ref) => {
+    return (
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <BaseButton
-            {...props}
-            style={{    
-   
-                ...props.style,           
-            }}
+          {...props}
+          ref={ref}
+          style={{
+            ...props.style,
+          }}
         >
-            {children}
+          {children}
         </BaseButton>
-    </ThemeProvider>
-    )
-};
+      </ThemeProvider>
+    );
+  }
+);
 
 export default Button;
