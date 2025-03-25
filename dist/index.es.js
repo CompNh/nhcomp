@@ -11066,8 +11066,7 @@ const Di = ["1fr", "1fr"], Fm = ({
       gap: `${e}px`,
       width: "100%",
       height: "100%",
-      border: a,
-      background: "#f9f9f9"
+      border: a
     },
     children: w.Children.map(t, (i) => w.isValidElement(i) && i.type === ic ? w.cloneElement(i, { level: o + 1 }) : i)
   }
