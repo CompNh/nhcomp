@@ -57,9 +57,19 @@ const BaseTextBox = styled.input.attrs({ type: "text" })`
   }
 `;
 
+const BaseLabel = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  gap: 6px;
+`;
 
 export { 
   BaseButton,
   BaseCheckbox,
-  BaseTextBox
+  BaseTextBox,
+  BaseLabel
 };

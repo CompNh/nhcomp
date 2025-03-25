@@ -1,23 +1,17 @@
 import { FaInfoCircle } from "react-icons/fa";
+import { BaseLabel } from "../CommonStyle";
 
 export interface LabelProps {
   label: string;
   isRequired?: boolean;
   toolTip?: string;
+  style? : React.CSSProperties
 }
 
-const Label = ({ label, isRequired, toolTip }: LabelProps) => {
+const Label = ({ label, isRequired, toolTip, style }: LabelProps) => {
     return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "6px",
-            fontSize: "14px",
-            color: "#333",
-            fontWeight: 500,
-            gap: "6px",
-          }}
+        <BaseLabel
+          style={{...style}}
         >
           <span>{label}</span>
     
@@ -39,7 +33,7 @@ const Label = ({ label, isRequired, toolTip }: LabelProps) => {
               <FaInfoCircle />
             </span>
           )}
-        </div>
+        </BaseLabel>
       );
 };
 
