@@ -12,6 +12,7 @@ interface SectionProps {
     children?: React.ReactNode;
     level?: number;
     border?: string;
+    transparent?: boolean;
 }
 interface LayoutProps {
     rowSizes?: string[];

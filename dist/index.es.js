@@ -11023,17 +11023,18 @@ const Di = ["1fr", "1fr"], Fm = ({
   endPosition: n,
   children: t,
   level: e,
-  border: a
+  border: a,
+  transparent: o = !1
 }) => {
-  const [o, i] = r, [s, c] = n, l = Sm();
+  const [i, s] = r, [c, l] = n, u = Sm();
   return /* @__PURE__ */ v.jsx(
     "div",
     {
       style: {
-        gridRow: `${o} / ${s + 1}`,
-        gridColumn: `${i} / ${c + 1}`,
+        gridRow: `${i} / ${c + 1}`,
+        gridColumn: `${s} / ${l + 1}`,
         border: a,
-        background: t ? "transparent" : l,
+        background: t || o ? "transparent" : u,
         display: "flex",
         flexDirection: "column",
         // ✅ 내부 요소 세로 정렬
@@ -11046,7 +11047,7 @@ const Di = ["1fr", "1fr"], Fm = ({
         overflow: "hidden"
         // ✅ 내부 스크롤 문제 방지
       },
-      children: t || `${e}Lv [${o}, ${i}] ~ [${s}, ${c}]`
+      children: t || `${e}Lv [${i}, ${s}] ~ [${c}, ${l}]`
     }
   );
 }, xi = ["1fr", "1fr"], Cm = ({
