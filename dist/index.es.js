@@ -2514,23 +2514,22 @@ const Mu = ({
     text-align: left;
     visibility: visible;
   }
-`, xr = ({
-  apply: r,
-  children: n,
-  ...t
-}) => /* @__PURE__ */ v.jsxs(xt, { theme: kt, children: [
-  /* @__PURE__ */ v.jsx(_t, {}),
-  /* @__PURE__ */ v.jsx(
-    In,
-    {
-      ...t,
-      style: {
-        ...t.style
-      },
-      children: n
-    }
-  )
-] }), Ds = ({
+`, xr = w.forwardRef(
+  ({ apply: r, children: n, ...t }, e) => /* @__PURE__ */ v.jsxs(xt, { theme: kt, children: [
+    /* @__PURE__ */ v.jsx(_t, {}),
+    /* @__PURE__ */ v.jsx(
+      In,
+      {
+        ...t,
+        ref: e,
+        style: {
+          ...t.style
+        },
+        children: n
+      }
+    )
+  ] })
+), Ds = ({
   id: r,
   apply: n,
   children: t,
@@ -11047,7 +11046,7 @@ const Di = ["1fr", "1fr"], Fm = ({
         overflow: "hidden"
         // ✅ 내부 스크롤 문제 방지
       },
-      children: t || `${e}Lv [${i}, ${s}] ~ [${c}, ${l}]`
+      children: t || !o && `${e}Lv [${i}, ${s}] ~ [${c}, ${l}]`
     }
   );
 }, xi = ["1fr", "1fr"], Cm = ({
