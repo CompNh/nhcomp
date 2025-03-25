@@ -21,8 +21,7 @@ const Layout = ({
         gap: `${gap}px`,
         width: "100%",
         height: "100%",
-        border: border,
-        background: "#f9f9f9",
+        border: border,        
       }}
     >
       {React.Children.map(children, (child) => {
