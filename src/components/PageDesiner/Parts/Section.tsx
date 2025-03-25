@@ -7,7 +7,8 @@ const Section = ({
     endPosition, 
     children,
     level,
-    border,     
+    border,
+    transparent = false     
 }: SectionProps) => {
   const [startRow, startCol] = startPosition;
   const [endRow, endCol] = endPosition;
@@ -21,7 +22,7 @@ const Section = ({
         gridRow: `${startRow} / ${endRow + 1}`,
         gridColumn: `${startCol} / ${endCol + 1}`,
         border: border,
-        background: children ? "transparent" : backgroundColor,
+        background: (children || transparent) ? "transparent" : backgroundColor,
         display: "flex", 
         flexDirection: "column", // ✅ 내부 요소 세로 정렬
         width: "100%",
