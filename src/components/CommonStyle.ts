@@ -20,30 +20,43 @@ const BaseButton = styled.button`
   }
 `;
 
-const BaseCheckbox = styled.input.attrs({ type: "checkbox" })`
+const BaseCheckbox = styled.input.attrs({ type: "checkbox" })<{$checkedColor?: string}>`
   width: 18px;
   height: 18px;
   cursor: pointer;
-  appearance: auto;
-  display: inline-block;
-  visibility: visible;
+  appearance: none;
+  display: inline-block;  
   opacity: 1;
   background-color: white;
   border: 2px solid #ccc;
   border-radius: 3px;
+  position: relative; /* ✅ 기준점 추가! */
 
   &:checked {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: ${({ $checkedColor }) => $checkedColor || '#007bff'};
+    border-color: ${({ $checkedColor }) => $checkedColor || '#007bff'};
   }
+
+  &:checked::after {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg); // 체크 표시 모양
+  }  
 `;
+
 
 const BaseTextBox = styled.input.attrs({ type: "text" })`
   display: flex;
   align-items: center;
   width: 85%;
   padding: 8px;
-  height : 11px;
+  height : 30px;
   border: 1px solid ${({ theme }) => theme.colors.second};
   border-radius: 5px;
   font-size: 14px;

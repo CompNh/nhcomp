@@ -2,7 +2,7 @@ import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import { AvartarButton, Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, Section, TextBox} from "../components";
 import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
-import { CheckBoxProps } from "../components/CheckBox/CheckBox";
+import CheckBox, { CheckBoxProps } from "../components/CheckBox/CheckBox";
 import { FormField } from "../components/Form/FormTypes";
 import { isEmail } from "../utils/Validate/ValidationRules";
 
@@ -143,6 +143,13 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
         </Section>
 
         <Section startPosition={[3, 3]} endPosition={[3, 3]}>
+          <CheckBox 
+          checkedColor="red" 
+          checked = {true}
+          label="그래서 뭐가 중한데이러 는것이냐"
+          labelSize="10px"
+          labelGap={4}
+          />
         </Section>
         <Section startPosition={[10, 1]} endPosition={[10, 3]}>
         </Section>

@@ -1,54 +1,97 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
-import { BaseCheckbox } from "../CommonStyle";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle, theme } from "../../styles/theme";
-
-export interface CheckBoxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+import React, {
+    ChangeEvent,
+    useState,
+    useEffect,
+    forwardRef,
+    InputHTMLAttributes,
+  } from "react";
+  import { BaseCheckbox } from "../CommonStyle";
+  import { ThemeProvider } from "styled-components";
+  import { GlobalStyle, theme } from "../../styles/theme";
+  
+  export interface CheckBoxProps
+    extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
     apply?: boolean;
-}
-
-const CheckBox = ({      
+    checkedColor?: string;
+    label? : string;
+    labelPosition? : string; 
+    labelColor? : string;
+    labelSize? : string;  
+    labelGap? : number;
+    labelLetterSpacing? : number; 
+  }
+  
+  const CheckBox = forwardRef<HTMLInputElement, CheckBoxProps>(({
     id,
-    apply,     
-    children, 
-    onChange, 
-    checked: propChecked, 
-    ...props 
-}: CheckBoxProps) => {
+    apply,
+    label,
+    labelPosition = "right",
+    labelColor = "#333",
+    labelSize = "14px",
+    labelGap = 6,
+    labelLetterSpacing = 1,
+    children,
+    onChange,
+    checkedColor,
+    checked: propChecked,
+    ...props
+  }, ref) => {
     const [checked, setCheck] = useState<boolean>(!!propChecked);
-    // ✅ props.checked 값이 변경되면 내부 상태도 업데이트
+  
     useEffect(() => {
-        setCheck(!!propChecked);
+      setCheck(!!propChecked);
     }, [propChecked]);
-
+  
     const checkEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        const newChecked = !checked; // ✅ 토글된 값 저장
-        setCheck(newChecked);
-
-        if (onChange) {
-            const modifiedEvent = Object.assign({}, e, {
-                target: { ...e.target, checked: newChecked, rowKey : id}, // ✅ checked 값 덮어쓰기
-            });
-            onChange(modifiedEvent);
-        }
+      const newChecked = !checked;
+      setCheck(newChecked);
+  
+      if (onChange) {
+        const modifiedEvent = Object.assign({}, e, {
+          target: { ...e.target, checked: newChecked, rowKey: id },
+        });
+        onChange(modifiedEvent);
+      }
     };
-
+  
+    const isVertical = labelPosition === "bottom";
+  
     return (
-        <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <BaseCheckbox
-                {...props}
-                style={{
-                    ...props.style,
-                }}
-                type="checkbox"
-                checked={checked}
-                onChange={checkEventHandler}                                                                
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: isVertical ? "column" : "row",
+            alignItems: "center",
+            gap: label ? `${labelGap}px` : undefined,
+          }}
+        >
+          <BaseCheckbox
+            {...props}
+            ref={ref}
+            $checkedColor={checkedColor}
+            type="checkbox"
+            checked={checked}
+            onChange={checkEventHandler}
+          />
+          {label && (
+            <span
+              style={{
+                color: labelColor,
+                fontSize: labelSize,
+                lineHeight: 1.3,   
+                letterSpacing : labelLetterSpacing      
+              }}
             >
-                {children}
-            </BaseCheckbox>
-        </ThemeProvider>
+              {label}
+            </span>
+          )}
+        </div>
+      </ThemeProvider>
     );
-};
-
-export default CheckBox;
+  });
+  
+  
+  export default CheckBox;
+  
