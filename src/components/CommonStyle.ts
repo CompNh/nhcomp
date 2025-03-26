@@ -40,8 +40,8 @@ const BaseCheckbox = styled.input.attrs({ type: "checkbox" })<{$checkedColor?: s
   &:checked::after {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 4px;
+    top: 3px;
+    left: 5px;
     width: 4px;
     height: 8px;
     border: solid white;
@@ -51,7 +51,8 @@ const BaseCheckbox = styled.input.attrs({ type: "checkbox" })<{$checkedColor?: s
 `;
 
 
-const BaseTextBox = styled.input.attrs({ type: "text" })`
+
+const BaseTextBox = styled.input`
   display: flex;
   align-items: center;
   width: 85%;

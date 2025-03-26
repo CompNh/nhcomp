@@ -150,6 +150,9 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
           labelSize="10px"
           labelGap={4}
           />
+          <TextBox
+            
+          />
         </Section>
         <Section startPosition={[10, 1]} endPosition={[10, 3]}>
         </Section>

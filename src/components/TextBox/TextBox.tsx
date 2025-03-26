@@ -41,9 +41,9 @@ import React, {
       return (
         <ThemeProvider theme={theme}>
           <GlobalStyle />
-          <BaseTextBox
+          <BaseTextBox            
             {...props}
-            ref={ref} // ✅ ref 연결
+            ref={ref} // ✅ ref 연결            
             type= {textType === undefined ? "text" : textType}
             style={{ ...props.style }}
             value={value}
