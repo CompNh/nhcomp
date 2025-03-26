@@ -122,15 +122,15 @@ See https://s-c.sh/2BAXzed for more info.`),window[Ur]+=1);var Bo={color:void 0,
   &:checked::after {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 4px;
+    top: 3px;
+    left: 5px;
     width: 4px;
     height: 8px;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg); // 체크 표시 모양
   }  
-`,ei=B.input.attrs({type:"text"})`
+`,ei=B.input`
   display: flex;
   align-items: center;
   width: 85%;
