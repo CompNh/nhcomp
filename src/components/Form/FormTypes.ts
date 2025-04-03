@@ -15,6 +15,7 @@ interface FormField {
 
     // ✅ 추가
     validate?: (value: any) => string | undefined; // 에러 메시지 반환
+    filter? : (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 export type {FormField}

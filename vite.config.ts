@@ -11,17 +11,17 @@ export default defineConfig({
     }),
     
   ],
-  resolve: {
-    alias: {
-      'styled-components': path.resolve(__dirname, 'node_modules/styled-components'),
-    },
-  },
-  optimizeDeps: {
-    exclude: ['styled-components'],
-  },
-  define: {
-    'process.env': {},
-  },
+  // resolve: {
+  //   alias: {
+  //     'styled-components': path.resolve(__dirname, 'node_modules/styled-components'),
+  //   },
+  // },
+  // optimizeDeps: {
+  //   exclude: ['styled-components'],
+  // },
+  // define: {
+  //   'process.env': {},
+  // },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true

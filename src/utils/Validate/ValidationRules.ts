@@ -8,7 +8,11 @@ export const isEmail = (message = "이메일 형식이 올바르지 않습니다
 /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? undefined : message;
 
 export const isNumber = (message = "숫자만 입력 가능합니다.") => (value: any) =>
-    !isNaN(value) ? undefined : message;
+    value === undefined || value === null || value === ''
+      ? undefined
+      : isNaN(Number(value))
+      ? message
+      : undefined;
 
 export const maxLength = (max: number, message?: string) => (value: string) =>
     value?.length <= max ? undefined : message || `${max}자 이하로 입력해주세요`;

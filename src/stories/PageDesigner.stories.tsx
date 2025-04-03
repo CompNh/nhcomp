@@ -4,7 +4,8 @@ import { AvartarButton, Button, DropDownBox, DropDownBoxOption, DropDownBoxProps
 import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 import CheckBox, { CheckBoxProps } from "../components/CheckBox/CheckBox";
 import { FormField } from "../components/Form/FormTypes";
-import { isEmail } from "../utils/Validate/ValidationRules";
+import { isEmail} from "../utils/Validate/ValidationRules";
+import { filterNumber } from "../utils";
 
 export default {
   title: "Components/PageDesigner",
@@ -75,7 +76,7 @@ const sampleData: SampleData[] = [
   ];
   
   const formFields: FormField[] = [
-    { label: "이름", key: "name", position : [1,1], isRequired: true, toolTip: "이름을 입력하시오", component: <TextBox/>},
+    { label: "이름", key: "name", position : [1,1], isRequired: true, toolTip: "이름을 입력하시오", component: <TextBox textType="rangeNumber"/> , filter : filterNumber},
     { label: "이메일", key: "email",position : [1,2], component: <TextBox textType= "email"/>, validate : isEmail() },
     { label: "비밀번호", key: "password",position : [2,1], component: <SingleDatePicker/> },
     { label: "창고 선택", key: "warehouse",position : [2,2], component: <DropDownBox options={sampleDropData} /> }
@@ -111,6 +112,9 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                         col: 2
                       }}                             
                       formFields={formFields}
+                      onSerach={function (data: { [key: string]: any; }): void {
+                        throw new Error("Function not implemented.");
+                      } }
                       onSubmit={function (data: { [key: string]: any; }): void {
                         throw new Error("Function not implemented.");
                       } }                

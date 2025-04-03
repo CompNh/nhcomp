@@ -55,7 +55,7 @@ const BaseCheckbox = styled.input.attrs({ type: "checkbox" })<{$checkedColor?: s
 const BaseTextBox = styled.input`
   display: flex;
   align-items: center;
-  width: 85%;
+  width: 90%;
   padding: 8px;
   height : 30px;
   border: 1px solid ${({ theme }) => theme.colors.second};

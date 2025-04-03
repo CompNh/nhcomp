@@ -6,6 +6,7 @@ import { FormField } from "./FormTypes";
 import useFormReducer from "./Reducer/useFormReducer";
 import Label from "../Label/Label";
 import { validateFields } from "./Utility/FormUtility";
+import { isRequired } from "../../utils";
 
 export interface FormProps {
   title?: string; // ✅ 폼 타이틀 추가
@@ -55,7 +56,10 @@ const Form = ({
               onChange: (e: any) => {
                 const result = e?.target?.value ?? e?.key ?? e;
                 reducer.setFieldValue({ key: field.key, value: result });
-              },
+              },    
+              onKeyDown : field.filter,
+              disabled: field.disabled,
+              readOnly: field.isReadOnly,          
             })
           : null;
 
@@ -90,7 +94,14 @@ const Form = ({
           </Button>
         }
         {onSerach &&
-          <Button type="button" onClick={() => onSerach(reducer.state)}>
+          <Button type="button" onClick={() => {
+            const newErrors = validateFields(formFields, reducer.state);
+            setErrors(newErrors);
+            if (Object.keys(newErrors).length === 0) {
+              onSerach(reducer.state)
+            }
+
+          }}>
             검색
           </Button>
         }
