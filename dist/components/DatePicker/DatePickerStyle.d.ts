@@ -1,5 +1,5 @@
-declare const DatePickerWrapper: import('../../../node_modules/styled-components/dist/types').IStyledComponentBase<"web", import('../../../node_modules/styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
-declare const DateButton: import('../../../node_modules/styled-components/dist/types').IStyledComponentBase<"web", import('../../../node_modules/styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, never>> & string;
-declare const CalendarContainer: import('../../../node_modules/styled-components/dist/types').IStyledComponentBase<"web", import('../../../node_modules/styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
+declare const DatePickerWrapper: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
+declare const DateButton: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, never>> & string;
+declare const CalendarContainer: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
 export { DatePickerWrapper, DateButton, CalendarContainer };
 //# sourceMappingURL=DatePickerStyle.d.ts.map

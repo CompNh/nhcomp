@@ -14,6 +14,7 @@ interface FormField {
     disabled?: boolean;
     isReadOnly?: boolean;
     validate?: (value: any) => string | undefined;
+    filter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 export type { FormField };
 //# sourceMappingURL=FormTypes.d.ts.map

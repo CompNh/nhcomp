@@ -14,5 +14,5 @@ export declare const theme: {
         active: string;
     };
 };
-export declare const GlobalStyle: import('react').NamedExoticComponent<import('../../node_modules/styled-components').ExecutionProps & object>;
+export declare const GlobalStyle: import('react').NamedExoticComponent<import('styled-components').ExecutionProps & object>;
 //# sourceMappingURL=theme.d.ts.map
