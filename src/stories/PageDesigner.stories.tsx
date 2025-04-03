@@ -116,24 +116,7 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                       } }                
                   />
                 </Section> 
-                <Section startPosition={[2,1]} endPosition={[2,2]}>
-                <Grid<SampleData> 
-                        columns={columns} 
-                        data={sampleData}
-                        options = {{
-                            sortable: true,
-                            filterable: true,
-                            grouping: true,
-                        }}
-                        isCellEditable = {true}
-                        pagingable = {true}
-                        pagination = {{
-                            pageSize: 10,
-                            currentPage: 1,
-                        }} 
-                        showRowCheckboxCol = {true}                       
-                        
-                    />                    
+                <Section startPosition={[2,1]} endPosition={[2,2]}>                                           
                 </Section>                
             </Layout>                        
         </Section>
@@ -150,9 +133,7 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
           labelSize="10px"
           labelGap={4}
           />
-          <TextBox
-            
-          />
+          <TextBox/>
         </Section>
         <Section startPosition={[10, 1]} endPosition={[10, 3]}>
         </Section>

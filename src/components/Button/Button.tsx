@@ -13,11 +13,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <BaseButton
-          {...props}
-          ref={ref}
-          style={{
-            ...props.style,
-          }}
+            {...props}
+            ref={ref}
+            style={{
+                ...props.style,
+            }}
         >
           {children}
         </BaseButton>
