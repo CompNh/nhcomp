@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
+import path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -10,6 +11,17 @@ export default defineConfig({
     }),
     
   ],
+  resolve: {
+    alias: {
+      'styled-components': path.resolve(__dirname, 'node_modules/styled-components'),
+    },
+  },
+  optimizeDeps: {
+    exclude: ['styled-components'],
+  },
+  define: {
+    'process.env': {},
+  },
   build: {
     commonjsOptions: {
       transformMixedEsModules: true
