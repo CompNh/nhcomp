@@ -12,6 +12,6 @@ interface GridContextMenuProps<T> {
     reducer: GridReducerReturn<T>;
     style?: React.CSSProperties;
 }
-declare const GridContextMenu: <T>({ menuPosition, options, onClose, reducer, style, }: GridContextMenuProps<T>) => import("react/jsx-runtime").JSX.Element | null;
+declare const GridContextMenu: <T>({ menuPosition, options, onClose, reducer, style, }: GridContextMenuProps<T>) => React.ReactPortal | null;
 export default GridContextMenu;
 //# sourceMappingURL=GridContextMenu.d.ts.map
