@@ -55,7 +55,14 @@ const Form = ({
               value,
               onChange: (e: any) => {
                 const result = e?.target?.value ?? e?.key ?? e;
+                // 🔥 1. 상태 저장
                 reducer.setFieldValue({ key: field.key, value: result });
+
+                // 🔥 2. 외부에서 전달한 onChange도 호출!
+                const originalOnChange = (field.component as React.ReactElement<any>).props?.onChange;
+                if (typeof originalOnChange === "function") {
+                  originalOnChange(e);
+                }
               },    
               onKeyDown : field.filter,
               disabled: field.disabled,
