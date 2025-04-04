@@ -2,7 +2,8 @@ import React, {
   ChangeEvent,
   useEffect,
   useState,
-  forwardRef,  
+  forwardRef,
+  useRef,
 } from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../../styles/theme";
@@ -14,7 +15,6 @@ export interface TextBoxProps
   textType?: "number" | "password" | "text" | "email" | "rangeNumber";
 }
 
-// ✅ forwardRef 사용
 const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
   (
     {
@@ -54,18 +54,23 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
       onChange?.(e);
     };
 
-    // ✅ range 값 변경 후 호출
-    const emitRangeChange = (min: string, max: string) => {
-      const composed = `${min}~${max}`;
-      const syntheticEvent = {
-        ...({} as ChangeEvent<HTMLInputElement>),
-        target: {
-          ...({} as HTMLInputElement),
-          value: composed,
-        },
-      };
-      onChange?.(syntheticEvent);
-    };
+    // ✅ range 상태가 바뀔 때 외부에 알림 (렌더 후에 실행)
+    const prevRangeRef = useRef(range);
+    useEffect(() => {
+      const prev = prevRangeRef.current;
+      if (range.min !== prev.min || range.max !== prev.max) {
+        const composed = `${range.min}~${range.max}`;
+        const syntheticEvent = {
+          ...({} as ChangeEvent<HTMLInputElement>),
+          target: {
+            ...({} as HTMLInputElement),
+            value: composed,
+          },
+        };
+        onChange?.(syntheticEvent);
+        prevRangeRef.current = range;
+      }
+    }, [range, onChange]);
 
     return (
       <ThemeProvider theme={theme}>
@@ -87,11 +92,7 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
               value={range.min}
               onChange={(e) => {
                 const min = e.target.value;
-                setRange((prev) => {
-                  const updated = { ...prev, min };
-                  emitRangeChange(updated.min, updated.max);
-                  return updated;
-                });
+                setRange((prev) => ({ ...prev, min }));
               }}
               style={{ flex: 1 }}
             />
@@ -102,11 +103,7 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
               value={range.max}
               onChange={(e) => {
                 const max = e.target.value;
-                setRange((prev) => {
-                  const updated = { ...prev, max };
-                  emitRangeChange(updated.min, updated.max);
-                  return updated;
-                });
+                setRange((prev) => ({ ...prev, max }));
               }}
               style={{ flex: 1 }}
             />

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { GridColumn, GridData, GroupRow } from "../GridTypes";
 import GridBodyContextMenu from "./GridBodyContextMenu";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
@@ -23,6 +23,7 @@ interface GridBodyProps<T> {
   onToggleGroupExpand: (groupKey: string) => void;
   reducer: GridReducerReturn<T>;
   style?: React.CSSProperties;
+  bodyHeight: number; // ✅ 상위에서 계산된 높이
 }
 
 const GridBody = <T,>({
@@ -35,6 +36,7 @@ const GridBody = <T,>({
   onToggleGroupExpand,
   reducer,
   style,
+  bodyHeight,
 }: GridBodyProps<T>) => {
   const [menuPosition, setMenuPosition] = useState<{
     x: number;
@@ -42,38 +44,11 @@ const GridBody = <T,>({
     row: T & { rowKey: string };
   } | null>(null);
 
-  const wrapperRef = useRef<HTMLTableSectionElement>(null);
-  const [placeholderHeight, setPlaceholderHeight] = useState(0);
+  const ROW_HEIGHT = 35;
 
-  const ROW_HEIGHT = 40;
-  const HEADER_HEIGHT = 40;
-  const PAGINATION_HEIGHT = 40;
-
-  // ✅ ResizeObserver로 전체 높이 자동 감지
-  useLayoutEffect(() => {
-    if (!wrapperRef.current) return;
-
-    const updateHeight = () => {
-      const totalHeight = wrapperRef.current?.getBoundingClientRect().height || 0;
-      const rowCount = reducer.state.data.filter((row) => !isGroupRowHelper(row)).length;
-      const dataHeight = rowCount * ROW_HEIGHT;
-
-      const reserved =
-        HEADER_HEIGHT +
-        (reducer.state.pagingable ? PAGINATION_HEIGHT : 0) +
-        dataHeight;
-
-      const remaining = totalHeight - reserved;
-      setPlaceholderHeight(remaining > 0 ? remaining : 0);
-    };
-
-    const observer = new ResizeObserver(updateHeight);
-    observer.observe(wrapperRef.current);
-
-    updateHeight(); // 초기 계산
-
-    return () => observer.disconnect();
-  }, [reducer.state.data, reducer.state.pagingable]);
+  // ✅ Placeholder 계산
+  const dataRowCount = reducer.state.data.filter((row) => !isGroupRowHelper(row)).length;
+  const placeholderHeight = Math.max(0, bodyHeight - dataRowCount * ROW_HEIGHT);
 
   const handleCellDoubleClick = (rowKey: string, colKey: string, value: T[keyof T]) => {
     reducer.setEditingCell(rowKey, colKey, value);
@@ -193,7 +168,7 @@ const GridBody = <T,>({
 
   return (
     <>
-      <TableBody ref={wrapperRef} style={{ ...style }}>
+      <TableBody style={{ ...style }}>
         {reducer.state.data.map((row, index) =>
           isGroupRowHelper(row)
             ? renderGroupRow(row as GroupRow<T>, 0)
@@ -204,7 +179,7 @@ const GridBody = <T,>({
           <PlaceholderRow>
             <PlaceholderCell
               colSpan={columns.length + (showRowNumCol ? 1 : 0) + (showRowCheckboxCol ? 1 : 0)}
-              style={{ height: placeholderHeight }}
+              style={{ height: placeholderHeight, minHeight: placeholderHeight }}
             />
           </PlaceholderRow>
         )}

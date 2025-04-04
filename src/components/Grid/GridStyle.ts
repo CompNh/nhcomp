@@ -94,6 +94,7 @@ const ConfirmButton = styled(BaseButton)`
     background-color: ${(props) => props.theme.colors.active}; /* ✅ hover 스타일 */
   }
 `;
+
 const CancelButton = styled(BaseButton)`
   width: 24px;
   height: 24px;
@@ -104,7 +105,6 @@ const CancelButton = styled(BaseButton)`
     background-color: ${(props) => props.theme.colors.active}; /* ✅ hover 스타일 */
   }
 `;
-
 
 // ✅ Header
 const HeaderWrapper = styled.thead`
