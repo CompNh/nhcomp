@@ -38,6 +38,7 @@ const GridHeader = <T,>({
   const closeContextMenu = () => setMenuPosition(null);
 
   return (
+    <>
     <HeaderWrapper style={style}>
       <HeaderRow>
         {/** Row Edit Col */}
@@ -87,13 +88,13 @@ const GridHeader = <T,>({
           ))}
         </FilterRow>
       )}
-
-      {options && <GridContextMenu 
+    </HeaderWrapper>
+    {options && <GridContextMenu 
         menuPosition={menuPosition} 
         options={options} 
         onClose={closeContextMenu} 
         reducer={reducer} />}
-    </HeaderWrapper>
+    </>    
   );
 };
 

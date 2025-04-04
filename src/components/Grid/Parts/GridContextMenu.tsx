@@ -4,6 +4,7 @@ import { FaFileExcel, FaFilePdf, FaFilter, FaLayerGroup, FaSortAmountDown, FaSor
 import { ContextDivider, ContextIcon, ContextItem, ContextMenuContainer, ContextMenuHeader, ContextMenuList } from "../GridStyle";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
 import { exportToExcel, exportToPDF } from "../Utility/GridUtility";
+import ReactDOM from "react-dom";
 
 interface GridContextMenuProps<T> {  
   menuPosition: { x: number; y: number; column: GridColumn<T> } | null;
@@ -104,7 +105,8 @@ const GridContextMenu = <T,>({
     },
   ].filter(Boolean) as ContextMenuItem[];
 
-  return (
+
+  const menu = (
     <ContextMenuContainer ref={menuRef} style={{ ...style, top: `${menuPosition.y}px`, left: `${menuPosition.x}px` }}>
       <ContextMenuHeader>{menuPosition.column.label}</ContextMenuHeader>
       <ContextMenuList>           
@@ -127,7 +129,33 @@ const GridContextMenu = <T,>({
         )}
       </ContextMenuList>
     </ContextMenuContainer>
-  );
+  )
+  return ReactDOM.createPortal(menu, document.body);
+
+  // return (
+  //   <ContextMenuContainer ref={menuRef} style={{ ...style, top: `${menuPosition.y}px`, left: `${menuPosition.x}px` }}>
+  //     <ContextMenuHeader>{menuPosition.column.label}</ContextMenuHeader>
+  //     <ContextMenuList>           
+  //       {menuItems.map((item, index) =>
+  //         item.divider ? (
+  //           <ContextDivider key={`divider-${index}`} />
+  //         ) : (
+  //           <ContextItem
+  //             key={index}
+  //             disabled={item.disabled}
+  //             onClick={() => {
+  //               if (!item.disabled && item.onClick) item.onClick();
+  //               onClose();
+  //             }}              
+  //           >
+  //             {item.icon && <ContextIcon>{item.icon}</ContextIcon>}              
+  //             <span>{item.label}</span>
+  //           </ContextItem>
+  //         )
+  //       )}
+  //     </ContextMenuList>
+  //   </ContextMenuContainer>
+  // );
 };
 
 export default GridContextMenu;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { GridColumn, GridData, GroupRow } from "../GridTypes";
 import GridBodyContextMenu from "./GridBodyContextMenu";
 import { GridReducerReturn } from "../Reducer/useGridReducer";
@@ -23,7 +23,7 @@ interface GridBodyProps<T> {
   onToggleGroupExpand: (groupKey: string) => void;
   reducer: GridReducerReturn<T>;
   style?: React.CSSProperties;
-  bodyHeight: number; // ✅ 상위에서 계산된 높이
+  bodyHeight: number;
 }
 
 const GridBody = <T,>({
@@ -46,9 +46,24 @@ const GridBody = <T,>({
 
   const ROW_HEIGHT = 35;
 
-  // ✅ Placeholder 계산
-  const dataRowCount = reducer.state.data.filter((row) => !isGroupRowHelper(row)).length;
-  const placeholderHeight = Math.max(0, bodyHeight - dataRowCount * ROW_HEIGHT);
+  // ✅ 실제 렌더될 row 수 계산 (group 펼침 고려)
+  const renderedRowCount = useMemo(() => {
+    const countVisibleRows = (rows: (GridData<T> | GroupRow<T>)[]): number => {
+      return rows.reduce((acc, row) => {
+        if (isGroupRowHelper(row)) {
+          const group = row as GroupRow<T>;
+          const isExpanded = reducer.state.group.expanded.has(group.__groupKey);
+          return acc + 1 + (isExpanded ? countVisibleRows(group.__children as (GridData<T> | GroupRow<T>)[]) : 0);
+        } else {
+          return acc + 1;
+        }
+      }, 0);
+    };
+
+    return countVisibleRows(reducer.state.data);
+  }, [reducer.state.data, reducer.state.group.expanded]);
+
+  const placeholderHeight = Math.max(0, bodyHeight - renderedRowCount * ROW_HEIGHT);
 
   const handleCellDoubleClick = (rowKey: string, colKey: string, value: T[keyof T]) => {
     reducer.setEditingCell(rowKey, colKey, value);
@@ -103,7 +118,7 @@ const GridBody = <T,>({
     let localRowIndex = 0;
 
     return (
-      <>
+      <React.Fragment key={row.__groupKey}>
         <GroupCell
           row={row}
           columns={columns}
@@ -119,7 +134,7 @@ const GridBody = <T,>({
               ? renderGroupRow(child as GroupRow<T>, level + 1)
               : renderDataRow(child as GridData<T>, level + 1, ++localRowIndex)
           )}
-      </>
+      </React.Fragment>
     );
   };
 
@@ -179,7 +194,7 @@ const GridBody = <T,>({
           <PlaceholderRow>
             <PlaceholderCell
               colSpan={columns.length + (showRowNumCol ? 1 : 0) + (showRowCheckboxCol ? 1 : 0)}
-              style={{ height: placeholderHeight, minHeight: placeholderHeight }}
+              style={{ height: placeholderHeight }}
             />
           </PlaceholderRow>
         )}

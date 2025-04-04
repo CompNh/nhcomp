@@ -43,13 +43,13 @@ const Grid = <T,>({
     if (!containerRef.current) return;
 
     const updateHeight = () => {
-      const clientHeight = containerRef.current?.clientHeight;
-      const visualHeight = containerRef.current?.getBoundingClientRect().height;
+      // const clientHeight = containerRef.current?.clientHeight;
+      // const visualHeight = containerRef.current?.getBoundingClientRect().height;
   
-      console.log("📏 container height",
-        "clientHeight:", clientHeight,
-        "visualHeight (bounding):", visualHeight
-      );
+      // console.log("📏 container height",
+      //   "clientHeight:", clientHeight,
+      //   "visualHeight (bounding):", visualHeight
+      // );
       
       const totalHeight = containerRef.current?.clientHeight || 0;
       const HEADER_HEIGHT = 40;
