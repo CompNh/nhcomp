@@ -11,7 +11,7 @@ import {
   GridTable,
   GridTableWrapper,
 } from "./GridStyle";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const Grid = <T,>({
   columns,
@@ -39,18 +39,14 @@ const Grid = <T,>({
   const containerRef = useRef<HTMLDivElement>(null);
   const [bodyHeight, setBodyHeight] = useState<number>(0);
 
+  useEffect(() => {
+    reducer.resetData(setRowKeysForOrginData(data));
+  }, [data]);
+
   useLayoutEffect(() => {
     if (!containerRef.current) return;
 
-    const updateHeight = () => {
-      // const clientHeight = containerRef.current?.clientHeight;
-      // const visualHeight = containerRef.current?.getBoundingClientRect().height;
-  
-      // console.log("📏 container height",
-      //   "clientHeight:", clientHeight,
-      //   "visualHeight (bounding):", visualHeight
-      // );
-      
+    const updateHeight = () => {      
       const totalHeight = containerRef.current?.clientHeight || 0;
       const HEADER_HEIGHT = 40;
       const PAGINATION_HEIGHT = pagingable ? 40 : 0;

@@ -1,7 +1,7 @@
 
 import { useReducer } from "react";
 import { gridReducer, GridState, initialGridState } from "./GridReducer";
-import { SortDirection } from "../GridTypes";
+import { GridData, SortDirection } from "../GridTypes";
 import { gridStateChanges } from "../Utility/GridUtility";
 
 export interface GridReducerReturn<T> {
@@ -25,6 +25,7 @@ export interface GridReducerReturn<T> {
     applyRowChanges : (rowKey: string) => void;
     resetRowChanges : (rowKey: string) => void;
     addRow : () => void;
+    resetData : (newData: GridData<T>[]) => void;
     
 }
 
@@ -189,6 +190,10 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
         dispatch({ type: "ADD_ROW" });        
     }
 
+    const resetData = (newData: GridData<T>[]) => {
+        dispatch({ type: 'RESET_DATA', payload: newData });
+      };
+
 
     /** 🔹 Grid 상태 전체 업데이트 */
     const updateGridState = () => {
@@ -219,7 +224,9 @@ function useGridReducer<T>(data: T[], pagingable: boolean = false, pageSize : nu
         removeEditedCell,
         applyRowChanges,
         resetRowChanges,
-        addRow
+        addRow,
+        resetData,       
+
     };
 }
 

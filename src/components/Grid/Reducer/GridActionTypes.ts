@@ -1,4 +1,4 @@
-import { SortDirection } from "../GridTypes";
+import { GridData, SortDirection } from "../GridTypes";
 import { GridState } from "./GridReducer";
 
 /** 🔹 컬럼 정렬 변경 액션 */
@@ -114,6 +114,12 @@ interface AddRowAction<T>{
     type: "ADD_ROW";    
 }
 
+interface ResetDataAction<T>{
+    type: "RESET_DATA";
+    payload: GridData<T>[];
+}
+
+
 /** 🔹 Grid 액션 타입 정의 */
 type GridAction<T> =
     | SetGridStateAction<T>
@@ -135,6 +141,7 @@ type GridAction<T> =
     | ApplyRowChangesAction
     | ResetRowChangesAction
     | AddRowAction<T>
+    | ResetDataAction<T>;
 
 export type { 
     GridAction,
@@ -156,5 +163,6 @@ export type {
     ResetAllChangesAction,
     ApplyRowChangesAction,
     ResetRowChangesAction,
-    AddRowAction
+    AddRowAction,
+    ResetDataAction,
 };

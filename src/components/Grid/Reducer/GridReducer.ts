@@ -374,7 +374,14 @@ function gridReducer<T>(state: GridState<T>, action: GridAction<T>): GridState<T
         /** 🔹 Grid 상태 변경 */
         case "SET_GRID_STATE":
             return { ...state, ...action.state }; // ✅ 새로운 상태 적용
-
+        /** 🔹 Grid Data 변경경 */
+        case "RESET_DATA":
+            return { ...state,
+                originalData: action.payload, // ✅ 원본 데이터 업데이트
+                data: state.pagingable ? paginateData(action.payload, state.pagenate.currentPage, state.pagenate.pageSize) as GridData<T>[] : action.payload, // ✅ 페이징 시 빈 Set 사용
+                editedRows: {}, // ✅ 수정된 데이터 초기화
+                editingCell: null, // ✅ 편집 상태 초기화
+             }; // ✅ 새로운 상태 적용
         default:
             return state;
     }
