@@ -1,5 +1,5 @@
 import { GridState } from './GridReducer';
-import { SortDirection } from '../GridTypes';
+import { GridData, SortDirection } from '../GridTypes';
 export interface GridReducerReturn<T> {
     state: GridState<T>;
     setSort: (column: string, direction: SortDirection) => void;
@@ -21,6 +21,7 @@ export interface GridReducerReturn<T> {
     applyRowChanges: (rowKey: string) => void;
     resetRowChanges: (rowKey: string) => void;
     addRow: () => void;
+    resetData: (newData: GridData<T>[]) => void;
 }
 /** 🔹 useGridReducer 훅 */
 declare function useGridReducer<T>(data: T[], pagingable?: boolean, pageSize?: number, activeExportSurport?: boolean, activeAddRowAble?: boolean): GridReducerReturn<T>;

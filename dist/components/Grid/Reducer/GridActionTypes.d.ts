@@ -1,4 +1,4 @@
-import { SortDirection } from '../GridTypes';
+import { GridData, SortDirection } from '../GridTypes';
 import { GridState } from './GridReducer';
 /** 🔹 컬럼 정렬 변경 액션 */
 interface SetSortAction {
@@ -105,7 +105,11 @@ interface SetGridStateAction<T> {
 interface AddRowAction<T> {
     type: "ADD_ROW";
 }
+interface ResetDataAction<T> {
+    type: "RESET_DATA";
+    payload: GridData<T>[];
+}
 /** 🔹 Grid 액션 타입 정의 */
-type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction | AddRowAction<T>;
-export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, AddRowAction };
+type GridAction<T> = SetGridStateAction<T> | SetSortAction | SetFilterAction | ClearFilterAction | SetGroupAction | RemoveGroupAction | ToggleGroupExpandAction | ToggleRowAction<T> | SetPageAction | SetPageSizeAction | SetEditingCellAction<T> | ClearEditingCellAction | SetEditCellAction<T> | RemoveEditedCellAction | ApplyAllChangesAction | ResetAllChangesAction | ApplyRowChangesAction | ResetRowChangesAction | AddRowAction<T> | ResetDataAction<T>;
+export type { GridAction, SetGridStateAction, SetSortAction, SetFilterAction, ClearFilterAction, SetGroupAction, RemoveGroupAction, ToggleGroupExpandAction, ToggleRowAction, SetPageAction, SetPageSizeAction, SetEditingCellAction, ClearEditingCellAction, SetEditCellAction, RemoveEditedCellAction, ApplyAllChangesAction, ResetAllChangesAction, ApplyRowChangesAction, ResetRowChangesAction, AddRowAction, ResetDataAction, };
 //# sourceMappingURL=GridActionTypes.d.ts.map
