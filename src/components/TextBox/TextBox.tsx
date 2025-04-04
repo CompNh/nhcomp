@@ -10,9 +10,15 @@ import { GlobalStyle, theme } from "../../styles/theme";
 import { BaseTextBox } from "../CommonStyle";
 
 export interface TextBoxProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "checked"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "checked" | "value" | "onChange"> {
   apply?: boolean;
   textType?: "number" | "password" | "text" | "email" | "rangeNumber";
+  value?: string | { min: number; max: number };
+  onChange?: (e: {
+    target: {
+      value: string | { min: number; max: number };
+    };
+  }) => void;
 }
 
 const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
@@ -29,7 +35,7 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
     const isRange = textType === "rangeNumber";
 
     const [value, setValue] = useState<string>(
-      propValue ? String(propValue) : ""
+      typeof propValue === "string" ? propValue : ""
     );
 
     const [range, setRange] = useState<{ min: string; max: string }>({
@@ -40,10 +46,14 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
     // ✅ 외부 value 동기화
     useEffect(() => {
       if (isRange) {
-        const [min = "", max = ""] = String(propValue ?? "").split("~");
-        setRange({ min, max });
-      } else {
-        setValue(propValue ? String(propValue) : "");
+        if (typeof propValue === "object" && propValue !== null && "min" in propValue && "max" in propValue) {
+          setRange({
+            min: String(propValue.min),
+            max: String(propValue.max),
+          });
+        }
+      } else if (typeof propValue === "string") {
+        setValue(propValue);
       }
     }, [propValue, isRange]);
 
@@ -51,23 +61,26 @@ const TextBox = forwardRef<HTMLInputElement, TextBoxProps>(
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const newVal = e.target.value;
       setValue(newVal);
-      onChange?.(e);
+      onChange?.({ target: { value: newVal } });
     };
 
-    // ✅ range 상태가 바뀔 때 외부에 알림 (렌더 후에 실행)
+    // ✅ range 상태 변경 시 객체로 전달
     const prevRangeRef = useRef(range);
     useEffect(() => {
       const prev = prevRangeRef.current;
       if (range.min !== prev.min || range.max !== prev.max) {
-        const composed = `${range.min}~${range.max}`;
-        const syntheticEvent = {
-          ...({} as ChangeEvent<HTMLInputElement>),
+        const min = parseFloat(range.min);
+        const max = parseFloat(range.max);
+
+        onChange?.({
           target: {
-            ...({} as HTMLInputElement),
-            value: composed,
+            value: {
+              min: isNaN(min) ? 0 : min,
+              max: isNaN(max) ? 0 : max,
+            },
           },
-        };
-        onChange?.(syntheticEvent);
+        });
+
         prevRangeRef.current = range;
       }
     }, [range, onChange]);

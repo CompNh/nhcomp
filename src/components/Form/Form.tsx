@@ -36,7 +36,19 @@ const Form = ({
   return (
     <>
       {/* ✅ 타이틀 (왼쪽 정렬) */}
-      {title && <h2 style={{ textAlign: "left", marginBottom: "10px" }}>{title}</h2>}
+      {title && (
+        <div
+          style={{
+            marginBottom: "16px",            
+            borderBottom: "1px solid #ccc",
+            fontSize: "15px",
+            fontWeight: 600,
+            color: "#333",
+          }}
+        >
+          {title}
+        </div>
+      )}
 
       <Layout rowSizes={rowSizes} colSizes={colSizes} gap={10}>
         {formFields.map((field) => {

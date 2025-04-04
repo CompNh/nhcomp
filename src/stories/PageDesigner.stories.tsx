@@ -85,7 +85,7 @@ const sampleData: SampleData[] = [
 const Template: StoryFn<typeof PageDesigner> = (args) => (
     <PageDesigner {...args} gap={2}>
         <Section startPosition={[1, 1]} endPosition={[2, 3]}>  
-        <Grid<SampleData> 
+        {/* <Grid<SampleData> 
                         columns={columns} 
                         data={sampleData}
                         options = {{
@@ -101,8 +101,8 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                         }} 
                         showRowCheckboxCol = {true}                       
                         
-                    />            
-            {/* <Layout gap={1}>
+                    />             */}
+            <Layout gap={1}>
                 <Section startPosition={[1,1]} endPosition={[1,1]}>  
                     <Grid<SampleData> 
                         columns={columns} 
@@ -129,17 +129,27 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                         col: 2
                       }}                             
                       formFields={formFields}
-                      onSerach={function (data: { [key: string]: any; }): void {
-                        throw new Error("Function not implemented.");
-                      } }
-                      onSubmit={function (data: { [key: string]: any; }): void {
-                        throw new Error("Function not implemented.");
-                      } }                
+                      onSerach={onChanged}
+                      onSubmit={onChanged}                
                   />
                 </Section> 
-                <Section startPosition={[2,1]} endPosition={[2,2]}>                                           
+                <Section startPosition={[2,1]} endPosition={[2,2]}>  
+                  <Form   
+                       title="폼 제목"    
+                        division={{
+                          row: 2,
+                          col: 2
+                        }}                             
+                        formFields={formFields}
+                        onSerach={function (data: { [key: string]: any; }): void {
+                          throw new Error("Function not implemented.");
+                        } }
+                        onSubmit={function (data: { [key: string]: any; }): void {
+                          throw new Error("Function not implemented.");
+                        } }                
+                    />                                         
                 </Section>                
-            </Layout>                         */}
+            </Layout>                        
         </Section>
 
         <Section startPosition={[3, 1]} endPosition={[3, 2]}>          
