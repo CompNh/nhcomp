@@ -11,7 +11,8 @@ interface GridBodyProps<T> {
     onToggleGroupExpand: (groupKey: string) => void;
     reducer: GridReducerReturn<T>;
     style?: React.CSSProperties;
+    bodyHeight: number;
 }
-declare const GridBody: <T>({ columns, showRowNumCol, showRowCheckboxCol, selectedRows, isCellEditable, onToggleRow, onToggleGroupExpand, reducer, style, }: GridBodyProps<T>) => import("react/jsx-runtime").JSX.Element;
+declare const GridBody: <T>({ columns, showRowNumCol, showRowCheckboxCol, selectedRows, isCellEditable, onToggleRow, onToggleGroupExpand, reducer, style, bodyHeight, }: GridBodyProps<T>) => import("react/jsx-runtime").JSX.Element;
 export default GridBody;
 //# sourceMappingURL=GridBody.d.ts.map
