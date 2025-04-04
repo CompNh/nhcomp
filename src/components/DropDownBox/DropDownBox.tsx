@@ -53,17 +53,20 @@ import {
       });
   
       // ✅ 외부 value → 내부 상태 반영
+      // 1. 옵션 변경 감지 시 내부 옵션 업데이트
+      useEffect(() => {
+        const updatedOptions = DefualtOptionAtive(options, isActiveAll);
+        reducer.setOptions(updatedOptions);
+      }, [options, isActiveAll]); // ✅ 외부 변경만 감지
+
+      // 2. value 변경 감지 시 선택된 값 반영
       useEffect(() => {
         if (value !== undefined) {
           const selected = reducer.state.options.find((opt) => opt.key === value);
-          if (selected) {
-            reducer.selectItem(selected);
-          }else{
-            reducer.selectItem(undefined);
-          }
+          reducer.selectItem(selected ?? undefined);
         }
       }, [value, reducer.state.options]);
-  
+      
       // ✅ Portal 위치 계산
       useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
