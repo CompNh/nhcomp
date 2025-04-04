@@ -203,6 +203,18 @@ const GridPaginationWrapper = styled.div`
   height: 40px; /* ✅ GridPagination 높이 설정 */    
 `;
 
+const PlaceholderRow = styled.tr`
+  pointer-events: none;
+  background-color: ${(props) => props.theme.colors.background};
+`;
+
+const PlaceholderCell = styled.td`
+  padding: 0;
+  border: none;
+  height: 100%;
+`;
+
+
 export { 
   ContextMenuContainer, 
   ContextMenuHeader, 
@@ -227,5 +239,7 @@ export {
   GridContainer,
   GridTable,
   GridPaginationWrapper,  
-  GridTableWrapper
+  GridTableWrapper,
+  PlaceholderRow,
+  PlaceholderCell
  };

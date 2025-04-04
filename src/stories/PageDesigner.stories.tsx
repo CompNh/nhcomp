@@ -85,7 +85,24 @@ const sampleData: SampleData[] = [
 const Template: StoryFn<typeof PageDesigner> = (args) => (
     <PageDesigner {...args} gap={2}>
         <Section startPosition={[1, 1]} endPosition={[2, 3]}>  
-              <Layout gap={1}>
+        <Grid<SampleData> 
+                        columns={columns} 
+                        data={sampleData}
+                        options = {{
+                            sortable: true,
+                            filterable: true,
+                            grouping: true,
+                        }}
+                        isCellEditable = {true}
+                        pagingable = {true}
+                        pagination = {{
+                            pageSize: 10,
+                            currentPage: 1,
+                        }} 
+                        showRowCheckboxCol = {true}                       
+                        
+                    />            
+            {/* <Layout gap={1}>
                 <Section startPosition={[1,1]} endPosition={[1,1]}>  
                     <Grid<SampleData> 
                         columns={columns} 
@@ -122,7 +139,7 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                 </Section> 
                 <Section startPosition={[2,1]} endPosition={[2,2]}>                                           
                 </Section>                
-            </Layout>                        
+            </Layout>                         */}
         </Section>
 
         <Section startPosition={[3, 1]} endPosition={[3, 2]}>          
@@ -138,8 +155,6 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
           labelGap={4}
           />
           <TextBox/>
-        </Section>
-        <Section startPosition={[10, 1]} endPosition={[10, 3]}>
         </Section>
     </PageDesigner>
 );
