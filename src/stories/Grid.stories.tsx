@@ -45,9 +45,9 @@ const sampleData: SampleData[] = [
 ];
 
 const sampleDropData: DropDownBoxOption[] = [
-  { key : "1" , text : "AAAA"},
-  { key : "2" , text : "BBBB"},
-  { key : "3" , text : "CCCC"},
+  { key : "1" , value : "AAAA"},
+  { key : "2" , value : "BBBB"},
+  { key : "3" , value : "CCCC"},
 ];
 
 const onChanged = (e : object) =>{
@@ -82,7 +82,7 @@ const columns: GridColumn<SampleData>[] = [
 export const Default: Story = {
   args: {
     columns: columns,
-    data: sampleData,
+    data: [],
     options: {
       sortable: true,
       filterable: true,

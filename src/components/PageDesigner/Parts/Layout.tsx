@@ -16,7 +16,11 @@ const Layout = ({
     style = undefined,  
 }: LayoutProps) => {
   return (
-    <div style={{ width: "100%", height: "100%", ...style}}  >    
+    <div style={{ 
+      width: "100%", 
+      height: "100%",
+      display: "flex", flexDirection: "column",
+      ...style}}  >    
     {title && (
       <LayoutTitle>
         {title}

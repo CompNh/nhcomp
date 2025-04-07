@@ -104,10 +104,10 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                     />             */}
             <Layout gap={1} title = {'메롱'}
             >
-                <Section startPosition={[1,1]} endPosition={[1,1]}>  
+                <Section startPosition={[1,1]} endPosition={[1,1]} title="그래">  
                     <Grid<SampleData> 
                         columns={columns} 
-                        data={sampleData}
+                        data={[]}
                         options = {{
                             sortable: true,
                             filterable: true,
