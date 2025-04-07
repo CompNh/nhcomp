@@ -11225,36 +11225,36 @@ const _i = ["1fr", "1fr"], Bm = ({
   border: a,
   level: o = 0,
   title: i = void 0
-}) => /* @__PURE__ */ v.jsxs(
-  "div",
-  {
-    style: {
-      display: "grid",
-      gridTemplateRows: r.join(" "),
-      gridTemplateColumns: n.join(" "),
-      gap: `${e}px`,
-      width: "100%",
-      height: "100%",
-      border: a
-    },
-    children: [
-      i && /* @__PURE__ */ v.jsx(
-        "div",
-        {
-          style: {
-            marginBottom: "16px",
-            borderBottom: "1px solid #ccc",
-            fontSize: "15px",
-            fontWeight: 600,
-            color: "#333"
-          },
-          children: i
-        }
-      ),
-      w.Children.map(t, (s) => w.isValidElement(s) && s.type === uc ? w.cloneElement(s, { level: o + 1 }) : s)
-    ]
-  }
-), Ci = (r) => r.reduce((n, t) => (n[t.key] = "", n), {}), Nm = (r, n) => {
+}) => /* @__PURE__ */ v.jsxs("div", { style: { width: "100%", height: "100%" }, children: [
+  i && /* @__PURE__ */ v.jsx(
+    "div",
+    {
+      style: {
+        marginBottom: "16px",
+        borderBottom: "1px solid #ccc",
+        fontSize: "15px",
+        fontWeight: 600,
+        color: "#333"
+      },
+      children: i
+    }
+  ),
+  /* @__PURE__ */ v.jsx(
+    "div",
+    {
+      style: {
+        display: "grid",
+        gridTemplateRows: r.join(" "),
+        gridTemplateColumns: n.join(" "),
+        gap: `${e}px`,
+        width: "100%",
+        height: "100%",
+        border: a
+      },
+      children: w.Children.map(t, (s) => w.isValidElement(s) && s.type === uc ? w.cloneElement(s, { level: o + 1 }) : s)
+    }
+  )
+] }), Ci = (r) => r.reduce((n, t) => (n[t.key] = "", n), {}), Nm = (r, n) => {
   switch (n.type) {
     case "UPDATE_FIELD":
       return { ...r, [n.payload.key]: n.payload.value };

@@ -1,1 +1,1 @@
-{"version":3,"file":"Layout.d.ts","sourceRoot":"","sources":["../../../../src/components/PageDesigner/Parts/Layout.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,sBAAsB,CAAC;AAKnD,QAAA,MAAM,MAAM,GAAI,8DAQb,WAAW,4CAkCb,CAAC;AAEF,eAAe,MAAM,CAAA"}
+{"version":3,"file":"Layout.d.ts","sourceRoot":"","sources":["../../../../src/components/PageDesigner/Parts/Layout.tsx"],"names":[],"mappings":"AACA,OAAO,EAAE,WAAW,EAAE,MAAM,sBAAsB,CAAC;AAKnD,QAAA,MAAM,MAAM,GAAI,8DAQb,WAAW,4CAoCb,CAAC;AAEF,eAAe,MAAM,CAAA"}
