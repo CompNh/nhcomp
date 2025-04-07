@@ -11228,7 +11228,8 @@ const _i = ["1fr", "1fr"], Vm = ({
         // ✅ 외부 여백 제거
         overflow: "hidden",
         // ✅ 내부 스크롤 문제 방지        
-        borderBottom: s ? "1px solid #ccc" : "none"
+        borderBottom: s ? "1px solid #ccc" : "none",
+        paddingBottom: s ? "8px" : "none"
       },
       children: [
         i && /* @__PURE__ */ v.jsxs(Tm, { children: [
