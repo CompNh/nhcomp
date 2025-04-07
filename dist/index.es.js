@@ -11249,7 +11249,13 @@ const _i = ["1fr", "1fr"], Vm = ({
   level: o = 0,
   title: i = void 0,
   style: s = void 0
-}) => /* @__PURE__ */ v.jsxs("div", { style: { width: "100%", height: "100%", ...s }, children: [
+}) => /* @__PURE__ */ v.jsxs("div", { style: {
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  ...s
+}, children: [
   i && /* @__PURE__ */ v.jsx(Pm, { children: i }),
   /* @__PURE__ */ v.jsx(
     "div",
