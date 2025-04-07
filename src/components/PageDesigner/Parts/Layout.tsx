@@ -1,6 +1,7 @@
 import React from "react";
 import { LayoutProps } from "../PageDesignerTypes";
 import Section from "./Section";
+import { LayoutTitle } from "../PageDesignerStyle";
 
 const DEFAULT_SIZE = ["1fr", "1fr"]; 
 
@@ -16,17 +17,9 @@ const Layout = ({
   return (
     <div style={{ width: "100%", height: "100%" }}>    
     {title && (
-      <div
-        style={{
-          marginBottom: "16px",
-          borderBottom: "1px solid #ccc",
-          fontSize: "15px",
-          fontWeight: 600,
-          color: "#333",
-        }}
-      >
+      <LayoutTitle>
         {title}
-      </div>
+      </LayoutTitle>
     )}      
       <div
         style={{

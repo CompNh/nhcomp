@@ -6,6 +6,7 @@ import { FormField } from "./FormTypes";
 import useFormReducer from "./Reducer/useFormReducer";
 import Label from "../Label/Label";
 import { validateFields } from "./Utility/FormUtility";
+import { ButtonGroup } from "../CommonStyle";
 
 export interface FormProps {
   title?: string; // ✅ 폼 타이틀 추가
@@ -98,9 +99,13 @@ const Form = ({
       </Layout>
 
       {/* ✅ 버튼 그룹 (오른쪽 정렬) */}
-      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px", gap: "2px" }}>
+      {/* <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "15px", gap: "4px" }}> */}
+      <ButtonGroup> 
         {onSubmit &&
-          <Button type="button" onClick={() => {
+          <Button 
+            type="button" 
+            style={{ minWidth: 80, height: 36 }} 
+            onClick={() => {
             const newErrors = validateFields(formFields, reducer.state);
             setErrors(newErrors);
         
@@ -112,7 +117,10 @@ const Form = ({
           </Button>
         }
         {onSerach &&
-          <Button type="button" onClick={() => {
+          <Button 
+            type="button" 
+            style={{ minWidth: 80, height: 36 }} 
+            onClick={() => {
             const newErrors = validateFields(formFields, reducer.state);
             setErrors(newErrors);
             if (Object.keys(newErrors).length === 0) {
@@ -124,11 +132,14 @@ const Form = ({
           </Button>
         }
         {isActivateInitialButton &&
-          <Button type="button" onClick={() => reducer.resetForm()}>
+          <Button 
+            type="button" 
+            style={{ minWidth: 80, height: 36 }} 
+            onClick={() => reducer.resetForm()}>
             초기화
           </Button>
         }
-      </div>
+      </ButtonGroup>
     </>
   );
 };

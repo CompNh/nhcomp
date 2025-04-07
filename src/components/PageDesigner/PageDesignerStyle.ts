@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
+const LayoutTitle = styled.div`
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ccc;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+
+`;
 const SectionTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 12px;  
 `;
 
 const TitleBar = styled.div`
@@ -22,4 +28,4 @@ const TitleText = styled.div`
   color: #333;
 `;
 
-export {SectionTitleWrapper, TitleBar, TitleText}
+export {SectionTitleWrapper, TitleBar, TitleText, LayoutTitle}

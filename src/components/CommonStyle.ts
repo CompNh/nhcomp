@@ -20,6 +20,23 @@ const BaseButton = styled.button`
   }
 `;
 
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  gap: 8px;
+
+  & > button {
+    min-width: 80px;
+    height: 36px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0 16px;
+    transition: background 0.2s ease;
+  }
+`;
+
 const BaseCheckbox = styled.input.attrs({ type: "checkbox" })<{$checkedColor?: string}>`
   width: 18px;
   height: 18px;
@@ -85,5 +102,6 @@ export {
   BaseButton,
   BaseCheckbox,
   BaseTextBox,
-  BaseLabel
+  BaseLabel,
+  ButtonGroup
 };

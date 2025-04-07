@@ -102,7 +102,7 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                         showRowCheckboxCol = {true}                       
                         
                     />             */}
-            <Layout gap={1}>
+            <Layout gap={1} title = {'메롱'}>
                 <Section startPosition={[1,1]} endPosition={[1,1]}>  
                     <Grid<SampleData> 
                         columns={columns} 
@@ -133,9 +133,8 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
                       onSubmit={onChanged}                
                   />
                 </Section> 
-                <Section startPosition={[2,1]} endPosition={[2,2]}>  
-                  <Form   
-                       title="폼 제목"    
+                <Section startPosition={[2,1]} endPosition={[2,2]} title={'안녕'}>  
+                  <Form                           
                         division={{
                           row: 2,
                           col: 2
