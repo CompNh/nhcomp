@@ -40,7 +40,7 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "styled-components": "styled", // ✅ UMD 빌드용 글로벌 이름 정의
+          "styled-components": "styledComponents", // ✅ UMD 빌드용 글로벌 이름 정의
           xlsx: "XLSX",
           jspdf: "jsPDF",
           "jspdf-autotable": "jspdfAutoTable",
