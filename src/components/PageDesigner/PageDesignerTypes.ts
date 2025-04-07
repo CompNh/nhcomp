@@ -15,6 +15,7 @@ interface SectionProps {
   border? : string;
   transparent? : boolean;
   title? : string;
+  borderBottom? : boolean;
 };
 
 interface LayoutProps {
@@ -25,6 +26,7 @@ interface LayoutProps {
   border? : string;
   level?: number;
   title? : string;
+  style? : React.CSSProperties;
 };
 
 export type {PageDesignerProps, SectionProps, LayoutProps}

@@ -12,10 +12,11 @@ const Layout = ({
     gap = 10,
     border,
     level = 0,
-    title = undefined,
+    title = undefined,  
+    style = undefined,  
 }: LayoutProps) => {
   return (
-    <div style={{ width: "100%", height: "100%" }}>    
+    <div style={{ width: "100%", height: "100%", ...style}}  >    
     {title && (
       <LayoutTitle>
         {title}

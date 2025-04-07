@@ -104,7 +104,7 @@ const Form = ({
         {onSubmit &&
           <Button 
             type="button" 
-            style={{ minWidth: 80, height: 36 }} 
+            style={{ minWidth: 80, height: 30 }} 
             onClick={() => {
             const newErrors = validateFields(formFields, reducer.state);
             setErrors(newErrors);
@@ -119,7 +119,7 @@ const Form = ({
         {onSerach &&
           <Button 
             type="button" 
-            style={{ minWidth: 80, height: 36 }} 
+            style={{ minWidth: 80, height: 30 }} 
             onClick={() => {
             const newErrors = validateFields(formFields, reducer.state);
             setErrors(newErrors);
@@ -134,7 +134,7 @@ const Form = ({
         {isActivateInitialButton &&
           <Button 
             type="button" 
-            style={{ minWidth: 80, height: 36 }} 
+            style={{ minWidth: 80, height: 30 }} 
             onClick={() => reducer.resetForm()}>
             초기화
           </Button>

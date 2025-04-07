@@ -10,7 +10,8 @@ const Section = ({
     level,
     border,
     transparent = false,
-    title = undefined,     
+    title = undefined,
+    borderBottom = false,     
 }: SectionProps) => {
   const [startRow, startCol] = startPosition;
   const [endRow, endCol] = endPosition;
@@ -31,8 +32,8 @@ const Section = ({
         height: "100%",
         padding: 0, // ✅ 내부 여백 제거
         margin: 0, // ✅ 외부 여백 제거
-        overflow: "hidden", // ✅ 내부 스크롤 문제 방지
-        
+        overflow: "hidden", // ✅ 내부 스크롤 문제 방지        
+        borderBottom: borderBottom ? "1px solid #ccc" : "none",
       }}
     >
     {title && (
