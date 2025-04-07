@@ -14,6 +14,7 @@ interface SectionProps {
     border?: string;
     transparent?: boolean;
     title?: string;
+    borderBottom?: boolean;
 }
 interface LayoutProps {
     rowSizes?: string[];
@@ -23,6 +24,7 @@ interface LayoutProps {
     border?: string;
     level?: number;
     title?: string;
+    style?: React.CSSProperties;
 }
 export type { PageDesignerProps, SectionProps, LayoutProps };
 //# sourceMappingURL=PageDesignerTypes.d.ts.map

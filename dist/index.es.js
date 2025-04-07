@@ -11181,15 +11181,15 @@ const _i = ["1fr", "1fr"], Vm = ({
 `, Tm = F.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   padding-bottom: 12px;  
 `, Om = F.div`
   width: 4px;
-  height: 20px;
+  height: 14px;
   background-color: #6366f1; // 보라색 (Tailwind 기준: indigo-500)
   border-radius: 2px;
 `, Rm = F.div`
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #333;
 `, Nm = () => {
@@ -11205,17 +11205,18 @@ const _i = ["1fr", "1fr"], Vm = ({
   level: e,
   border: a,
   transparent: o = !1,
-  title: i = void 0
+  title: i = void 0,
+  borderBottom: s = !1
 }) => {
-  const [s, c] = r, [l, u] = n, d = Nm();
+  const [c, l] = r, [u, d] = n, p = Nm();
   return /* @__PURE__ */ v.jsxs(
     "div",
     {
       style: {
-        gridRow: `${s} / ${l + 1}`,
-        gridColumn: `${c} / ${u + 1}`,
+        gridRow: `${c} / ${u + 1}`,
+        gridColumn: `${l} / ${d + 1}`,
         border: a,
-        background: t || o ? "transparent" : d,
+        background: t || o ? "transparent" : p,
         display: "flex",
         flexDirection: "column",
         // ✅ 내부 요소 세로 정렬
@@ -11225,15 +11226,16 @@ const _i = ["1fr", "1fr"], Vm = ({
         // ✅ 내부 여백 제거
         margin: 0,
         // ✅ 외부 여백 제거
-        overflow: "hidden"
-        // ✅ 내부 스크롤 문제 방지
+        overflow: "hidden",
+        // ✅ 내부 스크롤 문제 방지        
+        borderBottom: s ? "1px solid #ccc" : "none"
       },
       children: [
         i && /* @__PURE__ */ v.jsxs(Tm, { children: [
           /* @__PURE__ */ v.jsx(Om, {}),
           /* @__PURE__ */ v.jsx(Rm, { children: i })
         ] }),
-        t || !o && `${e}Lv [${s}, ${c}] ~ [${l}, ${u}]`
+        t || !o && `${e}Lv [${c}, ${l}] ~ [${u}, ${d}]`
       ]
     }
   );
@@ -11244,8 +11246,9 @@ const _i = ["1fr", "1fr"], Vm = ({
   gap: e = 10,
   border: a,
   level: o = 0,
-  title: i = void 0
-}) => /* @__PURE__ */ v.jsxs("div", { style: { width: "100%", height: "100%" }, children: [
+  title: i = void 0,
+  style: s = void 0
+}) => /* @__PURE__ */ v.jsxs("div", { style: { width: "100%", height: "100%", ...s }, children: [
   i && /* @__PURE__ */ v.jsx(Pm, { children: i }),
   /* @__PURE__ */ v.jsx(
     "div",
@@ -11259,7 +11262,7 @@ const _i = ["1fr", "1fr"], Vm = ({
         height: "100%",
         border: a
       },
-      children: w.Children.map(t, (s) => w.isValidElement(s) && s.type === uc ? w.cloneElement(s, { level: o + 1 }) : s)
+      children: w.Children.map(t, (c) => w.isValidElement(c) && c.type === uc ? w.cloneElement(c, { level: o + 1 }) : c)
     }
   )
 ] }), Ci = (r) => r.reduce((n, t) => (n[t.key] = "", n), {}), Lm = (r, n) => {
@@ -11347,7 +11350,7 @@ const Ym = (r = "필수 입력 항목입니다.") => (n) => n ? void 0 : r, Km =
         xr,
         {
           type: "button",
-          style: { minWidth: 80, height: 36 },
+          style: { minWidth: 80, height: 30 },
           onClick: () => {
             const d = Ei(t, i.state);
             c(d), Object.keys(d).length === 0 && (a == null || a(i.state));
@@ -11359,7 +11362,7 @@ const Ym = (r = "필수 입력 항목입니다.") => (n) => n ? void 0 : r, Km =
         xr,
         {
           type: "button",
-          style: { minWidth: 80, height: 36 },
+          style: { minWidth: 80, height: 30 },
           onClick: () => {
             const d = Ei(t, i.state);
             c(d), Object.keys(d).length === 0 && o(i.state);
@@ -11371,7 +11374,7 @@ const Ym = (r = "필수 입력 항목입니다.") => (n) => n ? void 0 : r, Km =
         xr,
         {
           type: "button",
-          style: { minWidth: 80, height: 36 },
+          style: { minWidth: 80, height: 30 },
           onClick: () => i.resetForm(),
           children: "초기화"
         }
