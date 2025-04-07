@@ -11,6 +11,7 @@ const Layout = ({
     gap = 10,
     border,
     level = 0,
+    title = undefined,
 }: LayoutProps) => {
   return (
     <div
@@ -24,6 +25,19 @@ const Layout = ({
         border: border,        
       }}
     >
+      {title && (
+        <div
+          style={{
+            marginBottom: "16px",            
+            borderBottom: "1px solid #ccc",
+            fontSize: "15px",
+            fontWeight: 600,
+            color: "#333",
+          }}
+        >
+          {title}
+        </div>
+      )}      
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child) && child.type === Section) {
           return React.cloneElement(child as React.ReactElement<any>, { level: level + 1 });

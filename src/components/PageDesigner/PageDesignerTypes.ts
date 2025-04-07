@@ -14,6 +14,7 @@ interface SectionProps {
   level?: number;
   border? : string;
   transparent? : boolean;
+  title? : string;
 };
 
 interface LayoutProps {
@@ -23,6 +24,7 @@ interface LayoutProps {
   gap?: number;
   border? : string;
   level?: number;
+  title? : string;
 };
 
 export type {PageDesignerProps, SectionProps, LayoutProps}

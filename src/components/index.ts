@@ -11,13 +11,13 @@ export { default as TextBox} from "./TextBox/TextBox";
 export { default as SingleDatePicker} from "./DatePicker/SingleDatePicker";
 //export { default as RangeDatePicker} from "./DatePicker/RangeDatePicker"; 추후 업데이트하자
 
-export { default as PageDesigner} from "./PageDesiner/PageDesigner";
-export { default as Section} from "./PageDesiner/Parts/Section";
-export { default as Layout} from "./PageDesiner/Parts/Layout";
-export * from  "./PageDesiner/PageDesignerTypes";
+export { default as PageDesigner} from "./PageDesigner/PageDesigner";
+export { default as Section} from "./PageDesigner/Parts/Section";
+export { default as Layout} from "./PageDesigner/Parts/Layout";
+export * from  "./PageDesigner/PageDesignerTypes";
 
 export { default as Form} from "./Form/Form";
-export * from  "./PageDesiner/PageDesignerTypes";
+export * from  "./PageDesigner/PageDesignerTypes";
 
 
 

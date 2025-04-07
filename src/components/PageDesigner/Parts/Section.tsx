@@ -1,4 +1,5 @@
 
+import { SectionTitleWrapper, TitleBar, TitleText } from "../PageDesignerStyle";
 import { SectionProps } from "../PageDesignerTypes";
 import { getRandomColor } from "../Utility/PageDesigner";
 
@@ -8,7 +9,8 @@ const Section = ({
     children,
     level,
     border,
-    transparent = false     
+    transparent = false,
+    title = undefined,     
 }: SectionProps) => {
   const [startRow, startCol] = startPosition;
   const [endRow, endCol] = endPosition;
@@ -33,6 +35,12 @@ const Section = ({
         
       }}
     >
+    {title && (
+      <SectionTitleWrapper>
+        <TitleBar />
+        <TitleText>{title}</TitleText>
+      </SectionTitleWrapper>
+    )}       
       {children || !transparent &&`${level}Lv [${startRow}, ${startCol}] ~ [${endRow}, ${endCol}]`}
     </div>
   );

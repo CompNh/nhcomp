@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Button from "../Button/Button";
-import Layout from "../PageDesiner/Parts/Layout";
-import Section from "../PageDesiner/Parts/Section";
+import Layout from "../PageDesigner/Parts/Layout";
+import Section from "../PageDesigner/Parts/Section";
 import { FormField } from "./FormTypes";
 import useFormReducer from "./Reducer/useFormReducer";
 import Label from "../Label/Label";
 import { validateFields } from "./Utility/FormUtility";
-import { isRequired } from "../../utils";
 
 export interface FormProps {
   title?: string; // ✅ 폼 타이틀 추가
@@ -87,7 +86,7 @@ const Form = ({
               <Label
                 label={field.label}
                 isRequired={field.isRequired}
-                toolTip={field.toolTip}
+                toolTip={field.toolTip}                
               />
               {componentWithProps}
               {errors[field.key] && (
