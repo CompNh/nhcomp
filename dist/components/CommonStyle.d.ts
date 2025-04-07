@@ -1,8 +1,9 @@
 declare const BaseButton: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, never>> & string;
+declare const ButtonGroup: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
 declare const BaseCheckbox: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components/dist/types').Substitute<import('styled-components').FastOmit<import('styled-components/dist/types').Substitute<import('react').DetailedHTMLProps<import('react').InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, import('react').DetailedHTMLProps<import('react').InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>>, never>, {
     $checkedColor?: string;
 }>> & string;
 declare const BaseTextBox: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, never>> & string;
 declare const BaseLabel: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
-export { BaseButton, BaseCheckbox, BaseTextBox, BaseLabel };
+export { BaseButton, BaseCheckbox, BaseTextBox, BaseLabel, ButtonGroup };
 //# sourceMappingURL=CommonStyle.d.ts.map
