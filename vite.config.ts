@@ -31,6 +31,7 @@ export default defineConfig({
       external: [
         "react", 
         "react-dom", 
+        "styled-components",        
         "xlsx", 
         "jspdf", 
         "jspdf-autotable" // ✅ Excel, PDF 관련 라이브러리 번들 제외
@@ -39,6 +40,7 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          "styled-components": "styled", // ✅ UMD 빌드용 글로벌 이름 정의
           xlsx: "XLSX",
           jspdf: "jsPDF",
           "jspdf-autotable": "jspdfAutoTable",
