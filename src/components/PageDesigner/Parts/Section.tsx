@@ -34,6 +34,7 @@ const Section = ({
         margin: 0, // ✅ 외부 여백 제거
         overflow: "hidden", // ✅ 내부 스크롤 문제 방지        
         borderBottom: borderBottom ? "1px solid #ccc" : "none",
+        paddingBottom: borderBottom ? "8px" : "none",
       }}
     >
     {title && (
