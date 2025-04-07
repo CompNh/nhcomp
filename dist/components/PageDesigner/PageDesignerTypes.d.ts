@@ -13,6 +13,7 @@ interface SectionProps {
     level?: number;
     border?: string;
     transparent?: boolean;
+    title?: string;
 }
 interface LayoutProps {
     rowSizes?: string[];
@@ -21,6 +22,7 @@ interface LayoutProps {
     gap?: number;
     border?: string;
     level?: number;
+    title?: string;
 }
 export type { PageDesignerProps, SectionProps, LayoutProps };
 //# sourceMappingURL=PageDesignerTypes.d.ts.map
