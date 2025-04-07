@@ -31,7 +31,7 @@ export default defineConfig({
       external: [
         "react", 
         "react-dom", 
-        "styled-components",        
+        //"styled-components",        
         "xlsx", 
         "jspdf", 
         "jspdf-autotable" // ✅ Excel, PDF 관련 라이브러리 번들 제외
