@@ -11,6 +11,8 @@ export declare const theme: {
         thirdHover: string;
         fourth: string;
         fourthHover: string;
+        fifth: string;
+        fifthHover: string;
         active: string;
     };
 };

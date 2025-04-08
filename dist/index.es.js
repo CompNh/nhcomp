@@ -2234,6 +2234,9 @@ const _u = F.tr`
   padding: 0;
   border: none;
   height: 100%;
+  color: ${(r) => r.theme.colors.fifth};
+  text-align: center;
+  vertical-align: middle;
 `, ra = (r) => r.__group === !0, ka = (r) => r.map((n, t) => ({
   ...n,
   rowKey: n.rowKey ?? ks(t)
@@ -2532,6 +2535,8 @@ const Nu = ({
     thirdHover: "#DC2626",
     fourth: "#3B82F6",
     fourthHover: "#60A5FA",
+    fifth: "#999999",
+    fifthHover: "#CCCCCC",
     active: "#9fd0f1"
   }
 }, _t = ql`
@@ -10414,7 +10419,8 @@ const mm = ({
         Su,
         {
           colSpan: r.length + (n ? 1 : 0) + (t ? 1 : 0),
-          style: { height: m }
+          style: { height: m },
+          children: s.state.originalData.length === 0 && "No data available"
         }
       ) })
     ] }),
