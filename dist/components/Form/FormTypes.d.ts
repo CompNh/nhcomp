@@ -13,6 +13,7 @@ interface FormField {
     style?: React.CSSProperties;
     disabled?: boolean;
     isReadOnly?: boolean;
+    defaultValue?: string | number;
     validate?: (value: any) => string | undefined;
     filter?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
