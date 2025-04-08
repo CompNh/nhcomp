@@ -18,6 +18,10 @@ const BaseButton = styled.button`
     background-color: ${(props) => props.theme.colors.secondHover}; /* ✅ 테마 적용 */
     color: ${(props) => props.theme.colors.font}; /* ✅ 테마 적용 */
   }
+  &:active {
+    transform: scale(0.96); /* ✅ 살짝 줄이기로 클릭감 표현 */
+    background-color: ${(props) => props.theme.colors.secondActive || props.theme.colors.secondHover};
+  }    
 `;
 
 const ButtonGroup = styled.div`

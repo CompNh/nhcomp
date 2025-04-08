@@ -9,6 +9,7 @@ export const theme = {
       primeHover: "#D6D6DA",
       second: "#e3e4e6",
       secondHover: "#D6D6DA",
+      secondActive: "#C8C8CC",
       third: "#EF4444",
       thirdHover: "#DC2626",
       fourth: "#3B82F6",
