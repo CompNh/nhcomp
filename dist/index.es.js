@@ -2124,10 +2124,11 @@ const An = F.button`
   color: ${(r) => r.theme.colors.font};
   overflow: hidden; 
 `, pu = F.div`
-  flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
-  width: 100%;  
-  overflow-x: auto;
-  overflow-y: auto;    
+    border-top: 1px solid ${(r) => r.theme.colors.font};
+    flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
+    width: 100%;  
+    overflow-x: auto;
+    overflow-y: auto;    
 `, fu = F.table`    
   width: 100%;
   height: 100%;
@@ -2155,16 +2156,29 @@ const An = F.button`
     background-color: ${(r) => r.theme.colors.active}; /* ✅ hover 스타일 */
   }
 `, hu = F.thead`
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: ${(r) => r.theme.colors.prime};
-  color: ${(r) => r.theme.colors.font};
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* ✅ 스크롤 시에도 그림자로 구분 */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: ${(r) => r.theme.colors.prime};
+    color: ${(r) => r.theme.colors.font};  
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: ${(r) => r.theme.colors.font};
+    z-index: 11;
+    pointer-events: none;    
+    }
     
 `, mu = F.tr`
   background-color: ${(r) => r.theme.colors.second};
   color: ${(r) => r.theme.colors.font};  
+
 `, Hr = F.th`
   position: ${(r) => r.sticky ? "sticky" : "relative"};
   ${(r) => r.sticky === "left" && `left: 0; background-color: ${r.theme.colors.prime};`}
@@ -2440,13 +2454,14 @@ const _u = F.tr`
       r.some((g) => (e == null ? void 0 : e.filterable) && l[g.key] !== void 0) && /* @__PURE__ */ v.jsxs(gu, { children: [
         n && /* @__PURE__ */ v.jsx("td", { style: { padding: "8px" }, children: " " }),
         t && /* @__PURE__ */ v.jsx("td", { style: { padding: "8px" }, children: " " }),
-        r.map((g) => /* @__PURE__ */ v.jsx("td", { style: { padding: "8px" }, children: g.filterable && l[g.key] !== void 0 && /* @__PURE__ */ v.jsx(
+        r.map((g) => /* @__PURE__ */ v.jsx("td", { style: { padding: "8px", width: g.width }, children: g.filterable && l[g.key] !== void 0 && /* @__PURE__ */ v.jsx(
           vu,
           {
             type: "text",
             value: l[g.key] || "",
             onChange: (y) => a.setFilter({ ...l, [g.key]: y.target.value }),
-            placeholder: "필터 입력..."
+            placeholder: "필터 입력...",
+            style: { width: g.width }
           }
         ) }, g.key))
       ] })
