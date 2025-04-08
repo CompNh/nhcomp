@@ -61,12 +61,24 @@ import {
 
       // 2. value 변경 감지 시 선택된 값 반영
       useEffect(() => {
-        // value가 undefined일 때만 defaultKey를 적용
-        if (value === undefined && defualtKey) {
-          const selected = reducer.state.options.find((opt) => opt.key === defualtKey);
+        if (value !== undefined) {
+          const selected = reducer.state.options.find((opt) => String(opt.key) === String(value));
+          if (selected && selected.key !== reducer.state.selectedItem?.key) {
+            reducer.selectItem(selected);
+          }
+        }
+      }, [value, reducer.state.options]);
+      
+      // ✅ 내부 초기 defaultKey 설정 (Uncontrolled 초기용)
+      const didInit = useRef(false);
+      useEffect(() => {
+        if (!didInit.current && value === undefined && defualtKey) {
+          const selected = reducer.state.options.find((opt) => String(opt.key) === String(defualtKey));
           reducer.selectItem(selected ?? undefined);
+          didInit.current = true;
         }
       }, [reducer.state.options, value, defualtKey]);
+      
       
       // ✅ Portal 위치 계산
       useEffect(() => {
