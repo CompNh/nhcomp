@@ -19,11 +19,12 @@ import {
     value?: Date | null;
     minDate?: Date;
     maxDate?: Date;
+    placeholderText? : string;
     onChange?: (date: Date | null) => void;
   }
   
   const SingleDatePicker = forwardRef<HTMLDivElement, SingleDatePickerProps>(
-    ({ value, onChange, minDate, maxDate }, ref) => {
+    ({ value, onChange, minDate, maxDate, placeholderText }, ref) => {
       const [selectedDate, setSelectedDate] = useState<Date | null>(value ?? null);
       const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
   
@@ -59,7 +60,7 @@ import {
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <DatePickerWrapper ref={wrapperRef}>
-            <DatePicker
+            <DatePicker              
               selected={selectedDate}
               onChange={(date) => {
                 setSelectedDate(date);
@@ -70,7 +71,7 @@ import {
               placeholderText="날짜 선택"
               minDate={minDate}
               maxDate={maxDate}
-              customInput={<DatePickerInput />}              
+              customInput={<DatePickerInput placeholderText= {placeholderText} />}              
               popperContainer={({ children }) =>
                 createPortal(
                   <CalendarContainer

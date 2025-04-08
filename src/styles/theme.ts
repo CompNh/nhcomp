@@ -35,4 +35,15 @@ export const GlobalStyle = createGlobalStyle`
     text-align: left;
     visibility: visible;
   }
+    
+.react-datepicker-wrapper {
+  width: 100%;
+  display: block;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+  display: block;
+}    
 `;
+

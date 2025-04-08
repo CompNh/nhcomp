@@ -68,7 +68,7 @@ const GridContainer = styled.div`
 `;
 
 const GridTableWrapper = styled.div<{ $maxHeight?: number | null }>`
-    border-top: 1px solid ${(props) => props.theme.colors.font};
+    border-top: 1px solid ${(props) => props.theme.colors.fifth};
     flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
     width: 100%;  
     overflow-x: auto;
@@ -123,7 +123,7 @@ const HeaderWrapper = styled.thead`
     left: 0;
     height: 1px;
     width: 100%;
-    background-color: ${(props) => props.theme.colors.font};
+    background-color: ${(props) => props.theme.colors.fifth};
     z-index: 11;
     pointer-events: none;    
     }

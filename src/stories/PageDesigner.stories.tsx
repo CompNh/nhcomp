@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { AvartarButton, Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, Section, TextBox} from "../components";
+import { AvartarButton, Button, DropDownBox, DropDownBoxOption, DropDownBoxProps, Form, Grid, GridColumn, Layout, PageDesigner, RangeDatePicker, Section, TextBox} from "../components";
 import SingleDatePicker, { SingleDatePickerProps } from "../components/DatePicker/SingleDatePicker";
 import CheckBox, { CheckBoxProps } from "../components/CheckBox/CheckBox";
 import { FormField } from "../components/Form/FormTypes";
@@ -78,7 +78,7 @@ const sampleData: SampleData[] = [
   const formFields: FormField[] = [
     { label: "이름", key: "name", position : [1,1], isRequired: true, toolTip: "이름을 입력하시오", component: <TextBox textType="rangeNumber"/> , filter : filterNumber},
     { label: "이메일", key: "email",position : [1,2], component: <TextBox textType= "email"/>, validate : isEmail() },
-    { label: "비밀번호", key: "password",position : [2,1], component: <SingleDatePicker/> },
+    { label: "비밀번호", key: "password",position : [2,1], component: <SingleDatePicker placeholderText={'날자선택'}/> },
     { label: "창고 선택", key: "warehouse",position : [2,2], component: <DropDownBox options={sampleDropData} onChange={onChanged} /> }
   ];
 
@@ -154,6 +154,7 @@ const Template: StoryFn<typeof PageDesigner> = (args) => (
 
         <Section startPosition={[3, 1]} endPosition={[3, 2]}>          
              <AvartarButton/>
+             <RangeDatePicker placeholderText="날자 범위를 선택하세요"/>
         </Section>
 
         <Section startPosition={[3, 3]} endPosition={[3, 3]}>

@@ -21,7 +21,7 @@ const PaginationContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 8px 16px;
-  border-top: 1px solid ${(props) => props.theme.colors.font};
+  border-top: 1px solid ${(props) => props.theme.colors.fifth};
   background-color: ${(props) => props.theme.colors.second};
 `;
 

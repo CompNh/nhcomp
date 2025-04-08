@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 
 const DatePickerWrapper = styled.div`
-  display: inline-flex;
+  display: block;
   align-items: center;
   position: relative;  
   width: 100%;
@@ -32,7 +32,7 @@ const DatePickerWrapper = styled.div`
 
 
 const DateButton = styled.button`
-  width: 144px;
+  width: 100%;
   padding: 8px;
   font-size: 14px;
   height : 30px;

@@ -9,7 +9,7 @@ export { default as AvartarButton} from "./Avatar/AvatarButton";
 export { default as CheckBox} from "./CheckBox/CheckBox";
 export { default as TextBox} from "./TextBox/TextBox";
 export { default as SingleDatePicker} from "./DatePicker/SingleDatePicker";
-//export { default as RangeDatePicker} from "./DatePicker/RangeDatePicker"; 추후 업데이트하자
+export { default as RangeDatePicker} from "./DatePicker/RangeDatePicker";
 
 export { default as PageDesigner} from "./PageDesigner/PageDesigner";
 export { default as Section} from "./PageDesigner/Parts/Section";

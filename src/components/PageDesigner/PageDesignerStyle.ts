@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const LayoutTitle = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   border-bottom: 1px solid #ccc;
   font-size: 17px;
   font-weight: 600;
