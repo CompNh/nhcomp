@@ -79,7 +79,7 @@ const sampleData: SampleData[] = [
     { label: "이름", key: "name", position : [1,1], isRequired: true, toolTip: "이름을 입력하시오", component: <TextBox textType="rangeNumber"/> , filter : filterNumber},
     { label: "이메일", key: "email",position : [1,2], component: <TextBox textType= "email"/>, validate : isEmail() },
     { label: "비밀번호", key: "password",position : [2,1], component: <SingleDatePicker placeholderText={'날자선택'}/> },
-    { label: "창고 선택", key: "warehouse",position : [2,2], component: <DropDownBox options={sampleDropData} onChange={onChanged} /> }
+    { label: "창고 선택", key: "warehouse",position : [2,2], component: <DropDownBox options={sampleDropData} onChange={onChanged} defualtKey="1"/> }
   ];
 
 const Template: StoryFn<typeof PageDesigner> = (args) => (

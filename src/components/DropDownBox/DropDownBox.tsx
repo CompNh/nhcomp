@@ -61,11 +61,12 @@ import {
 
       // 2. value 변경 감지 시 선택된 값 반영
       useEffect(() => {
-        if (value !== undefined) {
-          const selected = reducer.state.options.find((opt) => opt.key === value);
+        // value가 undefined일 때만 defaultKey를 적용
+        if (value === undefined && defualtKey) {
+          const selected = reducer.state.options.find((opt) => opt.key === defualtKey);
           reducer.selectItem(selected ?? undefined);
         }
-      }, [value, reducer.state.options]);
+      }, [reducer.state.options, value, defualtKey]);
       
       // ✅ Portal 위치 계산
       useEffect(() => {
