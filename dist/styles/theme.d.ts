@@ -7,6 +7,7 @@ export declare const theme: {
         primeHover: string;
         second: string;
         secondHover: string;
+        secondActive: string;
         third: string;
         thirdHover: string;
         fourth: string;
