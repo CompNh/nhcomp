@@ -13,6 +13,8 @@ export const theme = {
       thirdHover: "#DC2626",
       fourth: "#3B82F6",
       fourthHover: "#60A5FA",
+      fifth: "#999999",
+      fifthHover: "#CCCCCC",      
       active: "#9fd0f1",
     },
 };

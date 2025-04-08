@@ -212,6 +212,9 @@ const PlaceholderCell = styled.td`
   padding: 0;
   border: none;
   height: 100%;
+  color: ${(props) => props.theme.colors.fifth};
+  text-align: center;
+  vertical-align: middle;
 `;
 
 

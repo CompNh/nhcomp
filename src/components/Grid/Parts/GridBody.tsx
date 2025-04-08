@@ -195,7 +195,9 @@ const GridBody = <T,>({
             <PlaceholderCell
               colSpan={columns.length + (showRowNumCol ? 1 : 0) + (showRowCheckboxCol ? 1 : 0)}
               style={{ height: placeholderHeight }}
-            />
+            >
+              {reducer.state.originalData.length === 0 && "No data available"}
+            </PlaceholderCell>
           </PlaceholderRow>
         )}
       </TableBody>
