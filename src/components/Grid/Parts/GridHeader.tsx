@@ -75,13 +75,14 @@ const GridHeader = <T,>({
           {showRowNumCol && <td style={{ padding: "8px" }}>&nbsp;</td>}
           {showRowCheckboxCol && <td style={{ padding: "8px" }}>&nbsp;</td>}
           {columns.map((col) => (
-            <td key={col.key} style={{ padding: "8px" }}>
+            <td key={col.key} style={{ padding: "8px", width: col.width }}>
               {col.filterable && filters[col.key] !== undefined && (
                 <FilterInput
                   type="text"
                   value={filters[col.key] || ""}
                   onChange={(e) => reducer.setFilter({ ...filters, [col.key]: e.target.value })}
                   placeholder="필터 입력..."
+                  style={{ width: col.width }}
                 />
               )}
             </td>

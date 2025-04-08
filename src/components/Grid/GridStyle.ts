@@ -68,10 +68,11 @@ const GridContainer = styled.div`
 `;
 
 const GridTableWrapper = styled.div<{ $maxHeight?: number | null }>`
-  flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
-  width: 100%;  
-  overflow-x: auto;
-  overflow-y: auto;    
+    border-top: 1px solid ${(props) => props.theme.colors.font};
+    flex-grow: 1; /* ✅ 남은 공간을 자동으로 차지 */
+    width: 100%;  
+    overflow-x: auto;
+    overflow-y: auto;    
 `;
 
 const GridTable = styled.table`    
@@ -108,18 +109,31 @@ const CancelButton = styled(BaseButton)`
 
 // ✅ Header
 const HeaderWrapper = styled.thead`
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: ${(props) => props.theme.colors.prime};
-  color: ${(props) => props.theme.colors.font};
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* ✅ 스크롤 시에도 그림자로 구분 */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: ${(props) => props.theme.colors.prime};
+    color: ${(props) => props.theme.colors.font};  
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+    &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: ${(props) => props.theme.colors.font};
+    z-index: 11;
+    pointer-events: none;    
+    }
     
 `;
 
 const HeaderRow = styled.tr`
   background-color: ${(props) => props.theme.colors.second};
   color: ${(props) => props.theme.colors.font};  
+
 `;
 
 const HeaderCell = styled.th<{ width?: number; sticky?: "left" | "right" }>`
