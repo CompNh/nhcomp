@@ -13,6 +13,8 @@ interface FormField {
     disabled?: boolean; // 비활성화 여부
     isReadOnly?: boolean; // 읽기 전용 여부
 
+    defaultValue? : string | number; // 기본값
+
     // ✅ 추가
     validate?: (value: any) => string | undefined; // 에러 메시지 반환
     filter? : (e: React.KeyboardEvent<HTMLInputElement>) => void

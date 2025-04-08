@@ -59,7 +59,7 @@ const Form = ({
           const endPosition: [number, number] = [row + span.row - 1, col + span.col - 1];
 
           // ✅ 현재 필드 값
-          const value = (field.component as React.ReactElement<any>)?.props?.value ?? reducer.state[field.key];
+          const value = reducer.state[field.key];
 
           // ✅ 필드에 props 삽입 (value, onChange)
           const componentWithProps = React.isValidElement(field.component)

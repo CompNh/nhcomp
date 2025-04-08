@@ -7,7 +7,7 @@ interface FormState {
 
 const initialFormState = (formFields: FormField[]): FormState => {
   return formFields.reduce((acc, field) => {
-    acc[field.key] = ""; // 또는 field.defaultValue ?? ""
+    acc[field.key] = field.defaultValue ?? ""; // 또는 field.defaultValue ?? ""
     return acc;
   }, {} as FormState);
 };
