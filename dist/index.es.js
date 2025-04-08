@@ -2787,11 +2787,11 @@ const jo = (r, n) => {
       const g = jo(n, t);
       l.setOptions(g);
     }, [n, t]), ke(() => {
-      if (e !== void 0) {
-        const g = l.state.options.find((y) => y.key === e);
+      if (e === void 0 && s) {
+        const g = l.state.options.find((y) => y.key === s);
         l.selectItem(g ?? void 0);
       }
-    }, [e, l.state.options]), ke(() => {
+    }, [l.state.options, e, s]), ke(() => {
       const g = (y) => {
         u.current && !u.current.contains(y.target) && d.current && !d.current.contains(y.target) && l.setIsOpen(!1);
       };
