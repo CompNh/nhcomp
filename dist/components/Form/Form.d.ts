@@ -13,7 +13,8 @@ export interface FormProps {
     onSerach?: (data: {
         [key: string]: any;
     }) => void;
+    onReset?: () => void;
 }
-declare const Form: ({ title, division, formFields, isActivateInitialButton, onSubmit, onSerach }: FormProps) => import("react/jsx-runtime").JSX.Element;
+declare const Form: ({ title, division, formFields, isActivateInitialButton, onSubmit, onSerach, onReset }: FormProps) => import("react/jsx-runtime").JSX.Element;
 export default Form;
 //# sourceMappingURL=Form.d.ts.map
