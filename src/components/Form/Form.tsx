@@ -15,6 +15,7 @@ export interface FormProps {
   isActivateInitialButton? : boolean
   onSubmit?: (data: { [key: string]: any }) => void;
   onSerach?: (data: { [key: string]: any }) => void;
+  onReset?: () => void;
 }
 
 const Form = ({ 
@@ -23,7 +24,8 @@ const Form = ({
   formFields, 
   isActivateInitialButton = true,
   onSubmit, 
-  onSerach  
+  onSerach,
+  onReset
   
 }: FormProps) => {
   const reducer = useFormReducer(formFields);
@@ -135,7 +137,10 @@ const Form = ({
           <Button 
             type="button" 
             style={{ minWidth: 80, height: 30 }} 
-            onClick={() => reducer.resetForm()}>
+            onClick={() => {
+              onReset?.();
+              reducer.resetForm();
+            }}>
             초기화
           </Button>
         }
