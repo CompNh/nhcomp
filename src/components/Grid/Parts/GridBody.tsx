@@ -19,6 +19,7 @@ interface GridBodyProps<T> {
   showRowNumCol?: boolean;
   showRowCheckboxCol?: boolean;
   selectedRows: Set<T>;
+  onClickRow?: (row: T) => void;
   onToggleRow: (row: T) => void;
   onToggleGroupExpand: (groupKey: string) => void;
   reducer: GridReducerReturn<T>;
@@ -32,6 +33,7 @@ const GridBody = <T,>({
   showRowCheckboxCol,
   selectedRows,
   isCellEditable,
+  onClickRow,
   onToggleRow,
   onToggleGroupExpand,
   reducer,
@@ -45,6 +47,8 @@ const GridBody = <T,>({
   } | null>(null);
 
   const ROW_HEIGHT = 35;
+
+  const [clickedRowKey, setClickedRowKey] = useState<string | null>(null);
 
   // ✅ 실제 렌더될 row 수 계산 (group 펼침 고려)
   const renderedRowCount = useMemo(() => {
@@ -142,41 +146,49 @@ const GridBody = <T,>({
     const showActionColumn = Object.keys(reducer.state.editedRows).length > 0;
 
     return (
-      <TableRow key={row.rowKey} onContextMenu={(event) => handleContextMenu(event, row)}>
-        <DefaultGridColumns
-          row={row}
-          rowNum={rowNum}
-          selectedRows={selectedRows}
-          showRowNumCol={showRowNumCol}
-          showRowCheckboxCol={showRowCheckboxCol}
-          showActionColumn={showActionColumn}
-          onToggleRow={onToggleRow}
-          reducer={reducer}
-        />
-        {columns.map((col) => {
-          const isEdited = reducer.state.editedRows[row.rowKey]?.[col.key as keyof T] !== undefined;
-          const isEditing =
-            reducer.state.editingCell?.rowKey === row.rowKey && reducer.state.editingCell?.colKey === col.key;
-          const cellValue = isEditing
-            ? reducer.state.editingCell?.value
-            : reducer.state.editedRows[row.rowKey]?.[col.key as keyof T] ?? row[col.key as keyof T];
-
-          return (
-            <CellRenderer
-              key={col.key}
-              col={col}
-              row={row}
-              isEditing={isEditing}
-              isEdited={isEdited}
-              cellValue={cellValue}
-              handleCellDoubleClick={handleCellDoubleClick}
-              handleCellChange={handleCellChange}
-              handleKeyDown={handleKeyDown}
-              isCellEditable={isCellEditable}
-              cellprops={col.cellType?.cellProps}
+      <TableRow 
+        key={row.rowKey} 
+        onClick={()=> {
+            setClickedRowKey(row.rowKey)
+            onClickRow?.(row);
+        }} 
+        onContextMenu={(event) => 
+        handleContextMenu(event, row)} 
+        $isClicked={clickedRowKey === row.rowKey}>
+            <DefaultGridColumns
+            row={row}
+            rowNum={rowNum}
+            selectedRows={selectedRows}
+            showRowNumCol={showRowNumCol}
+            showRowCheckboxCol={showRowCheckboxCol}
+            showActionColumn={showActionColumn}
+            onToggleRow={onToggleRow}
+            reducer={reducer}
             />
-          );
-        })}
+            {columns.map((col) => {
+            const isEdited = reducer.state.editedRows[row.rowKey]?.[col.key as keyof T] !== undefined;
+            const isEditing =
+                reducer.state.editingCell?.rowKey === row.rowKey && reducer.state.editingCell?.colKey === col.key;
+            const cellValue = isEditing
+                ? reducer.state.editingCell?.value
+                : reducer.state.editedRows[row.rowKey]?.[col.key as keyof T] ?? row[col.key as keyof T];
+
+            return (
+                <CellRenderer
+                key={col.key}
+                col={col}
+                row={row}
+                isEditing={isEditing}
+                isEdited={isEdited}
+                cellValue={cellValue}
+                handleCellDoubleClick={handleCellDoubleClick}
+                handleCellChange={handleCellChange}
+                handleKeyDown={handleKeyDown}
+                isCellEditable={isCellEditable}
+                cellprops={col.cellType?.cellProps}              
+                />
+            );
+            })}
       </TableRow>
     );
   };

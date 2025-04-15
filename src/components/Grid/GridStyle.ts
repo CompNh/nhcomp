@@ -178,9 +178,23 @@ const TableBody = styled.tbody`
   overflow-y: auto;  
 `;
 
-const TableRow = styled.tr`
+const TableRow = styled.tr<{ $isClicked?: boolean }>`
   height: 80%;
   border-bottom: 1px solid ${(props) => props.theme.colors.secondHover};  
+
+  background-color: ${(props) =>
+    props.$isClicked ? props.theme.colors.fifth : "transparent"};
+  color: ${(props) =>
+    props.$isClicked ? props.theme.colors.background : props.theme.colors.font};  
+
+  &:hover {
+    background-color: ${(props) =>
+      props.$isClicked
+        ? props.theme.colors.fifthHover
+        : props.theme.colors.secondHover};
+    color: ${(props) => props.theme.colors.font};  
+  }  
+  
 `;
 const TableCell = styled.td<{ $isEdited?: boolean }>`
   padding: 5px;

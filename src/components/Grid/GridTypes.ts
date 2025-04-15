@@ -153,6 +153,9 @@ interface GridProps<T> {
     };
     /** Excel,PDF... Export Active In Contextmenu */
     activeExportSurport? : boolean;    
+
+    /** 선택된 Row에 대한 콜백 함수 추가 */
+    onRowSelected?: (row: T) => void;
 }
 
 interface GridGroupState {

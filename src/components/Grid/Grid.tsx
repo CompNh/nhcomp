@@ -24,13 +24,14 @@ const Grid = <T,>({
   isCellEditable = false,
   customStyles = {},
   activeExportSurport,
+  onRowSelected    
 }: GridProps<T>) => {
   const reducer = useGridReducer<T>(
     setRowKeysForOrginData(data),
     pagingable,
     pagination?.pageSize,
     activeExportSurport,
-    isCellEditable
+    isCellEditable    
   );
   const { pagenate } = reducer.state;
   const totalRows = data.length;
@@ -91,7 +92,8 @@ const Grid = <T,>({
               onToggleRow={reducer.toggleRow}
               onToggleGroupExpand={reducer.expandGroup}
               style={customStyles.body}
-              bodyHeight={bodyHeight} // ✅ 여기가 핵심!
+              bodyHeight={bodyHeight} 
+              onClickRow={onRowSelected}
             />
           </GridTable>
         </GridTableWrapper>
