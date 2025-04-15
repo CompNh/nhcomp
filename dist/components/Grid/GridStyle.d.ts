@@ -23,7 +23,9 @@ declare const FilterRow: import('styled-components/dist/types').IStyledComponent
 declare const FilterInput: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, never>> & string;
 declare const HeaderContent: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLDivElement>, HTMLDivElement>, never>> & string;
 declare const TableBody: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLTableSectionElement>, HTMLTableSectionElement>, never>> & string;
-declare const TableRow: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components').FastOmit<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, never>> & string;
+declare const TableRow: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components/dist/types').Substitute<import('react').DetailedHTMLProps<import('react').HTMLAttributes<HTMLTableRowElement>, HTMLTableRowElement>, {
+    $isClicked?: boolean;
+}>> & string;
 declare const TableCell: import('styled-components/dist/types').IStyledComponentBase<"web", import('styled-components/dist/types').Substitute<import('react').DetailedHTMLProps<import('react').TdHTMLAttributes<HTMLTableDataCellElement>, HTMLTableDataCellElement>, {
     $isEdited?: boolean;
 }>> & string;
